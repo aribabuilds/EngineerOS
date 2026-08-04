@@ -76,9 +76,9 @@ export default function PipelineWalkthrough() {
     };
   }, [playing, lastStep]);
 
-  function goTo(next: number) {
+  function moveBy(delta: number) {
     setPlaying(false);
-    setStep(Math.min(Math.max(next, 0), lastStep));
+    setStep((s) => Math.min(Math.max(s + delta, 0), lastStep));
   }
 
   // Word-box layout for the OCR / quality-gate steps, derived from the fake
@@ -249,7 +249,7 @@ export default function PipelineWalkthrough() {
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
           <button
             type="button"
-            onClick={() => goTo(step - 1)}
+            onClick={() => moveBy(-1)}
             disabled={step === 0}
             className="btn btn--ghost px-3 py-1.5 text-sm disabled:opacity-40"
           >
@@ -265,7 +265,7 @@ export default function PipelineWalkthrough() {
           </button>
           <button
             type="button"
-            onClick={() => goTo(step + 1)}
+            onClick={() => moveBy(1)}
             disabled={step === lastStep}
             className="btn btn--ghost px-3 py-1.5 text-sm disabled:opacity-40"
           >
