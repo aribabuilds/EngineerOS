@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Sets data-theme before paint - prevents a flash of the wrong theme. */}
+        {/* Sets data-theme before paint, preventing a flash of the wrong theme. */}
         <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
         <script
           type="application/ld+json"

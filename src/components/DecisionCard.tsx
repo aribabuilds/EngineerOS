@@ -15,11 +15,11 @@ export interface DecisionCardProps {
 }
 
 /**
- * Signature motif B - the "Decision Card".
+ * Signature motif B: the "Decision Card".
  * A bordered card with a dark header bar (mono, small accent dot), then rows
  * labelled Chose / Rejected / Cost / Why. Labels are mono; values are body;
  * the "Why" value is in italic display face. This is the intellectual
- * signature - rendered with care.
+ * signature, rendered with care.
  */
 export default function DecisionCard({
   header,
@@ -33,7 +33,7 @@ export default function DecisionCard({
 }: DecisionCardProps) {
   return (
     <div>
-      <div className="overflow-hidden rounded-card border border-line bg-surface">
+      <div className="adr-hover overflow-hidden rounded-card border border-line bg-surface">
         <div className="flex items-center gap-2 bg-[#14202e] px-4 py-2.5 dark:bg-raised">
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-primary" />
           <span className="u-mono text-xs tracking-wide text-white/90">{header}</span>

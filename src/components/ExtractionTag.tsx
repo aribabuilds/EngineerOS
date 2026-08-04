@@ -1,8 +1,8 @@
 /**
- * Signature motif A - "extraction annotation".
+ * Signature motif A: "extraction annotation".
  * A thin primary-outlined box with a tiny uppercase mono label above the value,
  * echoing how an OCR overlay tags a field on a scanned letter. Sharp corners
- * are intentional (they mimic a bounding box) - keep it quiet.
+ * are intentional (they mimic a bounding box). Keep it quiet.
  */
 export default function ExtractionTag({
   label,

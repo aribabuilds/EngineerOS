@@ -195,7 +195,7 @@ export default function PipelineWalkthrough() {
                     height="12"
                     fill="none"
                     stroke={strokeColor}
-                    strokeWidth={isGateStep && !highConfidence ? 1}
+                    strokeWidth={isGateStep && !highConfidence ? 1 : 1.5}
                     strokeDasharray={isGateStep && !highConfidence ? "2 2" : undefined}
                     opacity={visible ? (isGateStep && !highConfidence ? 0.55 : 0.85) : 0}
                     className={transitionClass}

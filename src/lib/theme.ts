@@ -25,7 +25,7 @@ export function persistTheme(theme: Theme): void {
   try {
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
   } catch {
-    /* in-memory only - the attribute on <html> still holds for this session */
+    /* in-memory only; the attribute on <html> still holds for this session */
   }
 }
 

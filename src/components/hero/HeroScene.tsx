@@ -7,31 +7,29 @@ import type { ThemeColors } from "./useThemeColors";
 
 const NODE_COUNT = 42;
 const GRID = { cols: 7, rows: 3, depth: 2 }; // 7 * 3 * 2 = 42
+const K = 5; // number of clusters / modules
 
-// Timeline (seconds). variables → functions → a system → adopted → idle.
+// Timeline (seconds). raw inputs -> structured data -> validated system -> trusted outcome -> idle.
 const T = {
   fadeIn: 0.8,
-  toClusters: [1.4, 2.8] as const,
-  toSystem: [2.8, 4.2] as const,
-  boxIn: [3.8, 4.4] as const,
-  check: [4.4, 5.2] as const,
+  toClusters: [1.4, 2.8] as const, // raw inputs settle into modules (structured data)
+  connections: [2.6, 3.6] as const, // module connections fade in (validated system begins)
+  toSystem: [2.8, 4.2] as const, // modules consolidate into the final structure
+  boxIn: [3.6, 4.2] as const, // the structure's bounding edge appears, dashed (still validating)
+  trust: [4.2, 5.0] as const, // edge resolves dashed to solid (trusted outcome)
 };
 
 const easeInOut = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
 // progress of a phase [a,b] at time t
 const phase = (t: number, a: number, b: number) => clamp01((t - a) / (b - a));
-// back-ease for the checkmark pop
-const easeBack = (x: number) => {
-  const c = 1.70158;
-  return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2);
-};
 
 interface Keyframes {
   scattered: THREE.Vector3[];
   cluster: THREE.Vector3[];
   system: THREE.Vector3[];
   colorIndex: number[]; // 0 = primary, 1 = periwinkle
+  hubs: THREE.Vector3[]; // one stable point per module, in final system space
 }
 
 function buildKeyframes(): Keyframes {
@@ -40,7 +38,6 @@ function buildKeyframes(): Keyframes {
   const system: THREE.Vector3[] = [];
   const colorIndex: number[] = [];
 
-  const K = 5;
   const clusterCenters = Array.from({ length: K }, (_, k) => {
     const x = (k - (K - 1) / 2) * 2.15;
     const y = ((k % 2) - 0.5) * 0.8;
@@ -60,14 +57,14 @@ function buildKeyframes(): Keyframes {
   const sz = 0.72;
 
   for (let i = 0; i < NODE_COUNT; i++) {
-    // scattered - drift in from a wide, flattened shell
+    // scattered: raw inputs, drifting in from a wide, flattened shell
     const a = rnd() * Math.PI * 2;
     const r = 4.5 + rnd() * 2.5;
     scattered.push(
       new THREE.Vector3(Math.cos(a) * r, (rnd() - 0.5) * 5.5, Math.sin(a) * r * 0.5 - 1),
     );
 
-    // cluster - tight mini-cluster around a centre
+    // cluster: structured data, grouped into small modules
     const c = clusterCenters[i % K];
     cluster.push(
       new THREE.Vector3(
@@ -77,7 +74,7 @@ function buildKeyframes(): Keyframes {
       ),
     );
 
-    // system - neat 3D block
+    // system: the resolved, validated structure
     const col = i % GRID.cols;
     const rem = Math.floor(i / GRID.cols);
     const row = rem % GRID.rows;
@@ -93,14 +90,27 @@ function buildKeyframes(): Keyframes {
     colorIndex.push(i % 3 === 0 ? 1 : 0);
   }
 
-  return { scattered, cluster, system, colorIndex };
+  // One stable hub per module: the centroid of that module's nodes in their
+  // final system position. Connections are drawn between these fixed points,
+  // not between the moving nodes, so the connecting lines never drift.
+  const hubs = Array.from({ length: K }, (_, k) => {
+    const centroid = new THREE.Vector3();
+    let count = 0;
+    for (let i = k; i < NODE_COUNT; i += K) {
+      centroid.add(system[i]);
+      count++;
+    }
+    return centroid.divideScalar(count);
+  });
+
+  return { scattered, cluster, system, colorIndex, hubs };
 }
 
 function beatFor(t: number): number {
-  if (t < T.toClusters[0]) return 0; // variables
-  if (t < T.toSystem[0]) return 1; // functions
-  if (t < T.check[0]) return 2; // a system
-  return 3; // adopted
+  if (t < T.toClusters[0]) return 0; // raw inputs
+  if (t < T.toSystem[0]) return 1; // structured data
+  if (t < T.trust[0]) return 2; // validated system
+  return 3; // trusted outcome
 }
 
 export interface HeroSceneProps {
@@ -116,8 +126,9 @@ export default function HeroScene({ colors, animate, pointerParallax, onBeat }: 
 
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const rootRef = useRef<THREE.Group>(null);
-  const checkRef = useRef<THREE.Group>(null);
-  const boxMatRef = useRef<THREE.LineBasicMaterial>(null);
+  const boxLineRef = useRef<THREE.LineSegments>(null);
+  const boxMatRef = useRef<THREE.LineDashedMaterial>(null);
+  const connMatRef = useRef<THREE.LineBasicMaterial>(null);
   const startRef = useRef<number | null>(null);
   const lastBeat = useRef<number>(-1);
 
@@ -131,6 +142,24 @@ export default function HeroScene({ colors, animate, pointerParallax, onBeat }: 
     const d = GRID.depth * 0.72 + 0.7;
     return new THREE.EdgesGeometry(new THREE.BoxGeometry(w, h, d));
   }, []);
+
+  // Line distances are required for LineDashedMaterial to render dashes.
+  useEffect(() => {
+    boxLineRef.current?.computeLineDistances();
+  }, [edges]);
+
+  // The module-connection graph: a ring linking each hub to the next.
+  const connectionsGeom = useMemo(() => {
+    const positions: number[] = [];
+    for (let k = 0; k < kf.hubs.length; k++) {
+      const a = kf.hubs[k];
+      const b = kf.hubs[(k + 1) % kf.hubs.length];
+      positions.push(a.x, a.y, a.z, b.x, b.y, b.z);
+    }
+    const geom = new THREE.BufferGeometry();
+    geom.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    return geom;
+  }, [kf.hubs]);
 
   // Apply per-instance colours once (and whenever the theme colours change).
   useEffect(() => {
@@ -163,17 +192,20 @@ export default function HeroScene({ colors, animate, pointerParallax, onBeat }: 
     }
     mesh.instanceMatrix.needsUpdate = true;
 
-    // System box fades in.
-    if (boxMatRef.current) {
-      boxMatRef.current.opacity = 0.0 + 0.4 * phase(t, T.boxIn[0], T.boxIn[1]);
+    // Module connections fade in as validation begins, then hold steady.
+    if (connMatRef.current) {
+      connMatRef.current.opacity = 0.5 * easeInOut(phase(t, T.connections[0], T.connections[1]));
     }
 
-    // Checkmark pops in during the "adopted" beat.
-    if (checkRef.current) {
-      const p = phase(t, T.check[0], T.check[1]);
-      const s = p <= 0 ? 0 : easeBack(p);
-      checkRef.current.scale.setScalar(s);
-      checkRef.current.visible = p > 0;
+    // The structure's bounding edge appears dashed, then resolves solid: the
+    // "trusted outcome" beat, replacing a checkmark with a blueprint-style
+    // draft-to-final transition.
+    if (boxMatRef.current) {
+      const boxFade = phase(t, T.boxIn[0], T.boxIn[1]);
+      const trustP = easeInOut(phase(t, T.trust[0], T.trust[1]));
+      boxMatRef.current.opacity = 0.45 * boxFade + 0.35 * trustP;
+      boxMatRef.current.gapSize = 0.09 * (1 - trustP);
+      boxMatRef.current.needsUpdate = true;
     }
 
     // Idle rotation + subtle pointer parallax on the whole assembly.
@@ -186,7 +218,7 @@ export default function HeroScene({ colors, animate, pointerParallax, onBeat }: 
   // Static path: compose the final frame once (reduced-motion / low-power).
   useEffect(() => {
     if (animate) return;
-    renderAt(T.check[1] + 0.5, 0.35, 0, 0);
+    renderAt(T.trust[1] + 0.5, 0.35, 0, 0);
     onBeat?.(3);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animate, colors]);
@@ -196,7 +228,7 @@ export default function HeroScene({ colors, animate, pointerParallax, onBeat }: 
     if (startRef.current === null) startRef.current = state.clock.elapsedTime;
     const t = state.clock.elapsedTime - startRef.current;
 
-    const idleStart = T.check[1];
+    const idleStart = T.trust[1];
     const idleAngle = t > idleStart ? (t - idleStart) * 0.12 : 0;
     const px = pointerParallax ? state.pointer.x : 0;
     const py = pointerParallax ? state.pointer.y : 0;
@@ -210,23 +242,6 @@ export default function HeroScene({ colors, animate, pointerParallax, onBeat }: 
     }
   });
 
-  // Two elongated boxes forming a check mark.
-  const strokes = useMemo(() => {
-    const make = (from: [number, number], to: [number, number], thickness: number) => {
-      const dx = to[0] - from[0];
-      const dy = to[1] - from[1];
-      const len = Math.hypot(dx, dy);
-      const angle = Math.atan2(dy, dx);
-      const cx = (from[0] + to[0]) / 2;
-      const cy = (from[1] + to[1]) / 2;
-      return { len, angle, cx, cy, thickness };
-    };
-    return [
-      make([-0.55, 0.02], [-0.12, -0.4], 0.15),
-      make([-0.12, -0.4], [0.72, 0.55], 0.15),
-    ];
-  }, []);
-
   return (
     <group ref={rootRef}>
       <instancedMesh
@@ -239,24 +254,22 @@ export default function HeroScene({ colors, animate, pointerParallax, onBeat }: 
       </instancedMesh>
 
       <lineSegments>
+        <primitive object={connectionsGeom} attach="geometry" />
+        <lineBasicMaterial ref={connMatRef} color={colors.periwinkle} transparent opacity={0} toneMapped={false} />
+      </lineSegments>
+
+      <lineSegments ref={boxLineRef}>
         <primitive object={edges} attach="geometry" />
-        <lineBasicMaterial
+        <lineDashedMaterial
           ref={boxMatRef}
           color={colors.primary}
+          dashSize={0.12}
+          gapSize={0.09}
           transparent
           opacity={0}
           toneMapped={false}
         />
       </lineSegments>
-
-      <group ref={checkRef} position={[0, 0, 1.3]} visible={false}>
-        {strokes.map((s, i) => (
-          <mesh key={i} position={[s.cx, s.cy, 0]} rotation={[0, 0, s.angle]}>
-            <boxGeometry args={[s.len, s.thickness, s.thickness]} />
-            <meshBasicMaterial color={colors.primary} toneMapped={false} />
-          </mesh>
-        ))}
-      </group>
     </group>
   );
 }

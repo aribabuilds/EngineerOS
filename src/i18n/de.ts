@@ -1,7 +1,7 @@
 import type { PartialDictionary } from "./types";
 
 /**
- * German namespace - STUB.
+ * German namespace: STUB.
  *
  * Deliberately empty for now. The site ships English only (see build brief §0:
  * "Leave a `de` namespace stubbed"). When translations are ready, fill keys

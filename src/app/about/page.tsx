@@ -35,7 +35,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Facts block - verbatim, machine-readable. */}
+        {/* Facts block: verbatim, machine-readable. */}
         <section className="border-b border-line bg-surface">
           <div className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
             <h2 className="font-display text-2xl font-semibold text-text">{about.factsHeading}</h2>
@@ -49,17 +49,17 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* The person - owner narrative TODO. */}
+        {/* The person: owner narrative TODO. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
             <h2 className="font-display text-2xl font-semibold text-text">{about.personHeading}</h2>
             <div className="mt-5">
-              <OwnerTodo>The personal narrative - owner to write. Do not fabricate.</OwnerTodo>
+              <OwnerTodo>The personal narrative. Owner to write. Do not fabricate.</OwnerTodo>
             </div>
           </div>
         </section>
 
-        {/* AI philosophy - reuse verbatim homepage copy. */}
+        {/* AI philosophy: reuse verbatim homepage copy. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
             <h2 className="font-display text-2xl font-semibold text-text">{about.philosophyHeading}</h2>
@@ -75,7 +75,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* The path - reuse verbatim dated rows. */}
+        {/* The path: reuse verbatim dated rows. */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-3xl px-5 py-12 sm:px-8">
             <h2 className="font-display text-2xl font-semibold text-text">{about.pathHeading}</h2>

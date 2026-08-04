@@ -16,7 +16,7 @@ export default function Header() {
         <Link
           href="/"
           className="u-mono text-sm font-medium tracking-[0.18em] text-text no-underline"
-          aria-label={`${nav.wordmarkFirst} ${nav.wordmarkAccent} - home`}
+          aria-label={`${nav.wordmarkFirst} ${nav.wordmarkAccent}: home`}
         >
           {nav.wordmarkFirst} <span className="text-primary">{nav.wordmarkAccent}</span>
         </Link>

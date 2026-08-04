@@ -17,7 +17,7 @@ const softwareJsonLd = {
       "@type": "SoftwareSourceCode",
       name: "BriefPilot",
       description:
-        "Reads German official letters aloud from a photo - an in-development, local-first OCR pipeline.",
+        "Reads German official letters aloud from a photo. An in-development, local-first OCR pipeline.",
       codeRepository: REPOS.briefpilot,
       programmingLanguage: ["Python", "TypeScript"],
       author: { "@type": "Person", name: AUTHOR_NAME },

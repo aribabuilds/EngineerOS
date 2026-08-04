@@ -42,8 +42,8 @@ export const en: Dictionary = {
     ],
     emailMe: "Email me",
     bookACall: "Book a call",
-    canvasCaption: "variables → functions → a system → adopted",
-    canvasBeats: ["variables", "functions", "a system", "adopted"],
+    canvasCaption: "raw inputs → structured data → validated system → trusted outcome",
+    canvasBeats: ["raw inputs", "structured data", "validated system", "trusted outcome"],
   },
 
   shipped: {

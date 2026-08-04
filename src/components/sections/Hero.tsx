@@ -10,7 +10,7 @@ export default function Hero() {
   return (
     <section className="border-b border-line" aria-labelledby="hero-h1">
       <div className="mx-auto grid max-w-5xl items-center gap-8 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
-        {/* Text column - real DOM, paints immediately. */}
+        {/* Text column: real DOM, paints immediately. */}
         <div className="order-2 lg:order-1">
           <p className="u-mono text-sm text-primary">{hero.eyebrow}</p>
 
@@ -41,7 +41,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Visual column - the one bold element. */}
+        {/* Visual column: the one bold element. */}
         <div className="order-1 h-[280px] w-full sm:h-[360px] lg:order-2 lg:h-[440px]">
           <HeroCanvasLazy />
         </div>
