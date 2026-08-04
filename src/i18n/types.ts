@@ -15,6 +15,7 @@ export interface Dictionary {
   nav: {
     work: string;
     path: string;
+    decisions: string;
     contact: string;
     cv: string;
     wordmarkFirst: string;
@@ -35,7 +36,13 @@ export interface Dictionary {
   };
   shipped: {
     heading: string;
-    items: string[];
+    items: {
+      problem: string;
+      decision: string;
+      outcome: string;
+      /** Omitted (not just empty) when there is no honest adoption claim for this item. */
+      adoption?: string;
+    }[];
   };
   featured: {
     heading: string;
@@ -101,19 +108,21 @@ export interface Dictionary {
       architecture: string;
       decisions: string;
       hardPart: string;
-      evidence: string;
-      whatsNext: string;
+      testing: string;
+      roadmap: string;
       roleAI: string;
     };
     problemBody: string;
     constraints: string[];
-    evidenceBody: string;
-    evidenceItems: string[];
-    evidenceNote: string;
-    whatsNextBody: string;
-    whatsNextItems: string[];
+    testingItems: string[];
+    testingNote: string;
+    roadmapItems: { item: string; why: string }[];
     hardPartBody: string[];
     roleAIBody: string[];
+    /** Real, git-derived last-updated date and computed reading time. */
+    lastUpdatedLabel: string;
+    readingTimeSuffix: string;
+    ciStatusLabel: string;
     walkthrough: {
       caption: string;
       steps: { key: string; label: string }[];

@@ -2,29 +2,13 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getDictionary } from "@/i18n";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const w = getDictionary("en").caseStudy.walkthrough;
 
 type Outcome = "pass" | "fail";
 
 const STEP_MS = 1700;
-
-function usePrefersReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    let mq: MediaQueryList;
-    try {
-      mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    } catch {
-      return;
-    }
-    setReduced(mq.matches);
-    const onChange = () => setReduced(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-  return reduced;
-}
 
 /** A single laid-out word box, positioned by a simple character-width estimate. */
 interface WordBox {

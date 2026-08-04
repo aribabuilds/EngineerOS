@@ -1,3 +1,6 @@
+"use client";
+
+import { useId, useState } from "react";
 import Link from "next/link";
 
 export interface DecisionCardProps {
@@ -12,6 +15,8 @@ export interface DecisionCardProps {
   labels: { chose: string; rejected: string; cost: string; why: string };
   /** Optional link rendered under the card. */
   link?: { href: string; label: string };
+  /** Starts expanded. Used for the first ADR so the pattern is discoverable. */
+  defaultExpanded?: boolean;
 }
 
 /**
@@ -20,6 +25,9 @@ export interface DecisionCardProps {
  * labelled Chose / Rejected / Cost / Why. Labels are mono; values are body;
  * the "Why" value is in italic display face. This is the intellectual
  * signature, rendered with care.
+ *
+ * Collapsed by default (title + Chose only); expanding reveals Rejected /
+ * Cost / Why with a smooth height transition. No flip animation.
  */
 export default function DecisionCard({
   header,
@@ -30,7 +38,11 @@ export default function DecisionCard({
   why,
   labels,
   link,
+  defaultExpanded = false,
 }: DecisionCardProps) {
+  const [expanded, setExpanded] = useState(defaultExpanded);
+  const regionId = useId();
+
   return (
     <div>
       <div className="adr-hover overflow-hidden rounded-card border border-line bg-surface">
@@ -47,12 +59,36 @@ export default function DecisionCard({
 
         <dl className="divide-y divide-line">
           <Row label={labels.chose}>{chose}</Row>
-          <Row label={labels.rejected}>{rejected}</Row>
-          <Row label={labels.cost}>{cost}</Row>
-          <Row label={labels.why}>
-            <span className="font-display text-lg italic leading-snug text-text">“{why}”</span>
-          </Row>
         </dl>
+
+        <div
+          id={regionId}
+          className="grid transition-[grid-template-rows] duration-300 ease-out"
+          style={{ gridTemplateRows: expanded ? "1fr" : "0fr" }}
+        >
+          <div className="overflow-hidden">
+            <dl className="divide-y divide-line border-t border-line">
+              <Row label={labels.rejected}>{rejected}</Row>
+              <Row label={labels.cost}>{cost}</Row>
+              <Row label={labels.why}>
+                <span className="font-display text-lg italic leading-snug text-text">“{why}”</span>
+              </Row>
+            </dl>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setExpanded((e) => !e)}
+          aria-expanded={expanded}
+          aria-controls={regionId}
+          className="u-mono flex w-full items-center justify-center gap-1.5 border-t border-line py-2 text-xs text-muted transition-colors hover:text-primary"
+        >
+          {expanded ? "Show less" : "Show more"}
+          <span aria-hidden="true" className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}>
+            ▾
+          </span>
+        </button>
       </div>
 
       {link ? (

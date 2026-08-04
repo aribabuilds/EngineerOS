@@ -20,6 +20,7 @@ export default function DecisionSection() {
           why={featured.why}
           labels={d.labels}
           link={{ href: "/work/briefpilot", label: d.seeRest }}
+          defaultExpanded
         />
       </div>
     </Section>

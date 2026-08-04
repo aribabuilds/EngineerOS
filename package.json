@@ -2,8 +2,11 @@
   "name": "ariba-anjum-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Personal portfolio for Ariba Anjum — junior AI / software engineer.",
+  "description": "Personal portfolio for Ariba Anjum, junior AI / software engineer.",
   "scripts": {
+    "generate:build-info": "node scripts/generate-build-info.mjs",
+    "predev": "npm run generate:build-info",
+    "prebuild": "npm run generate:build-info",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

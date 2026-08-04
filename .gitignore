@@ -28,6 +28,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# generated at build/dev time by scripts/generate-build-info.mjs
+src/lib/buildInfo.generated.ts
+
 # editor
 .vscode/*
 !.vscode/extensions.json

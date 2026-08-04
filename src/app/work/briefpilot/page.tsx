@@ -7,8 +7,11 @@ import CaseSection from "@/components/CaseSection";
 import HtmlComment from "@/components/HtmlComment";
 import PipelineWalkthrough from "@/components/briefpilot/PipelineWalkthrough";
 import ArchitectureDiagram from "@/components/briefpilot/ArchitectureDiagram";
+import CiBadge from "@/components/briefpilot/CiBadge";
 import { getDictionary } from "@/i18n";
 import { REPOS } from "@/lib/site";
+import { buildInfo } from "@/lib/buildInfo.generated";
+import { estimateReadingMinutes } from "@/lib/readingTime";
 
 const dict = getDictionary("en");
 const cs = dict.caseStudy;
@@ -19,6 +22,19 @@ export const metadata: Metadata = {
   description: dict.meta.workDescription,
   alternates: { canonical: "/work/briefpilot" },
 };
+
+// Computed from the page's real copy, never hand-set.
+const readingMinutes = estimateReadingMinutes(
+  cs.oneLiner,
+  cs.problemBody,
+  cs.constraints,
+  cs.hardPartBody,
+  cs.roleAIBody,
+  cs.testingItems,
+  cs.testingNote,
+  cs.roadmapItems.flatMap((r) => [r.item, r.why]),
+  decisions.items.flatMap((d) => [d.chose, d.rejected, d.cost, d.why]),
+);
 
 export default function BriefPilotCaseStudy() {
   return (
@@ -43,7 +59,20 @@ export default function BriefPilotCaseStudy() {
             </div>
             <p className="reading mt-4 text-lg text-muted">{cs.oneLiner}</p>
 
-            {/* 2. Above the fold: repo, role, stack */}
+            {/* Real, git-derived metadata: last updated + reading time. No
+                fabricated value renders if git couldn't resolve one. */}
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
+              {buildInfo.briefpilotLastUpdated ? (
+                <span className="u-mono">
+                  {cs.lastUpdatedLabel}: {buildInfo.briefpilotLastUpdated}
+                </span>
+              ) : null}
+              <span className="u-mono">
+                {readingMinutes} {cs.readingTimeSuffix}
+              </span>
+            </div>
+
+            {/* 2. Above the fold: repo, role, stack, CI status */}
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
               <a
                 href={REPOS.briefpilot}
@@ -61,6 +90,7 @@ export default function BriefPilotCaseStudy() {
                   </li>
                 ))}
               </ul>
+              <CiBadge label={cs.ciStatusLabel} />
             </div>
 
             {/* Interactive pipeline walkthrough, standing in for a future screen recording. */}
@@ -91,10 +121,10 @@ export default function BriefPilotCaseStudy() {
           <ArchitectureDiagram />
         </CaseSection>
 
-        {/* 6. The decision log, given visual weight. */}
+        {/* 6. The decision log, given visual weight. First entry defaults expanded. */}
         <CaseSection eyebrow="decisions" heading={cs.sections.decisions} emphasis>
           <div className="grid gap-6">
-            {decisions.items.map((it) => (
+            {decisions.items.map((it, i) => (
               <DecisionCard
                 key={it.header + it.title}
                 header={it.header}
@@ -104,6 +134,7 @@ export default function BriefPilotCaseStudy() {
                 cost={it.cost}
                 why={it.why}
                 labels={decisions.labels}
+                defaultExpanded={i === 0}
               />
             ))}
           </div>
@@ -120,29 +151,34 @@ export default function BriefPilotCaseStudy() {
           <HtmlComment text="/OWNER VERIFY" />
         </CaseSection>
 
-        {/* 8. Evidence (no accuracy numbers) */}
-        <CaseSection eyebrow="evidence" heading={cs.sections.evidence} emphasis>
-          <p className="text-text">{cs.evidenceBody}</p>
-          <ul className="mt-4 grid gap-2">
-            {cs.evidenceItems.map((item) => (
+        {/* 8. Testing and guarantees: only what's real. No extraction,
+            validation, or human-review claim appears here. */}
+        <CaseSection eyebrow="testing" heading={cs.sections.testing} emphasis>
+          <ul className="grid gap-2">
+            {cs.testingItems.map((item) => (
               <li key={item} className="u-mono text-sm text-text">
                 <span className="text-primary">✓</span> {item}
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-sm text-muted">{cs.evidenceNote}</p>
+          <p className="mt-4 text-sm text-muted">{cs.testingNote}</p>
         </CaseSection>
 
-        {/* 9. What's wrong, what's next */}
-        <CaseSection eyebrow="next" heading={cs.sections.whatsNext} emphasis>
-          <p className="text-text">{cs.whatsNextBody}</p>
-          <ul className="mt-4 grid list-disc gap-2 pl-5">
-            {cs.whatsNextItems.map((item) => (
-              <li key={item} className="text-muted">
-                {item}
+        {/* 9. Roadmap: planned engineering, each scoped by something already shipped. */}
+        <CaseSection eyebrow="roadmap" heading={cs.sections.roadmap} emphasis>
+          <ol className="grid gap-4">
+            {cs.roadmapItems.map((r, i) => (
+              <li key={r.item} className="grid grid-cols-[1.5rem_1fr] gap-3">
+                <span className="u-mono text-sm text-primary" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p className="text-text">{r.item}</p>
+                  <p className="u-mono mt-1 text-xs text-muted">why: {r.why}</p>
+                </div>
               </li>
             ))}
-          </ul>
+          </ol>
         </CaseSection>
 
         {/* 10. Role and where AI assisted. Owner-drafted, pending verification. */}

@@ -4,9 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import HeroScene from "./HeroScene";
 import { useThemeColors } from "./useThemeColors";
+import { useInView } from "@/lib/useInView";
 import { getDictionary } from "@/i18n";
 
 const hero = getDictionary("en").hero;
+
+// The hero's own timeline settles around 5s (see HeroScene's T.trust[1]).
+// The caption reveal waits until then so it never runs alongside the WebGL
+// sequence, then plays once as a quiet second beat of the same thesis.
+const CAPTION_REVEAL_DELAY_MS = 5200;
 
 function detectReducedMotion(): boolean {
   try {
@@ -61,6 +67,18 @@ export default function HeroCanvas() {
     return () => io.disconnect();
   }, []);
 
+  // The caption's one-time reveal: hidden until the hero has settled and the
+  // caption itself has scrolled into view. Instant under reduced motion /
+  // constrained devices, since the hero itself is already static there.
+  const { ref: captionRef, inView: captionInView } = useInView<HTMLParagraphElement>(0.3);
+  const [revealed, setRevealed] = useState(!animate);
+
+  useEffect(() => {
+    if (!animate || revealed || !captionInView) return;
+    const timer = setTimeout(() => setRevealed(true), CAPTION_REVEAL_DELAY_MS);
+    return () => clearTimeout(timer);
+  }, [animate, revealed, captionInView]);
+
   const beats = hero.canvasBeats;
 
   return (
@@ -81,13 +99,24 @@ export default function HeroCanvas() {
         />
       </Canvas>
 
-      {/* Mono caption tracking the beats. Decorative; the real headline is DOM. */}
+      {/* Mono caption: a one-time word reveal once the hero has settled, then
+          a quiet, permanent highlight tracking the active beat. Decorative;
+          the real headline is DOM text elsewhere. */}
       <p
+        ref={captionRef}
         aria-hidden="true"
-        className="u-mono pointer-events-none absolute bottom-2 left-2 flex flex-wrap gap-x-1.5 text-[0.68rem] text-muted"
+        className="u-mono pointer-events-none absolute bottom-2 left-2 flex flex-wrap gap-x-1.5 text-[0.68rem] text-muted lg:bottom-6 lg:left-6"
       >
         {beats.map((b, i) => (
-          <span key={b} className="flex items-center gap-1.5">
+          <span
+            key={b}
+            className="flex items-center gap-1.5 transition-all duration-300 ease-out"
+            style={{
+              opacity: revealed ? 1 : 0,
+              transform: revealed ? "translateY(0)" : "translateY(4px)",
+              transitionDelay: revealed ? `${i * 90}ms` : "0ms",
+            }}
+          >
             <span className={i === beat ? "text-primary" : ""}>{b}</span>
             {i < beats.length - 1 ? <span className="opacity-50">→</span> : null}
           </span>

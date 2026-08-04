@@ -1,3 +1,5 @@
+import CountUpText from "./CountUpText";
+
 /**
  * Signature motif A: "extraction annotation".
  * A thin primary-outlined box with a tiny uppercase mono label above the value,
@@ -16,7 +18,9 @@ export default function ExtractionTag({
   return (
     <div className={`extraction ${className}`}>
       <span className="extraction__label">{label}</span>
-      <span className="u-mono block text-sm text-text">{value}</span>
+      {/* CountUpText only animates a real standalone number (e.g. "20 h /
+          week"); it passes codes like "C1" through unchanged. */}
+      <CountUpText text={value} className="u-mono block text-sm text-text" />
     </div>
   );
 }

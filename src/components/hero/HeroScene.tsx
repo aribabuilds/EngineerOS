@@ -209,9 +209,11 @@ export default function HeroScene({ colors, animate, pointerParallax, onBeat }: 
     }
 
     // Idle rotation + subtle pointer parallax on the whole assembly.
+    // Capped at roughly 3 degrees (~0.05 rad) / 1.5 degrees (~0.03 rad): a
+    // hint of life on cursor movement, not a spin.
     if (rootRef.current) {
-      rootRef.current.rotation.y = idleAngle + px * 0.25;
-      rootRef.current.rotation.x = py * 0.15;
+      rootRef.current.rotation.y = idleAngle + px * 0.05;
+      rootRef.current.rotation.x = py * 0.03;
     }
   };
 

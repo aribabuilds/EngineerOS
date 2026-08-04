@@ -89,6 +89,14 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Offsets all page content for the fixed vertical rail (see Header.tsx),
+     which only renders at this breakpoint. */
+  @media (min-width: 1024px) {
+    body {
+      padding-left: 72px;
+    }
+  }
+
   h1,
   h2,
   h3 {
@@ -324,6 +332,51 @@
   }
   .timeline-dot--active {
     opacity: 1;
+  }
+
+  /* The vertical rail's nav links. Rotated via writing-mode only; the
+     underlying <a> keeps normal DOM order and the global focus-visible
+     outline (see @layer base) still applies. No ancestor here uses
+     overflow: hidden, so that outline is never clipped by the rotation. */
+  .rail-link {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    opacity: 0.65;
+    transition: color 150ms ease-out, opacity 150ms ease-out;
+  }
+  .rail-link:hover {
+    color: var(--text);
+    opacity: 1;
+  }
+  .rail-link--active {
+    color: var(--primary);
+    opacity: 1;
+  }
+
+  /* Hero scroll indicator: a thin line with a dot that descends once on
+     load. Reduced motion drops the dot entirely (handled in the component),
+     leaving just the static line. */
+  .scroll-indicator__dot {
+    animation: scroll-indicator-descend 1600ms ease-in-out 1;
+    animation-fill-mode: forwards;
+  }
+  @keyframes scroll-indicator-descend {
+    0% {
+      top: 0%;
+      opacity: 0;
+    }
+    15% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
   }
 }
 

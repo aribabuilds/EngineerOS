@@ -21,6 +21,7 @@ export const en: Dictionary = {
   nav: {
     work: "Work",
     path: "Path",
+    decisions: "Decisions",
     contact: "Contact",
     cv: "CV",
     wordmarkFirst: "ARIBA",
@@ -46,12 +47,32 @@ export const en: Dictionary = {
     canvasBeats: ["raw inputs", "structured data", "validated system", "trusted outcome"],
   },
 
+  // Restructured into field-labeled parts (round 2). Same verbatim facts as
+  // the original paragraphs, re-cut into problem/decision/outcome/adoption.
+  // No adoption line is invented where the source doesn't support one.
   shipped: {
     heading: "What I've shipped",
     items: [
-      "A GenAI document pipeline I proposed and now lead. It takes asset onboarding at vountain (a fintech in Hanover) from manual data entry to automated extraction across 100+ documents a week, with validation and a human check before anything is trusted.",
-      "Automation I built that got adopted company-wide at two teams: an n8n + LLM standup summariser that reported progress to leadership, and a Slack-to-ClickUp intake that turned client messages into tracked tasks with deadlines.",
-      "A learning platform I delivered for a school in Dubai over six months. I was moved mid-project from building it to reviewing the junior developers' pull requests.",
+      {
+        problem: "Asset onboarding at vountain (a fintech in Hanover) ran on manual data entry.",
+        decision:
+          "Proposed and now lead a GenAI document pipeline: automated extraction with validation and a human check before anything is trusted.",
+        outcome: "Automated extraction across 100+ documents a week.",
+        adoption: "Running in production at vountain, replacing manual entry.",
+      },
+      {
+        problem: "Untracked async standups, and client Slack requests turned into tickets by hand.",
+        decision:
+          "n8n + LLM automations: a standup summariser reporting to leadership, and a Slack-to-ClickUp intake with deadlines.",
+        outcome: "Daily progress visibility without meetings, and client messages become tracked tasks automatically.",
+        adoption: "Company-wide at two teams.",
+      },
+      {
+        problem: "A Dubai school needed a learning platform built.",
+        decision: "Delivered it over a six-month freelance engagement.",
+        outcome: "Promoted mid-project from building it to reviewing the junior developers' pull requests.",
+        // No adoption claim exists for this one; the label is omitted, not invented.
+      },
     ],
   },
 
@@ -72,10 +93,11 @@ export const en: Dictionary = {
       quantum: {
         status: "live",
         title: "Quantum Playground",
+        // Round 2: lead with why the visualization exists, not what it looks like.
         summary:
-          "An interactive 3D playground for quantum states: build qubits, apply gates, and watch a Bell pair and a teleportation protocol play out in real time.",
+          "Quantum states are hard to reason about as vectors of complex numbers. This is a visual, interactive representation that makes gate effects and entanglement observable: build qubits, apply gates, and watch a Bell pair and a teleportation protocol play out in real time.",
         detail:
-          "A fully typed quantum-state engine under a Three.js / GLSL visual layer. Every push builds and ships itself to the live site.",
+          "The state engine is fully typed and separated from the rendering layer. Every push builds and deploys automatically to the live site.",
       },
     },
   },
@@ -198,8 +220,8 @@ export const en: Dictionary = {
       architecture: "Architecture",
       decisions: "Three decisions",
       hardPart: "The hard part",
-      evidence: "Evidence it works",
-      whatsNext: "What it gets wrong · what's next",
+      testing: "Testing and guarantees",
+      roadmap: "Roadmap",
       roleAI: "My role, and where AI assisted",
     },
     problemBody:
@@ -210,19 +232,38 @@ export const en: Dictionary = {
       "Privacy of personal mail",
       "No GPU",
     ],
-    evidenceBody: "What's checked on the way in:",
-    evidenceItems: [
-      "CI runs on every push.",
-      "mypy --strict across the codebase.",
-      "Typed contracts between components.",
+    // Testing and guarantees: only what's real. No extraction, validation, or
+    // human-review claim appears here or anywhere else on the page, since
+    // none of those are built yet.
+    testingItems: [
+      "CI runs lint, type-check, test, and build on every push.",
+      "mypy --strict across the backend.",
+      "Typed contracts between frontend and backend (TypeScript discriminated unions on job states).",
+      "The quality gate is the first trust guarantee: unreadable input is rejected with retake guidance rather than rendered as unreliable text.",
     ],
-    evidenceNote: "No accuracy numbers exist yet. None are claimed here.",
-    whatsNextBody: "Honest about what isn't built:",
-    whatsNextItems: [
-      "Extraction is not built yet.",
-      "The plain-English explanation is not built yet.",
-      "The deadline-overlay feature is not built yet.",
+    testingNote: "No accuracy numbers exist yet. None are claimed here.",
+
+    // Roadmap: planned engineering, not missing features. Each item is
+    // already scoped by a real, shipped contract (the adapter interface, the
+    // bounding boxes), which is why it's sequenced next rather than someday.
+    roadmapItems: [
+      {
+        item: "LLM structured extraction behind the existing adapter.",
+        why: "The adapter contract already defines it.",
+      },
+      {
+        item: "Deterministic validators on extracted fields.",
+        why: "Hallucinated deadlines are the worst failure mode in this product.",
+      },
+      {
+        item: "Click-to-verify source highlighting.",
+        why: "The word-level bounding boxes already shipped exist to power it.",
+      },
     ],
+
+    lastUpdatedLabel: "Last updated",
+    readingTimeSuffix: "min read",
+    ciStatusLabel: "CI",
 
     // Owner-drafted, pending verification. See the OWNER VERIFY comment
     // rendered around both blocks in work/briefpilot/page.tsx.
