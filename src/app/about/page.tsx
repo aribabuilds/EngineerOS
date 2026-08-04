@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ExtractionTag from "@/components/ExtractionTag";
 import OwnerTodo from "@/components/OwnerTodo";
+import HtmlComment from "@/components/HtmlComment";
 import { getDictionary } from "@/i18n";
 
 const dict = getDictionary("en");
@@ -43,6 +44,8 @@ export default function AboutPage() {
                 <ExtractionTag key={fact.label} label={fact.label} value={fact.value} />
               ))}
             </div>
+            {/* German level shown as B1; the CV's text layer still reads A2 in two spots. */}
+            <HtmlComment text="OWNER: confirm A2 vs B1 and align site + CV" />
           </div>
         </section>
 

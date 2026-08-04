@@ -13,7 +13,7 @@ const c = getDictionary("en").contact;
 
 export default function Contact() {
   return (
-    <Section id="contact" heading={c.heading}>
+    <Section id="contact" eyebrow="contact" heading={c.heading}>
       <p className="reading mt-5 text-lg text-muted">{c.lede}</p>
 
       <div className="mt-8 flex flex-wrap gap-3">

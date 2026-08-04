@@ -6,7 +6,7 @@ const path = getDictionary("en").path;
 /** Dated rows - the order carries meaning (spec → build). */
 export default function PathSection() {
   return (
-    <Section id="path" heading={path.heading}>
+    <Section id="path" eyebrow="path" heading={path.heading}>
       <ol className="mt-8 border-t border-line">
         {path.rows.map((row, i) => (
           <li

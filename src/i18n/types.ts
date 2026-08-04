@@ -95,7 +95,6 @@ export interface Dictionary {
     roleTag: string;
     stack: string[];
     repoLabel: string;
-    recordingTodo: string;
     sections: {
       problem: string;
       constraints: string;
@@ -113,6 +112,35 @@ export interface Dictionary {
     evidenceNote: string;
     whatsNextBody: string;
     whatsNextItems: string[];
+    hardPartBody: string[];
+    roleAIBody: string[];
+    walkthrough: {
+      caption: string;
+      steps: { key: string; label: string }[];
+      playLabel: string;
+      pauseLabel: string;
+      backLabel: string;
+      nextLabel: string;
+      outcomeLabel: string;
+      passLabel: string;
+      failLabel: string;
+      retakeHeading: string;
+      retakeTips: string[];
+      letter: {
+        aktenzeichen: string;
+        behorde: string;
+        address: string;
+        subject: string;
+        bodyLines: string[];
+      };
+    };
+    architecture: {
+      stages: string[];
+      ciLabel: string;
+      aiAdapterLabel: string;
+      aiAdapterStatusLabel: string;
+      aiAdapterStatusValue: string;
+    };
   };
   about: {
     title: string;

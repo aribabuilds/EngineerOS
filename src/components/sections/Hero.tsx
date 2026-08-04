@@ -1,5 +1,6 @@
 import HeroCanvasLazy from "@/components/hero/HeroCanvasLazy";
 import ExtractionTag from "@/components/ExtractionTag";
+import HtmlComment from "@/components/HtmlComment";
 import { getDictionary } from "@/i18n";
 import { MAILTO } from "@/lib/site";
 
@@ -27,6 +28,8 @@ export default function Hero() {
               <ExtractionTag key={tag.label} label={tag.label} value={tag.value} />
             ))}
           </div>
+          {/* German level shown as B1; the CV's text layer still reads A2 in two spots. */}
+          <HtmlComment text="OWNER: confirm A2 vs B1 and align site + CV" />
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={MAILTO} className="btn btn--primary">

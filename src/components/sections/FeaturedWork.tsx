@@ -7,7 +7,7 @@ const f = getDictionary("en").featured;
 
 export default function FeaturedWork() {
   return (
-    <Section id="work" heading={f.heading}>
+    <Section id="work" eyebrow="work" heading={f.heading}>
       <div className="mt-8 grid gap-5 md:grid-cols-2">
         {/* Card A - BriefPilot (in development). No live-demo link, by design. */}
         <WorkCard

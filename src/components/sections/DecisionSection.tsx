@@ -9,7 +9,7 @@ const featured = d.items[0];
 
 export default function DecisionSection() {
   return (
-    <Section id="decision" heading={d.heading}>
+    <Section id="decision" eyebrow="decisions" heading={d.heading}>
       <div className="mt-8 max-w-2xl">
         <DecisionCard
           header={featured.header}

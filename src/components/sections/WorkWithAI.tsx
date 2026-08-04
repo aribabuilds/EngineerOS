@@ -5,7 +5,7 @@ const ai = getDictionary("en").ai;
 
 export default function WorkWithAI() {
   return (
-    <Section id="ai" heading={ai.heading}>
+    <Section id="ai" eyebrow="how_i_work_with_ai" heading={ai.heading}>
       <p className="reading mt-5 text-lg text-muted">{ai.intro}</p>
 
       <div className="mt-9 grid gap-5 md:grid-cols-3">

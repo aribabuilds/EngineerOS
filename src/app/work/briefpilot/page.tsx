@@ -3,7 +3,9 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import DecisionCard from "@/components/DecisionCard";
-import OwnerTodo from "@/components/OwnerTodo";
+import HtmlComment from "@/components/HtmlComment";
+import PipelineWalkthrough from "@/components/briefpilot/PipelineWalkthrough";
+import ArchitectureDiagram from "@/components/briefpilot/ArchitectureDiagram";
 import { getDictionary } from "@/i18n";
 import { REPOS } from "@/lib/site";
 
@@ -22,7 +24,7 @@ export default function BriefPilotCaseStudy() {
     <>
       <Header />
       <main id="main">
-        {/* 1 - Title + one-liner + status + date range */}
+        {/* 1. Title, one-liner, status, date range */}
         <section className="border-b border-line">
           <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-16">
             <p className="mb-4">
@@ -40,7 +42,7 @@ export default function BriefPilotCaseStudy() {
             </div>
             <p className="reading mt-4 text-lg text-muted">{cs.oneLiner}</p>
 
-            {/* 2 - Above the fold: repo · recording · role · stack */}
+            {/* 2. Above the fold: repo, role, stack */}
             <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
               <a
                 href={REPOS.briefpilot}
@@ -59,19 +61,21 @@ export default function BriefPilotCaseStudy() {
                 ))}
               </ul>
             </div>
-            <div className="mt-4">
-              <OwnerTodo>{cs.recordingTodo}</OwnerTodo>
+
+            {/* Interactive pipeline walkthrough, standing in for a future screen recording. */}
+            <div className="mt-6">
+              <PipelineWalkthrough />
             </div>
           </div>
         </section>
 
-        {/* 3 - Problem */}
-        <CaseSection heading={cs.sections.problem}>
+        {/* 3. Problem */}
+        <CaseSection eyebrow="problem" heading={cs.sections.problem}>
           <p className="reading text-lg text-text">{cs.problemBody}</p>
         </CaseSection>
 
-        {/* 4 - Constraints */}
-        <CaseSection heading={cs.sections.constraints}>
+        {/* 4. Constraints */}
+        <CaseSection eyebrow="constraints" heading={cs.sections.constraints}>
           <ul className="flex flex-wrap gap-2">
             {cs.constraints.map((con) => (
               <li key={con} className="extraction">
@@ -81,53 +85,42 @@ export default function BriefPilotCaseStudy() {
           </ul>
         </CaseSection>
 
-        {/* 5 - Architecture (owner supplies the diagram) */}
-        <CaseSection heading={cs.sections.architecture}>
-          <OwnerTodo>Readable architecture diagram - owner to supply / approve.</OwnerTodo>
+        {/* 5. Architecture */}
+        <CaseSection eyebrow="architecture" heading={cs.sections.architecture}>
+          <ArchitectureDiagram />
         </CaseSection>
 
-        {/* 6 - Three decisions as Decision Cards (given visual weight) */}
-        <CaseSection heading={cs.sections.decisions} emphasis>
+        {/* 6. The decision log, given visual weight. */}
+        <CaseSection eyebrow="decisions" heading={cs.sections.decisions} emphasis>
           <div className="grid gap-6">
-            {/* ADR-0003 - null-not-guess. Values TODO (not yet provided verbatim). */}
-            <DecisionCard
-              header={cs.adr03Header}
-              chose={dict.common.ownerTodo}
-              rejected={dict.common.ownerTodo}
-              cost={dict.common.ownerTodo}
-              why="Owner to provide the decision log entry for null-not-guess."
-              labels={d.labels}
-            />
-
-            {/* Photo quality-gate. Values TODO. */}
-            <DecisionCard
-              header={cs.qualityGateHeader}
-              chose={dict.common.ownerTodo}
-              rejected={dict.common.ownerTodo}
-              cost={dict.common.ownerTodo}
-              why="Owner to provide the decision log entry for the photo quality-gate."
-              labels={d.labels}
-            />
-
-            {/* ADR-0001 - no hosted deployment. Full verbatim content exists. */}
-            <DecisionCard
-              header={d.header}
-              chose={d.chose}
-              rejected={d.rejected}
-              cost={d.cost}
-              why={d.why}
-              labels={d.labels}
-            />
+            {decisions.items.map((it) => (
+              <DecisionCard
+                key={it.header + it.title}
+                header={it.header}
+                title={it.title}
+                chose={it.chose}
+                rejected={it.rejected}
+                cost={it.cost}
+                why={it.why}
+                labels={decisions.labels}
+              />
+            ))}
           </div>
         </CaseSection>
 
-        {/* 7 - The hard part */}
-        <CaseSection heading={cs.sections.hardPart}>
-          <OwnerTodo>The hard part - owner to write. Do not fabricate.</OwnerTodo>
+        {/* 7. The hard part. Owner-drafted, pending verification. */}
+        <CaseSection eyebrow="hard_part" heading={cs.sections.hardPart}>
+          <HtmlComment text="OWNER VERIFY" />
+          <div className="reading grid gap-4 text-text">
+            {cs.hardPartBody.map((para) => (
+              <p key={para}>{para}</p>
+            ))}
+          </div>
+          <HtmlComment text="/OWNER VERIFY" />
         </CaseSection>
 
-        {/* 8 - Evidence (no accuracy numbers) */}
-        <CaseSection heading={cs.sections.evidence} emphasis>
+        {/* 8. Evidence (no accuracy numbers) */}
+        <CaseSection eyebrow="evidence" heading={cs.sections.evidence} emphasis>
           <p className="text-text">{cs.evidenceBody}</p>
           <ul className="mt-4 grid gap-2">
             {cs.evidenceItems.map((item) => (
@@ -139,24 +132,27 @@ export default function BriefPilotCaseStudy() {
           <p className="mt-4 text-sm text-muted">{cs.evidenceNote}</p>
         </CaseSection>
 
-        {/* 9 - What's wrong / what's next */}
-        <CaseSection heading={cs.sections.whatsNext} emphasis>
+        {/* 9. What's wrong, what's next */}
+        <CaseSection eyebrow="next" heading={cs.sections.whatsNext} emphasis>
           <p className="text-text">{cs.whatsNextBody}</p>
-          <ul className="mt-4 grid gap-2">
+          <ul className="mt-4 grid list-disc gap-2 pl-5">
             {cs.whatsNextItems.map((item) => (
               <li key={item} className="text-muted">
-                - {item}
+                {item}
               </li>
             ))}
           </ul>
         </CaseSection>
 
-        {/* 10 - Role + where AI assisted */}
-        <CaseSection heading={cs.sections.roleAI}>
-          <OwnerTodo>
-            Owner to detail their role and exactly where AI assisted (see the homepage
-            &ldquo;How I work with AI&rdquo; for the philosophy).
-          </OwnerTodo>
+        {/* 10. Role and where AI assisted. Owner-drafted, pending verification. */}
+        <CaseSection eyebrow="role" heading={cs.sections.roleAI}>
+          <HtmlComment text="OWNER VERIFY" />
+          <div className="reading grid gap-4 text-text">
+            {cs.roleAIBody.map((para) => (
+              <p key={para}>{para}</p>
+            ))}
+          </div>
+          <HtmlComment text="/OWNER VERIFY" />
         </CaseSection>
       </main>
       <Footer />
@@ -165,17 +161,20 @@ export default function BriefPilotCaseStudy() {
 }
 
 function CaseSection({
+  eyebrow,
   heading,
   children,
   emphasis = false,
 }: {
+  eyebrow: string;
   heading: string;
   children: React.ReactNode;
   emphasis?: boolean;
 }) {
   return (
-    <section className={`border-b border-line ${emphasis ? "bg-surface" : ""}`}>
+    <section className={`reveal border-b border-line ${emphasis ? "bg-surface" : ""}`}>
       <div className={`mx-auto max-w-3xl px-5 sm:px-8 ${emphasis ? "py-14 sm:py-16" : "py-11 sm:py-12"}`}>
+        <p className="u-mono mb-2 text-xs tracking-wide text-muted">field: {eyebrow}</p>
         <h2 className="font-display text-2xl font-semibold text-text">{heading}</h2>
         <div className="mt-5">{children}</div>
       </div>
