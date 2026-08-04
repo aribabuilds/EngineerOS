@@ -17,19 +17,21 @@ export default function Hero() {
       <div className="relative flex flex-col lg:min-h-screen lg:flex-row lg:items-center">
         {/* Zone 2: content column. Real DOM, paints immediately; the canvas
             is progressive enhancement layered in afterward. */}
-        <div className="relative z-10 px-5 py-14 sm:px-8 sm:py-20 lg:w-[45%] lg:max-w-[560px] lg:shrink-0 lg:py-0 lg:pl-16">
+        <div className="relative z-10 px-5 py-8 sm:px-8 sm:py-20 lg:w-[45%] lg:max-w-[560px] lg:shrink-0 lg:py-0 lg:pl-16">
           <p className="u-mono text-sm text-primary">{hero.eyebrow}</p>
 
           <h1
             id="hero-h1"
-            className="mt-4 font-display text-4xl font-semibold leading-[1.08] text-text sm:text-5xl"
+            className="mt-3 font-display text-4xl font-semibold leading-[1.08] text-text sm:mt-4 sm:text-5xl"
           >
             {hero.h1}
           </h1>
 
-          <p className="reading mt-5 text-lg text-muted">{hero.lede}</p>
+          <p className="reading mt-4 text-lg text-muted sm:mt-5">{hero.lede}</p>
 
-          <div className="mt-7 grid gap-2.5 sm:grid-cols-3 lg:grid-cols-1 lg:max-w-xs">
+          {/* Two columns on the smallest phones so all three tags fit the
+              first viewport without scrolling; three from sm: up. */}
+          <div className="mt-5 grid grid-cols-2 gap-2 sm:mt-7 sm:grid-cols-3 sm:gap-2.5 lg:grid-cols-1 lg:max-w-xs">
             {hero.tags.map((tag) => (
               <ExtractionTag key={tag.label} label={tag.label} value={tag.value} />
             ))}
@@ -38,9 +40,9 @@ export default function Hero() {
           <HtmlComment text="OWNER: confirm A2 vs B1 and align site + CV" />
 
           {/* Owner-maintained live status, edited in src/content/status.ts. */}
-          <p className="u-mono mt-4 text-xs text-muted">{currentStatus}</p>
+          <p className="u-mono mt-3 text-xs text-muted sm:mt-4">{currentStatus}</p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
             <a href={MAILTO} className="btn btn--primary">
               {hero.emailMe}
             </a>
