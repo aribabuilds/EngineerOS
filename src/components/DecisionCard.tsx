@@ -46,7 +46,7 @@ export default function DecisionCard({
   return (
     <div>
       <div className="adr-hover overflow-hidden rounded-card border border-line bg-surface">
-        <div className="flex items-center gap-2 bg-[#14202e] px-4 py-2.5 dark:bg-raised">
+        <div className="flex items-center gap-2 bg-[#1c1815] px-4 py-2.5 dark:bg-raised">
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-primary" />
           <span className="u-mono text-xs tracking-wide text-white/90">{header}</span>
         </div>

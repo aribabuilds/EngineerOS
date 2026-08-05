@@ -10,7 +10,7 @@ export interface ThemeColors {
 
 function readColors(): ThemeColors {
   if (typeof window === "undefined") {
-    return { primary: "#1b54c0", periwinkle: "#123c8c", bg: "#ffffff" };
+    return { primary: "#a8431f", periwinkle: "#8a611e", bg: "#fbf8f4" };
   }
   const cs = getComputedStyle(document.documentElement);
   const get = (name: string, fallback: string) => {
@@ -18,9 +18,9 @@ function readColors(): ThemeColors {
     return v || fallback;
   };
   return {
-    primary: get("--primary", "#1b54c0"),
-    periwinkle: get("--periwinkle", "#123c8c"),
-    bg: get("--bg", "#ffffff"),
+    primary: get("--primary", "#a8431f"),
+    periwinkle: get("--periwinkle", "#8a611e"),
+    bg: get("--bg", "#fbf8f4"),
   };
 }
 

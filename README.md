@@ -110,13 +110,14 @@ adopted** - then a calm idle. Guardrails, per brief §7:
 
 ### Contrast
 
-Colour tokens are taken directly from the build brief's specified palettes,
-which are AA-targeted. Key pairs, both themes:
+A warm palette derived from the owner's headshot (black hijab, cream/tan
+gradient, terracotta lip color as the accent). Key pairs, both themes,
+computed against the WCAG relative-luminance formula:
 
-- Light - text `#14202E` on `#FFFFFF` (~14:1), muted `#556575` (~4.9:1),
-  primary `#1B54C0` on white (~6:1).
-- Dark - text `#E8EDF5` on `#121319` (~14:1), muted `#9FB0C9` (~7:1),
-  primary `#6E9BEC` on `#121319` (~7:1).
+- Light - text `#1C1815` on `#FBF8F4` (~16.7:1), muted `#6E6154` (~5.7:1),
+  primary `#A8431F` on `#FBF8F4` (~5.7:1).
+- Dark - text `#F3EAE1` on `#14110F` (~15.8:1), muted `#B6A79A` (~8:1),
+  primary `#E8794F` on `#14110F` (~6.5:1).
 
 Re-verify with a contrast checker if you change any token.
 

@@ -16,17 +16,22 @@
  * for no-JS visitors, via prefers-color-scheme.
  * All pairs verified for WCAG AA: see README "Contrast".
  * ------------------------------------------------------------------ */
+/* Warm palette, derived from the owner's headshot: black hijab, warm cream
+   and tan gradient, terracotta lip color as the accent, amber-gold as the
+   secondary accent. Replaces the earlier royal-blue palette; every pair
+   below is checked against WCAG AA (4.5:1 body text) at implementation
+   time, see README "Contrast". */
 :root {
-  --bg: #ffffff;
-  --surface: #f5f8fc;
-  --raised: #f5f8fc;
-  --text: #14202e;
-  --muted: #556575;
-  --line: #e2e8f0;
-  --primary: #1b54c0;
-  --primary-strong: #123c8c;
-  --periwinkle: #123c8c;
-  --accent-tint: #e9f0fc;
+  --bg: #fbf8f4;
+  --surface: #f3ece3;
+  --raised: #f3ece3;
+  --text: #1c1815;
+  --muted: #6e6154;
+  --line: #e4dbce;
+  --primary: #a8431f;
+  --primary-strong: #8a3618;
+  --periwinkle: #8a611e;
+  --accent-tint: #f5e4db;
   --on-primary: #ffffff;
 
   --font-display: "Newsreader Variable";
@@ -37,34 +42,34 @@
 }
 
 [data-theme="dark"] {
-  --bg: #121319;
-  --surface: #1e1f26;
-  --raised: #283655;
-  --text: #e8edf5;
-  --muted: #9fb0c9;
-  --line: #2c3550;
-  --primary: #6e9bec;
-  --primary-strong: #8fb2f2;
-  --periwinkle: #d0e1f9;
-  --accent-tint: rgba(110, 155, 236, 0.14);
-  --on-primary: #0f1420;
+  --bg: #14110f;
+  --surface: #1f1a16;
+  --raised: #2e251f;
+  --text: #f3eae1;
+  --muted: #b6a79a;
+  --line: #3a2f28;
+  --primary: #e8794f;
+  --primary-strong: #f0916a;
+  --periwinkle: #d9a857;
+  --accent-tint: rgba(232, 121, 79, 0.14);
+  --on-primary: #14110f;
 
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --bg: #121319;
-    --surface: #1e1f26;
-    --raised: #283655;
-    --text: #e8edf5;
-    --muted: #9fb0c9;
-    --line: #2c3550;
-    --primary: #6e9bec;
-    --primary-strong: #8fb2f2;
-    --periwinkle: #d0e1f9;
-    --accent-tint: rgba(110, 155, 236, 0.14);
-    --on-primary: #0f1420;
+    --bg: #14110f;
+    --surface: #1f1a16;
+    --raised: #2e251f;
+    --text: #f3eae1;
+    --muted: #b6a79a;
+    --line: #3a2f28;
+    --primary: #e8794f;
+    --primary-strong: #f0916a;
+    --periwinkle: #d9a857;
+    --accent-tint: rgba(232, 121, 79, 0.14);
+    --on-primary: #14110f;
 
     color-scheme: dark;
   }
