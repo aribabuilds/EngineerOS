@@ -28,7 +28,7 @@ function AiColumn({ label, body, index }: { label: string; body: string; index: 
       style={{ "--reveal-delay": `${index * 90}ms` } as React.CSSProperties}
       className={`reveal ${inView ? "reveal--visible" : ""} rounded-card border border-line bg-surface p-5`}
     >
-      <h3 className="u-mono text-sm font-medium text-primary">{label}</h3>
+      <h3 className="u-mono text-sm font-medium text-primary-strong">{label}</h3>
       <p className="mt-3 text-text">{body}</p>
     </div>
   );

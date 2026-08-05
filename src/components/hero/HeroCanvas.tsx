@@ -117,7 +117,7 @@ export default function HeroCanvas() {
               transitionDelay: revealed ? `${i * 90}ms` : "0ms",
             }}
           >
-            <span className={i === beat ? "text-primary" : ""}>{b}</span>
+            <span className={i === beat ? "text-primary-strong" : ""}>{b}</span>
             {i < beats.length - 1 ? <span className="opacity-50">→</span> : null}
           </span>
         ))}

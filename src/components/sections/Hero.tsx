@@ -18,7 +18,7 @@ export default function Hero() {
         {/* Zone 2: content column. Real DOM, paints immediately; the canvas
             is progressive enhancement layered in afterward. */}
         <div className="relative z-10 px-5 py-6 sm:px-8 sm:py-20 lg:w-[45%] lg:max-w-[560px] lg:shrink-0 lg:py-0 lg:pl-16">
-          <p className="u-mono text-sm text-primary">{hero.eyebrow}</p>
+          <p className="u-mono text-sm text-primary-strong">{hero.eyebrow}</p>
 
           <h1
             id="hero-h1"

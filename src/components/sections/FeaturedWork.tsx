@@ -23,7 +23,7 @@ export default function FeaturedWork() {
           summary={f.cards.briefpilot.summary}
           detail={f.cards.briefpilot.detail}
         >
-          <Link href="/work/briefpilot" className="u-mono text-sm font-medium text-primary">
+          <Link href="/work/briefpilot" className="u-mono text-sm font-medium text-primary-strong">
             {f.readDecisions} <span aria-hidden="true">→</span>
           </Link>
           <ExternalLink href={REPOS.briefpilot}>{f.repo}</ExternalLink>
@@ -80,7 +80,7 @@ function WorkCard({
       <div className="flex items-center justify-between">
         <span className="card-hover-box">
           <h3 className="font-display text-xl font-semibold text-text">{title}</h3>
-          <span className="card-hover-box__tag u-mono text-[0.65rem] text-primary" aria-hidden="true">
+          <span className="card-hover-box__tag u-mono text-[0.65rem] text-primary-strong" aria-hidden="true">
             field: title
           </span>
         </span>
@@ -112,7 +112,7 @@ function ExternalLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`u-mono text-sm ${strong ? "font-medium text-primary" : "text-muted hover:text-primary"}`}
+      className={`u-mono text-sm ${strong ? "font-medium text-primary-strong" : "text-muted hover:text-primary-strong"}`}
     >
       {children}
     </a>

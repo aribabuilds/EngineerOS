@@ -45,7 +45,7 @@ export default function BriefPilotCaseStudy() {
         <section className="border-b border-line">
           <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-16">
             <p className="mb-4">
-              <Link href="/" className="u-mono text-sm text-muted hover:text-primary">
+              <Link href="/" className="u-mono text-sm text-muted hover:text-primary-strong">
                 <span aria-hidden="true">←</span> {dict.common.backToHome}
               </Link>
             </p>
@@ -78,7 +78,7 @@ export default function BriefPilotCaseStudy() {
                 href={REPOS.briefpilot}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="u-mono text-sm font-medium text-primary"
+                className="u-mono text-sm font-medium text-primary-strong"
               >
                 {cs.repoLabel} <span aria-hidden="true">→</span>
               </a>
@@ -157,7 +157,7 @@ export default function BriefPilotCaseStudy() {
           <ul className="grid gap-2">
             {cs.testingItems.map((item) => (
               <li key={item} className="u-mono text-sm text-text">
-                <span className="text-primary">✓</span> {item}
+                <span className="text-primary-strong">✓</span> {item}
               </li>
             ))}
           </ul>
@@ -169,7 +169,7 @@ export default function BriefPilotCaseStudy() {
           <ol className="grid gap-4">
             {cs.roadmapItems.map((r, i) => (
               <li key={r.item} className="grid grid-cols-[1.5rem_1fr] gap-3">
-                <span className="u-mono text-sm text-primary" aria-hidden="true">
+                <span className="u-mono text-sm text-primary-strong" aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <div>

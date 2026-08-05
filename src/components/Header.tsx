@@ -107,7 +107,7 @@ export default function Header() {
         <a
           href={CV_PATH}
           download
-          className="u-mono rounded-md px-2.5 py-1.5 text-sm text-text no-underline transition-colors hover:text-primary"
+          className="u-mono rounded-md px-2.5 py-1.5 text-sm text-text no-underline transition-colors hover:text-primary-strong"
         >
           {nav.cv} <span aria-hidden="true">↓</span>
         </a>
@@ -121,7 +121,7 @@ export default function Header() {
           className="u-mono text-sm font-medium tracking-[0.18em] text-text no-underline"
           aria-label={homeLabel}
         >
-          {nav.wordmarkFirst} <span className="text-primary">{nav.wordmarkAccent}</span>
+          {nav.wordmarkFirst} <span className="text-primary-strong">{nav.wordmarkAccent}</span>
         </Link>
 
         <nav aria-label="Primary" className="flex items-center gap-1 sm:gap-2">
@@ -140,7 +140,7 @@ export default function Header() {
           <a
             href={CV_PATH}
             download
-            className="u-mono rounded-md px-2.5 py-1.5 text-sm text-text no-underline transition-colors hover:text-primary"
+            className="u-mono rounded-md px-2.5 py-1.5 text-sm text-text no-underline transition-colors hover:text-primary-strong"
           >
             {nav.cv} <span aria-hidden="true">↓</span>
           </a>

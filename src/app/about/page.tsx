@@ -24,7 +24,7 @@ export default function AboutPage() {
         <section className="border-b border-line">
           <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-16">
             <p className="mb-4">
-              <Link href="/" className="u-mono text-sm text-muted hover:text-primary">
+              <Link href="/" className="u-mono text-sm text-muted hover:text-primary-strong">
                 <span aria-hidden="true">←</span> {dict.common.backToHome}
               </Link>
             </p>
@@ -67,7 +67,7 @@ export default function AboutPage() {
             <div className="mt-7 grid gap-5 md:grid-cols-3">
               {dict.ai.columns.map((col) => (
                 <div key={col.label} className="rounded-card border border-line bg-surface p-5">
-                  <h3 className="u-mono text-sm font-medium text-primary">{col.label}</h3>
+                  <h3 className="u-mono text-sm font-medium text-primary-strong">{col.label}</h3>
                   <p className="mt-3 text-text">{col.body}</p>
                 </div>
               ))}
@@ -85,7 +85,7 @@ export default function AboutPage() {
                   key={i}
                   className="grid grid-cols-[4rem_1fr] items-baseline gap-4 border-b border-line py-4 sm:grid-cols-[6rem_1fr]"
                 >
-                  <span className="u-mono text-sm text-primary">{row.year}</span>
+                  <span className="u-mono text-sm text-primary-strong">{row.year}</span>
                   <div>
                     <p className="font-medium text-text">{row.role}</p>
                     <p className="text-muted">{row.note}</p>

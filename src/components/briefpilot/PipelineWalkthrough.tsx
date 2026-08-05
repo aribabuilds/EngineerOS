@@ -107,7 +107,7 @@ export default function PipelineWalkthrough() {
             <li
               key={s.key}
               className={`u-mono text-xs tracking-wide ${
-                i === step ? "text-primary" : i < step ? "text-muted" : "text-muted/50"
+                i === step ? "text-primary-strong" : i < step ? "text-muted" : "text-muted/50"
               }`}
             >
               {String(i + 1).padStart(2, "0")} {s.label}

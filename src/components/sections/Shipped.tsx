@@ -9,7 +9,7 @@ const shipped = getDictionary("en").shipped;
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <p className="grid grid-cols-[5.5rem_1fr] gap-3 sm:grid-cols-[6.5rem_1fr]">
-      <span className="u-mono text-xs uppercase tracking-wide text-primary">{label}:</span>
+      <span className="u-mono text-xs uppercase tracking-wide text-primary-strong">{label}:</span>
       <CountUpText text={value} className="text-text" />
     </p>
   );
@@ -23,7 +23,7 @@ export default function Shipped() {
       <ol className="mt-8 grid gap-8 sm:gap-9">
         {shipped.items.map((item, i) => (
           <li key={i} className="grid grid-cols-[2rem_1fr] gap-4 sm:grid-cols-[3rem_1fr]">
-            <span className="u-mono pt-0.5 text-sm text-primary" aria-hidden="true">
+            <span className="u-mono pt-0.5 text-sm text-primary-strong" aria-hidden="true">
               {String(i + 1).padStart(2, "0")}
             </span>
             <div className="reading grid gap-1.5">

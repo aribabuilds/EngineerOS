@@ -46,7 +46,7 @@ export default function DecisionCard({
   return (
     <div>
       <div className="adr-hover overflow-hidden rounded-card border border-line bg-surface">
-        <div className="flex items-center gap-2 bg-[#1c1815] px-4 py-2.5 dark:bg-raised">
+        <div className="flex items-center gap-2 bg-[#1e1b17] px-4 py-2.5 dark:bg-raised">
           <span aria-hidden="true" className="h-2 w-2 rounded-full bg-primary" />
           <span className="u-mono text-xs tracking-wide text-white/90">{header}</span>
         </div>
@@ -82,7 +82,7 @@ export default function DecisionCard({
           onClick={() => setExpanded((e) => !e)}
           aria-expanded={expanded}
           aria-controls={regionId}
-          className="u-mono flex w-full items-center justify-center gap-1.5 border-t border-line py-2 text-xs text-muted transition-colors hover:text-primary"
+          className="u-mono flex w-full items-center justify-center gap-1.5 border-t border-line py-2 text-xs text-muted transition-colors hover:text-primary-strong"
         >
           {expanded ? "Show less" : "Show more"}
           <span aria-hidden="true" className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}>
@@ -93,7 +93,7 @@ export default function DecisionCard({
 
       {link ? (
         <p className="mt-3">
-          <Link href={link.href} className="u-mono text-sm font-medium text-primary">
+          <Link href={link.href} className="u-mono text-sm font-medium text-primary-strong">
             {link.label} <span aria-hidden="true">→</span>
           </Link>
         </p>

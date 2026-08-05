@@ -16,22 +16,22 @@
  * for no-JS visitors, via prefers-color-scheme.
  * All pairs verified for WCAG AA: see README "Contrast".
  * ------------------------------------------------------------------ */
-/* Warm palette, derived from the owner's headshot: black hijab, warm cream
-   and tan gradient, terracotta lip color as the accent, amber-gold as the
-   secondary accent. Replaces the earlier royal-blue palette; every pair
-   below is checked against WCAG AA (4.5:1 body text) at implementation
-   time, see README "Contrast". */
+/* Owner-specified palette: near-black / beige backgrounds, a muted
+   taupe-brown primary accent, and a gold-beige secondary accent (no orange
+   cast). --primary-strong doubles as the text-safe alternative where
+   --primary itself would read too light for body text on the light-mode
+   background; see README "Contrast" for the one flagged shortfall. */
 :root {
-  --bg: #fbf8f4;
-  --surface: #f3ece3;
-  --raised: #f3ece3;
-  --text: #1c1815;
-  --muted: #6e6154;
-  --line: #e4dbce;
-  --primary: #a8431f;
-  --primary-strong: #8a3618;
-  --periwinkle: #8a611e;
-  --accent-tint: #f5e4db;
+  --bg: #c1bdb5;
+  --surface: #cbc7be;
+  --raised: #cbc7be;
+  --text: #1e1b17;
+  --muted: #524a41;
+  --line: #6b6455;
+  --primary: #6d6057;
+  --primary-strong: #4a4038;
+  --periwinkle: #4e4520;
+  --accent-tint: #d6d0c7;
   --on-primary: #ffffff;
 
   --font-display: "Newsreader Variable";
@@ -42,34 +42,34 @@
 }
 
 [data-theme="dark"] {
-  --bg: #14110f;
-  --surface: #1f1a16;
-  --raised: #2e251f;
-  --text: #f3eae1;
-  --muted: #b6a79a;
-  --line: #3a2f28;
-  --primary: #e8794f;
-  --primary-strong: #f0916a;
-  --periwinkle: #d9a857;
-  --accent-tint: rgba(232, 121, 79, 0.14);
-  --on-primary: #14110f;
+  --bg: #0c0b09;
+  --surface: #1a1613;
+  --raised: #241f19;
+  --text: #ede7df;
+  --muted: #b4a99b;
+  --line: #2e2822;
+  --primary: #bdab9d;
+  --primary-strong: #cdbfb3;
+  --periwinkle: #c9bc9c;
+  --accent-tint: rgba(189, 171, 157, 0.14);
+  --on-primary: #0c0b09;
 
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --bg: #14110f;
-    --surface: #1f1a16;
-    --raised: #2e251f;
-    --text: #f3eae1;
-    --muted: #b6a79a;
-    --line: #3a2f28;
-    --primary: #e8794f;
-    --primary-strong: #f0916a;
-    --periwinkle: #d9a857;
-    --accent-tint: rgba(232, 121, 79, 0.14);
-    --on-primary: #14110f;
+    --bg: #0c0b09;
+    --surface: #1a1613;
+    --raised: #241f19;
+    --text: #ede7df;
+    --muted: #b4a99b;
+    --line: #2e2822;
+    --primary: #bdab9d;
+    --primary-strong: #cdbfb3;
+    --periwinkle: #c9bc9c;
+    --accent-tint: rgba(189, 171, 157, 0.14);
+    --on-primary: #0c0b09;
 
     color-scheme: dark;
   }
@@ -122,7 +122,7 @@
   }
 
   a {
-    color: var(--primary);
+    color: var(--primary-strong);
     text-underline-offset: 0.18em;
   }
 
@@ -177,9 +177,6 @@
     color: var(--primary-strong);
     margin-bottom: 0.15rem;
   }
-  [data-theme="dark"] .extraction__label {
-    color: var(--primary);
-  }
 
   .btn {
     display: inline-flex;
@@ -209,7 +206,7 @@
   }
   .btn--ghost:hover {
     border-color: var(--primary);
-    color: var(--primary);
+    color: var(--primary-strong);
   }
 
   .status-tag {
@@ -232,7 +229,7 @@
     background: currentColor;
   }
   .status-tag--live {
-    color: var(--primary);
+    color: var(--primary-strong);
     border-color: var(--primary);
   }
 
@@ -356,7 +353,7 @@
     opacity: 1;
   }
   .rail-link--active {
-    color: var(--primary);
+    color: var(--primary-strong);
     opacity: 1;
   }
 

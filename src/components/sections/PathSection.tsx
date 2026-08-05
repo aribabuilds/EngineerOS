@@ -44,7 +44,7 @@ function TimelineRow({ row }: { row: { year: string; role: string; note: string 
           inView ? "timeline-dot--active" : ""
         }`}
       />
-      <span className="u-mono text-sm text-primary">{row.year}</span>
+      <span className="u-mono text-sm text-primary-strong">{row.year}</span>
       <div>
         <p className="font-medium text-text">{row.role}</p>
         <p className="text-muted">{row.note}</p>

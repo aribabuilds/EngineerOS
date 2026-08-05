@@ -110,14 +110,24 @@ adopted** - then a calm idle. Guardrails, per brief §7:
 
 ### Contrast
 
-A warm palette derived from the owner's headshot (black hijab, cream/tan
-gradient, terracotta lip color as the accent). Key pairs, both themes,
-computed against the WCAG relative-luminance formula:
+Owner-specified palette: near-black / beige backgrounds, a muted taupe-brown
+primary accent, gold-beige secondary. Key pairs, computed against the WCAG
+relative-luminance formula:
 
-- Light - text `#1C1815` on `#FBF8F4` (~16.7:1), muted `#6E6154` (~5.7:1),
-  primary `#A8431F` on `#FBF8F4` (~5.7:1).
-- Dark - text `#F3EAE1` on `#14110F` (~15.8:1), muted `#B6A79A` (~8:1),
-  primary `#E8794F` on `#14110F` (~6.5:1).
+- Light - text `#1E1B17` on `#C1BDB5` (~9.2:1), muted `#524A41` (~4.6:1),
+  border `#6B6455` (~3.1:1, UI-component threshold).
+- Dark - text `#EDE7DF` on `#0C0B09` (~16:1), muted `#B4A99B` (~8.5:1),
+  primary `#BDAB9D` on `#0C0B09` (~8.9:1).
+
+**Known shortfall:** light-mode `--primary` (`#6D6057`) on light-mode `--bg`
+(`#C1BDB5`) computes to ~3.24:1, below the 4.5:1 AA threshold for body text.
+It's used as specified for button fills, borders, and accent dots, where it
+reads fine (those need 3:1, or none, not 4.5:1). Where `--primary` renders
+as actual text on the page background (default link color, a handful of
+`text-primary` labels), the effective contrast is currently below AA in
+light mode only. `--primary-strong` (`#4A4038`, ~5.4:1) is a same-family,
+AA-passing alternative if the owner wants those specific text uses
+corrected; left as-is for now pending that decision.
 
 Re-verify with a contrast checker if you change any token.
 
