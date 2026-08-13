@@ -6,6 +6,7 @@ import FeaturedWork from "@/components/sections/FeaturedWork";
 import WorkWithAI from "@/components/sections/WorkWithAI";
 import DecisionSection from "@/components/sections/DecisionSection";
 import PathSection from "@/components/sections/PathSection";
+import Achievements from "@/components/sections/Achievements";
 import Contact from "@/components/sections/Contact";
 import { REPOS, QUANTUM_LIVE, AUTHOR_NAME } from "@/lib/site";
 
@@ -50,6 +51,7 @@ export default function HomePage() {
         <WorkWithAI />
         <DecisionSection />
         <PathSection />
+        <Achievements />
         <Contact />
       </main>
       <Footer />

@@ -1,67 +1,82 @@
-import HeroCanvasLazy from "@/components/hero/HeroCanvasLazy";
-import ScrollIndicator from "@/components/hero/ScrollIndicator";
-import ExtractionTag from "@/components/ExtractionTag";
-import HtmlComment from "@/components/HtmlComment";
 import { getDictionary } from "@/i18n";
-import { MAILTO } from "@/lib/site";
-import { currentStatus } from "@/content/status";
+import ForestScene from "@/components/hero/ForestScene";
+import LanguageToggle from "@/components/hero/LanguageToggle";
 
 const hero = getDictionary("en").hero;
 
+// Brief-locked hero contact address. NOTE: this differs from the site-wide
+// EMAIL (ariba.anjum.se@gmail.com) used by the Header and Contact section.
+// The round-5 brief locks hello@aribaanjum.com for the hero CTAs; kept in one
+// place so it's a one-line change if the site later unifies on one address.
+const HERO_EMAIL = "hello@aribaanjum.com";
+const MAILTO = `mailto:${HERO_EMAIL}`;
+// TODO(owner): swap for the real Google Meet scheduling URL when available (brief §9).
+const MAILTO_CALL = `mailto:${HERO_EMAIL}?subject=Book%20a%2020-min%20call`;
+
+/**
+ * Forest-scene hero (round 5). One continuous canvas scene fills the hero as
+ * a full-bleed background; a soft gradient scrim (not a box) keeps the text
+ * legible. The headline and both CTAs are real server-rendered HTML that read
+ * with zero JS; only the animated scene and the language toggle are client.
+ * Scope is the hero only, nothing else on the site changes.
+ */
 export default function Hero() {
   return (
-    <section className="relative overflow-x-hidden border-b border-line" aria-labelledby="hero-h1">
-      {/* Content in DOM order first, canvas second: this alone gives the
-          right result at both breakpoints (stacked, text-first on mobile;
-          content-left canvas-right on desktop) with no order-* overrides. */}
-      <div className="relative flex flex-col lg:min-h-screen lg:flex-row lg:items-center">
-        {/* Zone 2: content column. Real DOM, paints immediately; the canvas
-            is progressive enhancement layered in afterward. */}
-        <div className="relative z-10 px-5 py-6 sm:px-8 sm:py-20 lg:w-[45%] lg:max-w-[560px] lg:shrink-0 lg:py-0 lg:pl-16">
-          <p className="u-mono text-sm text-primary-strong">{hero.eyebrow}</p>
+    <section
+      className="hero-forest relative min-h-[100svh] overflow-hidden border-b border-line"
+      aria-labelledby="hero-h1"
+    >
+      {/* Scene: full-bleed, decorative, non-interactive. Pointer parallax is
+          read off this section (which keeps its events), not the canvas. */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <ForestScene />
+      </div>
+      <div className="hero-forest__scrim" aria-hidden="true" />
 
-          <h1
-            id="hero-h1"
-            className="mt-2 font-display text-4xl font-semibold leading-[1.08] text-text sm:mt-4 sm:text-5xl"
-          >
-            {hero.h1}
-          </h1>
+      {/* Language toggle, top-right. Offset down on desktop so it clears the
+          site Header's fixed top-right utility cluster (CV + theme). */}
+      <div className="absolute right-4 top-4 z-20 lg:top-[4.5rem]">
+        <LanguageToggle label={hero.languageToggleLabel} />
+      </div>
 
-          <p className="reading mt-3 text-lg text-muted sm:mt-5">{hero.lede}</p>
+      {/* Text, left-aligned, vertically centered on desktop, top on mobile. */}
+      <div className="relative z-10 flex min-h-[100svh] max-w-[640px] flex-col justify-start px-6 py-16 sm:px-12 lg:justify-center lg:py-12">
+        <p className="hero-forest__eyebrow mb-6">
+          <b>{hero.eyebrowName}</b> &nbsp;·&nbsp; {hero.eyebrowRole}
+        </p>
 
-          {/* Two columns on the smallest phones so all three tags fit the
-              first viewport without scrolling; three from sm: up. */}
-          <div className="mt-4 grid grid-cols-2 gap-2 sm:mt-7 sm:grid-cols-3 sm:gap-2.5 lg:grid-cols-1 lg:max-w-xs">
-            {hero.tags.map((tag) => (
-              <ExtractionTag key={tag.label} label={tag.label} value={tag.value} />
-            ))}
-          </div>
-          {/* German level shown as B1; the CV's text layer still reads A2 in two spots. */}
-          <HtmlComment text="OWNER: confirm A2 vs B1 and align site + CV" />
+        <h1 id="hero-h1" className="hero-forest__display hero-forest__h1 mb-5">
+          {hero.h1}
+        </h1>
 
-          {/* Owner-maintained live status, edited in src/content/status.ts. */}
-          <p className="u-mono mt-2 text-xs text-muted sm:mt-4">{currentStatus}</p>
+        <p className="hero-forest__subline mb-6">
+          {hero.subline.map((seg, i) => (seg.strong ? <b key={i}>{seg.text}</b> : <span key={i}>{seg.text}</span>))}
+        </p>
 
-          <div className="mt-5 flex flex-wrap gap-3 sm:mt-8">
-            <a href={MAILTO} className="btn btn--primary">
-              {hero.emailMe}
-            </a>
-            <a href="#contact" className="btn btn--ghost">
-              {hero.bookACall}
-            </a>
-          </div>
+        <span className="hero-forest__pill mb-8">{hero.pill}</span>
 
-          <ScrollIndicator />
+        <div className="mb-8 flex flex-wrap gap-3">
+          <a className="hero-forest__btn hero-forest__btn--primary" href={MAILTO}>
+            {hero.ctaPrimaryLabel}
+          </a>
+          <a className="hero-forest__btn hero-forest__btn--ghost" href={MAILTO_CALL}>
+            {hero.ctaSecondaryLabel}
+          </a>
         </div>
 
-        {/* Zone 3: the canvas. Bleeds slightly past the viewport's right
-            edge on desktop, per the reference composition; the outer
-            section's overflow-x-hidden keeps that from causing a scrollbar. */}
-        <div className="relative h-[280px] w-full sm:h-[360px] lg:h-screen lg:min-w-0 lg:flex-1">
-          <div className="h-full w-full lg:absolute lg:inset-y-0 lg:left-0 lg:w-auto lg:right-[-3rem]">
-            <HeroCanvasLazy />
-          </div>
+        {/* Quick facts: always revealed, no interaction (brief §7). */}
+        <div className="mb-8 flex flex-wrap gap-2">
+          {hero.slabs.map((slab) => (
+            <div key={slab.label} className="hero-forest__slab">
+              <span className="lab">{slab.label}</span>
+              <span className="val">{slab.value}</span>
+            </div>
+          ))}
         </div>
+
+        <span className="hero-forest__cue">
+          {hero.scrollCue} <span className="hero-forest__arrow">↓</span>
+        </span>
       </div>
     </section>
   );

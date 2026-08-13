@@ -25,12 +25,24 @@ export interface Dictionary {
     themeToDark: string;
   };
   hero: {
-    eyebrow: string;
+    eyebrowName: string;
+    eyebrowRole: string;
     h1: string;
-    lede: string;
-    tags: { label: string; value: string }[];
-    emailMe: string;
-    bookACall: string;
+    /** Sub-line as segments; `strong` gives weight (not color) to concrete
+     * nouns. TODO(owner): this copy is a stand-in, swap for the final H7
+     * string before launch (brief §9). */
+    subline: { text: string; strong?: boolean }[];
+    pill: string;
+    ctaPrimaryLabel: string;
+    ctaSecondaryLabel: string;
+    /** Always-revealed quick facts (no interaction). The availability value
+     * is a stand-in; TODO(owner) confirm exact wording (brief §9). */
+    slabs: { label: string; value: string }[];
+    scrollCue: string;
+    languageToggleLabel: string;
+    /** Still read by the retained-but-unused WebGL hero files (HeroCanvas.tsx
+     * etc.); kept so those files keep typechecking even though nothing
+     * imports them from Hero.tsx anymore. */
     canvasCaption: string;
     canvasBeats: string[];
   };
@@ -159,6 +171,10 @@ export interface Dictionary {
     personHeading: string;
     philosophyHeading: string;
     pathHeading: string;
+  };
+  achievements: {
+    heading: string;
+    placeholderNote: string;
   };
 }
 

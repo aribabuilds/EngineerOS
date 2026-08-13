@@ -5,6 +5,11 @@
 @import "@fontsource-variable/newsreader/opsz.css";
 @import "@fontsource-variable/newsreader/opsz-italic.css";
 @import "@fontsource-variable/geist-mono";
+/* Hero-only faces (round 5). @font-face is global but the family is applied
+   solely inside .hero-forest, so the woff2 files download only when the hero
+   renders and sitewide typography is untouched. */
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/instrument-sans";
 
 @tailwind base;
 @tailwind components;
@@ -357,27 +362,202 @@
     opacity: 1;
   }
 
-  /* Hero scroll indicator: a thin line with a dot that descends once on
-     load. Reduced motion drops the dot entirely (handled in the component),
-     leaving just the static line. */
-  .scroll-indicator__dot {
-    animation: scroll-indicator-descend 1600ms ease-in-out 1;
-    animation-fill-mode: forwards;
+  /* ---- Forest-scene hero (round 5, from ariba-hero-final.html) ---- *
+   * Everything here is scoped under .hero-forest; the sitewide theme
+   * tokens and typography are never touched. Palette values are the
+   * locked hexes, hardcoded (this scene is a fixed palette, not themed). */
+  .hero-forest {
+    font-family: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+    color: #26302e;
+    background-color: #e6e7e8;
   }
-  @keyframes scroll-indicator-descend {
-    0% {
-      top: 0%;
-      opacity: 0;
+  .hero-forest__display {
+    font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+    line-height: 1.04;
+  }
+  .hero-forest__eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(38, 48, 46, 0.55);
+    font-weight: 500;
+  }
+  .hero-forest__eyebrow b {
+    color: #26302e;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .hero-forest__h1 {
+    font-weight: 440;
+    font-size: clamp(2.3rem, 4.6vw, 3.6rem);
+    color: #26302e;
+  }
+  .hero-forest__subline {
+    font-size: clamp(1rem, 1.15vw, 1.08rem);
+    line-height: 1.55;
+    color: rgba(38, 48, 46, 0.7);
+    max-width: 52ch;
+  }
+  .hero-forest__subline b {
+    color: #26302e;
+    font-weight: 600;
+  }
+  .hero-forest__cue {
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(38, 48, 46, 0.55);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
+  }
+
+  /* Legibility scrim: page-base color bleeding into the scene, soft fade,
+     never a hard-edged box. Horizontal on desktop, vertical on mobile. */
+  .hero-forest__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      #e6e7e8 0%,
+      rgba(230, 231, 232, 0.88) 26%,
+      rgba(230, 231, 232, 0.55) 44%,
+      rgba(230, 231, 232, 0.16) 62%,
+      rgba(230, 231, 232, 0) 78%
+    );
+  }
+  @media (max-width: 860px) {
+    .hero-forest__scrim {
+      background: linear-gradient(
+        180deg,
+        #e6e7e8 0%,
+        rgba(230, 231, 232, 0.9) 30%,
+        rgba(230, 231, 232, 0.58) 50%,
+        rgba(230, 231, 232, 0.2) 68%,
+        rgba(230, 231, 232, 0) 82%
+      );
     }
-    15% {
-      opacity: 1;
-    }
-    85% {
-      opacity: 1;
-    }
+  }
+
+  /* Sky-blue focus ring on hero interactive elements (brief §8). Beats the
+     global --primary focus-visible rule, which uses :where() (0 specificity). */
+  .hero-forest a:focus-visible,
+  .hero-forest button:focus-visible {
+    outline: 3px solid #b3dbed;
+    outline-offset: 2px;
+  }
+
+  .hero-forest__pill {
+    display: inline-block;
+    font-size: 0.86rem;
+    line-height: 1.3;
+    color: #3e6155;
+    background: rgba(62, 97, 85, 0.09);
+    border: 1px solid rgba(62, 97, 85, 0.32);
+    border-radius: 999px;
+    padding: 0.5rem 0.95rem;
+    font-weight: 500;
+  }
+
+  .hero-forest__btn {
+    font-size: 0.98rem;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0.72rem 1.25rem;
+    border: 1px solid transparent;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+  }
+  .hero-forest__btn--primary {
+    background: #3e6155;
+    color: #fff;
+  }
+  .hero-forest__btn--primary:hover {
+    background: #345248;
+  }
+  .hero-forest__btn--ghost {
+    background: transparent;
+    color: #26302e;
+    border-color: rgba(38, 48, 46, 0.12);
+  }
+  .hero-forest__btn--ghost:hover {
+    background: rgba(179, 219, 237, 0.35);
+    border-color: rgba(38, 48, 46, 0.22);
+  }
+
+  .hero-forest__slab {
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(38, 48, 46, 0.12);
+    border-radius: 10px;
+    padding: 0.55rem 0.8rem;
+    min-width: 120px;
+  }
+  .hero-forest__slab .lab {
+    display: block;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(38, 48, 46, 0.55);
+    font-weight: 600;
+  }
+  .hero-forest__slab .val {
+    display: block;
+    font-size: 0.92rem;
+    color: #26302e;
+    font-weight: 500;
+    margin-top: 0.3rem;
+  }
+
+  .hero-forest__lang {
+    display: inline-flex;
+    gap: 0.15rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(38, 48, 46, 0.12);
+    border-radius: 999px;
+    padding: 0.2rem;
+    backdrop-filter: blur(6px);
+  }
+  .hero-forest__lang button {
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(38, 48, 46, 0.7);
+    background: transparent;
+    border: none;
+    border-radius: 999px;
+    padding: 0.32rem 0.7rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .hero-forest__lang button[aria-pressed="true"] {
+    background: #3e6155;
+    color: #fff;
+  }
+  .hero-forest__lang button:not([aria-pressed="true"]):hover {
+    background: rgba(179, 219, 237, 0.5);
+    color: #26302e;
+  }
+
+  /* Scroll-cue arrow bob. The global reduced-motion rule below stops it. */
+  .hero-forest__arrow {
+    display: inline-block;
+    animation: hero-bob 2.4s ease-in-out infinite;
+  }
+  @keyframes hero-bob {
+    0%,
     100% {
-      top: 100%;
-      opacity: 0;
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(4px);
     }
   }
 }

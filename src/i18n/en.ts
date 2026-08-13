@@ -31,18 +31,42 @@ export const en: Dictionary = {
     themeToDark: "Switch to dark theme",
   },
 
+  // Forest-scene hero (round 5), from ariba-hero-final.html. Locked copy used
+  // as written, with two project-standard adjustments: the sub-line's em dash
+  // is converted to a comma (no-em-dash rule), and the copy marked below as a
+  // stand-in is flagged TODO(owner) per brief §9.
   hero: {
-    eyebrow: "Junior AI / software engineer · relocating to Germany",
-    h1: "I ship AI and automation systems that teams actually adopt.",
-    lede:
-      "I scope the problem, build it, and talk to the people who'll use it while I do. Right now I'm building and leading a GenAI document pipeline at a German fintech.",
-    tags: [
-      { label: "availability", value: "20 h / week now" },
-      { label: "location", value: "Germany · on-site ok" },
-      { label: "languages", value: "English C1 · German B1" },
+    eyebrowName: "Ariba Anjum",
+    eyebrowRole: "AI and Automation Engineer",
+    h1: "I ship AI and automation that teams actually adopt",
+    // TODO(owner): stand-in sub-line. Swap for the final H7 string before
+    // launch (brief §9: "do not ship this wording as final").
+    subline: [
+      {
+        text: "Software engineer in AI & automation with a project-management edge, I scope the problem, talk to the stakeholders, and drive it to adoption. At ",
+      },
+      { text: "vountain", strong: true },
+      {
+        text: " I proposed and led an LLM document pipeline handling 100+ onboarding docs a week; automations I built at Grayhat and Webmedia were adopted company-wide.",
+      },
     ],
-    emailMe: "Email me",
-    bookACall: "Book a call",
+    pill: "Open to Werkstudent and AI/automation roles · Remote → On-site",
+    ctaPrimaryLabel: "Email me",
+    ctaSecondaryLabel: "Book a 20-min call",
+    slabs: [
+      // TODO(owner): confirm exact availability wording (brief §9).
+      { label: "Availability", value: "Open now · interviewing" },
+      { label: "Location", value: "Germany" },
+      {
+        label: "Languages",
+        value: "English (fluent) · German (conversational) · Arabic (fluent) · Turkish (conversational)",
+      },
+    ],
+    // Rendered as "Inside this" + a separately-bobbing arrow in the hero.
+    scrollCue: "Inside this",
+    languageToggleLabel: "Language",
+
+    // Still read by the retained-but-unused WebGL hero files.
     canvasCaption: "raw inputs → structured data → validated system → trusted outcome",
     canvasBeats: ["raw inputs", "structured data", "validated system", "trusted outcome"],
   },
@@ -349,5 +373,13 @@ export const en: Dictionary = {
     personHeading: "The person",
     philosophyHeading: "How I work with AI",
     pathHeading: "The path",
+  },
+
+  // New section (round 3), linked from the hero's index block. Placeholder
+  // by owner's explicit request: qualifications and certifications go here
+  // later. Not pre-filled, even though real ones exist on file.
+  achievements: {
+    heading: "Achievements",
+    placeholderNote: "Qualifications and certifications. Owner to add.",
   },
 };
