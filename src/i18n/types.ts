@@ -47,13 +47,27 @@ export interface Dictionary {
     canvasBeats: string[];
   };
   shipped: {
+    eyebrow: string;
     heading: string;
+    supportingLine: string;
+    /** Short italic closing line after the third stop. */
+    closingLine: string;
     items: {
+      title: string;
+      subtitle: string;
       problem: string;
       decision: string;
+      /** Each inner array is one flow's chip labels, joined with arrows in the UI.
+       * Omitted (not just empty) on items with no literal pipeline to show. */
+      microFlows?: string[][];
       outcome: string;
       /** Omitted (not just empty) when there is no honest adoption claim for this item. */
       adoption?: string;
+      /** Quiet closing line on the card, e.g. "In production". */
+      statusLine: string;
+      /** "roots" = stem roots down (adopted/holding). "fork" = stem forks
+       * upward (promotion/growth), used only where there is no Adoption row. */
+      growthForm: "roots" | "fork";
     }[];
   };
   featured: {

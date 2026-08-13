@@ -1,40 +1,55 @@
-import Section from "@/components/Section";
-import CountUpText from "@/components/CountUpText";
 import { getDictionary } from "@/i18n";
+import GrowthFrame from "@/components/shipped/GrowthFrame";
+import StopCard from "@/components/shipped/StopCard";
+import AmbientLeaves from "@/components/shipped/AmbientLeaves";
 
 const shipped = getDictionary("en").shipped;
 
-/** Each field-labeled row, e.g. "problem" / "decision". CountUpText animates
- * a real number in the value (only "outcome" currently has one). */
-function Field({ label, value }: { label: string; value: string }) {
-  return (
-    <p className="grid grid-cols-[5.5rem_1fr] gap-3 sm:grid-cols-[6.5rem_1fr]">
-      <span className="u-mono text-xs uppercase tracking-wide text-primary-strong">{label}:</span>
-      <CountUpText text={value} className="text-text" />
-    </p>
-  );
-}
-
-/** Structured problem/decision/outcome/adoption, so the reader remembers the
- * decision, not the tool (round 2 restructure of the original paragraphs). */
+/**
+ * Forest-path redesign (round 6): the path continuing deeper from the Hero.
+ * Three project "stops," each a fine-line growth animation beside a
+ * Problem/Decision/Outcome/Adoption card. Bespoke section shell (not the
+ * generic Section.tsx), since this continues the Hero's forest world rather
+ * than the site's default theme. Server component; only GrowthFrame and
+ * StopCard are client, for the scroll-triggered draw/reveal.
+ */
 export default function Shipped() {
   return (
-    <Section id="shipped" eyebrow="shipped" heading={shipped.heading}>
-      <ol className="mt-8 grid gap-8 sm:gap-9">
-        {shipped.items.map((item, i) => (
-          <li key={i} className="grid grid-cols-[2rem_1fr] gap-4 sm:grid-cols-[3rem_1fr]">
-            <span className="u-mono pt-0.5 text-sm text-primary-strong" aria-hidden="true">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div className="reading grid gap-1.5">
-              <Field label="problem" value={item.problem} />
-              <Field label="decision" value={item.decision} />
-              <Field label="outcome" value={item.outcome} />
-              {item.adoption ? <Field label="adoption" value={item.adoption} /> : null}
-            </div>
-          </li>
-        ))}
-      </ol>
-    </Section>
+    <section
+      id="shipped"
+      className="shipped-forest relative overflow-hidden border-b border-line"
+      aria-labelledby="shipped-heading"
+    >
+      <AmbientLeaves />
+
+      <div className="relative z-10 mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
+        <p className="shipped-forest__eyebrow mb-3">{shipped.eyebrow}</p>
+        <h2 id="shipped-heading" className="shipped-forest__display shipped-forest__heading mb-4">
+          {shipped.heading}
+        </h2>
+        <p className="shipped-forest__supporting mb-12 sm:mb-16">{shipped.supportingLine}</p>
+
+        <ol className="grid gap-14 sm:gap-20">
+          {shipped.items.map((item, i) => (
+            <li key={i} className="shipped-forest__stop">
+              <GrowthFrame index={i + 1} form={item.growthForm} />
+              <StopCard
+                title={item.title}
+                subtitle={item.subtitle}
+                problem={item.problem}
+                decision={item.decision}
+                microFlows={item.microFlows}
+                outcome={item.outcome}
+                adoption={item.adoption}
+                statusLine={item.statusLine}
+                growthForm={item.growthForm}
+              />
+            </li>
+          ))}
+        </ol>
+
+        <p className="shipped-forest__closing mt-16 sm:mt-20">{shipped.closingLine}</p>
+      </div>
+    </section>
   );
 }

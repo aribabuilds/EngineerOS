@@ -71,31 +71,55 @@ export const en: Dictionary = {
     canvasBeats: ["raw inputs", "structured data", "validated system", "trusted outcome"],
   },
 
-  // Restructured into field-labeled parts (round 2). Same verbatim facts as
-  // the original paragraphs, re-cut into problem/decision/outcome/adoption.
-  // No adoption line is invented where the source doesn't support one.
+  // Forest-path redesign (round 6): the section directly after the Hero,
+  // continuing its forest world. Locked copy from the owner's brief, used
+  // verbatim with one standing adjustment: em dashes converted to commas
+  // (no-em-dash rule) with zero meaning change. See growthFrame components
+  // for how growthForm ("roots" | "fork") and microFlows are rendered.
   shipped: {
+    eyebrow: "The path so far",
     heading: "What I've shipped",
+    supportingLine:
+      "Three times something manual or broken needed fixing. Each time I scoped it, built it, and it stayed.",
+    closingLine: "and it all stayed rooted.",
     items: [
       {
-        problem: "Asset onboarding at vountain (a fintech in Hanover) ran on manual data entry.",
+        title: "GenAI document pipeline",
+        subtitle: "vountain · fintech, Hanover",
+        problem: "Asset onboarding ran on manual data entry.",
         decision:
-          "Proposed and now lead a GenAI document pipeline: automated extraction with validation and a human check before anything is trusted.",
+          "Proposed and now lead a GenAI pipeline: automated extraction, validation, and a human check before anything is trusted.",
+        microFlows: [["doc", "extract", "validate", "human check", "adopted"]],
         outcome: "Automated extraction across 100+ documents a week.",
-        adoption: "Running in production at vountain, replacing manual entry.",
+        adoption: "Running in production, replacing manual entry.",
+        statusLine: "In production",
+        growthForm: "roots",
       },
       {
+        title: "Automations that stuck",
+        subtitle: "Grayhat & Webmedia · internal + client ops",
         problem: "Untracked async standups, and client Slack requests turned into tickets by hand.",
         decision:
           "n8n + LLM automations: a standup summariser reporting to leadership, and a Slack-to-ClickUp intake with deadlines.",
-        outcome: "Daily progress visibility without meetings, and client messages become tracked tasks automatically.",
+        microFlows: [
+          ["standup", "LLM summary", "leadership"],
+          ["Slack req", "LLM", "ClickUp task"],
+        ],
+        outcome: "Daily progress visibility without meetings; client messages become tracked tasks automatically.",
         adoption: "Company-wide at two teams.",
+        statusLine: "Company-wide",
+        growthForm: "roots",
       },
       {
+        title: "Learning platform, then the PR queue",
+        subtitle: "Dubai school · six-month freelance",
         problem: "A Dubai school needed a learning platform built.",
         decision: "Delivered it over a six-month freelance engagement.",
-        outcome: "Promoted mid-project from building it to reviewing the junior developers' pull requests.",
+        // No micro-flow for this one; the brief specifies it only for stops 1 and 2.
+        outcome: "Promoted mid-project, from building it to reviewing the junior developers' pull requests.",
         // No adoption claim exists for this one; the label is omitted, not invented.
+        statusLine: "Promoted mid-project",
+        growthForm: "fork",
       },
     ],
   },

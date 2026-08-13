@@ -80,6 +80,19 @@
   }
 }
 
+/* Forest palette tokens (round 6): the shared source of truth for the Hero's
+   forest world and any section that continues it (currently: Shipped). The
+   Hero itself still uses the hardcoded hexes below directly and is untouched
+   by this block; these variables exist so new forest-world sections don't
+   re-hardcode the palette. Fixed, not themed: no dark-mode variant. */
+:root {
+  --forest-sky: #b3dbed;
+  --forest-green: #3e6155;
+  --forest-brown: #716444;
+  --forest-base: #e6e7e8;
+  --forest-ink: #26302e;
+}
+
 @layer base {
   * {
     border-color: var(--line);
@@ -560,6 +573,219 @@
       transform: translateY(4px);
     }
   }
+
+  /* ---- Shipped: forest-path section (round 6) ---- *
+   * Continues the Hero's forest world via the --forest-* tokens above.
+   * Fixed palette, not themed: same reasoning as .hero-forest. */
+  .shipped-forest {
+    font-family: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+    color: var(--forest-ink);
+    background-color: var(--forest-base);
+  }
+  .shipped-forest__display {
+    font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+  }
+  .shipped-forest__eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--forest-green);
+    font-weight: 500;
+  }
+  .shipped-forest__heading {
+    font-weight: 440;
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    color: var(--forest-ink);
+  }
+  .shipped-forest__supporting {
+    font-size: clamp(1rem, 1.1vw, 1.05rem);
+    line-height: 1.55;
+    color: rgba(38, 48, 46, 0.7);
+    max-width: 52ch;
+  }
+
+  /* Stop row: growth frame beside its card on desktop, stacked on mobile. */
+  .shipped-forest__stop {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 1.75rem;
+    align-items: start;
+  }
+  @media (max-width: 640px) {
+    .shipped-forest__stop {
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+    .shipped-forest__frame-wrap {
+      width: 68px;
+      margin: 0 auto;
+    }
+  }
+  .shipped-forest__frame-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .shipped-forest__card-title {
+    font-weight: 440;
+    font-size: 1.15rem;
+    color: var(--forest-ink);
+  }
+  .shipped-forest__card-subtitle {
+    font-size: 0.85rem;
+    color: rgba(38, 48, 46, 0.55);
+    margin-top: 0.15rem;
+  }
+  /* Visible by default (no-JS default: always shown). JS adds .is-pending
+     right after mount if the card hasn't scrolled into view yet, then removes
+     it once it has, so the card fades/lifts in on trigger instead of on load. */
+  .shipped-forest__card {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .shipped-forest__card.is-pending {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .shipped-forest__row {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 0.75rem;
+  }
+  @media (min-width: 640px) {
+    .shipped-forest__row {
+      grid-template-columns: 6.5rem 1fr;
+    }
+  }
+  .shipped-forest__row-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--forest-green);
+    padding-top: 0.15rem;
+  }
+  .shipped-forest__row-value {
+    color: var(--forest-ink);
+    opacity: 0.88;
+  }
+
+  /* Micro-flow: quiet chips, never competes with the Decision row's text. */
+  .shipped-forest__flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.4rem;
+  }
+  .shipped-forest__chip {
+    font-size: 0.68rem;
+    line-height: 1.4;
+    padding: 0.12rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(62, 97, 85, 0.07);
+    border: 1px solid rgba(62, 97, 85, 0.2);
+    color: var(--forest-green);
+    white-space: nowrap;
+  }
+  .shipped-forest__flow-arrow {
+    color: rgba(38, 48, 46, 0.32);
+    font-size: 0.72rem;
+  }
+
+  .shipped-forest__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    color: rgba(38, 48, 46, 0.6);
+    margin-top: 1rem;
+  }
+  .shipped-forest__status::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--forest-green);
+    flex: none;
+  }
+  /* Promoted (fork) stops use the sky-blue "upward" accent, per the palette's
+     designated role, instead of the green "adopted/holding" accent. */
+  .shipped-forest__status--fork::before {
+    background: var(--forest-sky);
+    box-shadow: 0 0 0 3px rgba(179, 219, 237, 0.4);
+  }
+
+  .shipped-forest__closing {
+    font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-optical-sizing: auto;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    color: rgba(38, 48, 46, 0.75);
+    text-align: center;
+  }
+
+  /* Growth frame: fine-line SVG, drawn via stroke-dashoffset. Colors keep the
+     same accent split as the status dot: green for stem/leaves/roots (grown,
+     holding), sky blue only for the fork's upward branches (promoted). */
+  .shipped-forest__growth-soil {
+    stroke: var(--forest-brown);
+    stroke-width: 1;
+    opacity: 0.45;
+    fill: none;
+  }
+  .shipped-forest__growth-stem {
+    stroke: var(--forest-green);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .shipped-forest__growth-leaf {
+    stroke: var(--forest-green);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .shipped-forest__growth-root {
+    stroke: var(--forest-brown);
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  .shipped-forest__growth-fork {
+    stroke: var(--forest-sky);
+    stroke-width: 1.7;
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.65s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  /* Ambient leaves: very light continuity layer, subordinate to the growth
+     reveal. Pure CSS drift; the reduced-motion query below stops it, and the
+     component itself skips rendering entirely when motion is reduced. */
+  .shipped-forest__ambient-leaf {
+    position: absolute;
+    opacity: 0.16;
+    color: var(--forest-green);
+    animation: shipped-leaf-drift 14s ease-in-out infinite;
+  }
+  @keyframes shipped-leaf-drift {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(6px, 14px) rotate(8deg);
+    }
+  }
 }
 
 /* Respect reduced-motion everywhere. The 3D hero handles this separately by
@@ -575,5 +801,18 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+  /* The rule above already collapses durations; delays need their own reset
+     so the growth frame and card don't sit at a visible pause before
+     snapping to their final, fully-drawn state. */
+  .shipped-forest__growth-stem,
+  .shipped-forest__growth-leaf,
+  .shipped-forest__growth-root,
+  .shipped-forest__growth-fork,
+  .shipped-forest__card {
+    transition-delay: 0ms !important;
+  }
+  .shipped-forest__ambient-leaf {
+    display: none;
   }
 }
