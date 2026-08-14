@@ -16,4 +16,6 @@ export const de: PartialDictionary = {
   // TODO: shipped (round 6 forest-path redesign): eyebrow, supportingLine,
   // closingLine, and per-item title/subtitle/problem/decision/outcome/
   // adoption/statusLine all need German copy. Not read at runtime yet.
+  // TODO: featured (round 8 valley redesign): watchDemo, and each card's new
+  // marker line, need German copy. Not read at runtime yet.
 };

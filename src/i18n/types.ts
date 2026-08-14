@@ -75,9 +75,24 @@ export interface Dictionary {
     readDecisions: string;
     repo: string;
     openLiveDemo: string;
+    /** Label for the BriefPilot demo-video trigger. */
+    watchDemo: string;
     cards: {
-      briefpilot: { status: string; title: string; summary: string; detail: string };
-      quantum: { status: string; title: string; summary: string; detail: string };
+      briefpilot: {
+        status: string;
+        /** Short line under the title, e.g. "Live · in the light". */
+        marker: string;
+        title: string;
+        summary: string;
+        detail: string;
+      };
+      quantum: {
+        status: string;
+        marker: string;
+        title: string;
+        summary: string;
+        detail: string;
+      };
     };
   };
   ai: {

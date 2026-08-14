@@ -129,9 +129,16 @@ export const en: Dictionary = {
     readDecisions: "Read the decisions",
     repo: "Repo",
     openLiveDemo: "Open the live demo",
+    watchDemo: "Watch demo",
     cards: {
+      // BriefPilot has shipped (round 8): status flips to Live. Description
+      // is left exactly as-is, pending Ariba's updated copy (owner TODO,
+      // not to be edited without her explicit new text — see the video
+      // pipeline's OWNER note in FeaturedWork.tsx for the same flag on the
+      // primary live link).
       briefpilot: {
-        status: "in development",
+        status: "Live",
+        marker: "Live · in the light",
         title: "BriefPilot",
         summary:
           "Photograph a German official letter and it reads the text back to you. That is the first step toward telling you, in plain language, what it means and what to do.",
@@ -140,6 +147,7 @@ export const en: Dictionary = {
       },
       quantum: {
         status: "live",
+        marker: "Live · in the light",
         title: "Quantum Playground",
         // Round 2: lead with why the visualization exists, not what it looks like.
         summary:

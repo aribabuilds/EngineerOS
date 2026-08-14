@@ -30,6 +30,19 @@ export const REPOS = {
 
 export const QUANTUM_LIVE = "https://aribabuilds.github.io/Quantum-Playground/";
 
+// TODO(owner): BriefPilot has shipped (round 8); replace with the real live
+// URL. Left unconfigured on purpose: no link renders until this is set, same
+// convention as BOOKING_URL above. Do not fabricate a URL.
+export const BRIEFPILOT_LIVE_URL = "PLACEHOLDER_BRIEFPILOT_LIVE_URL";
+export const briefpilotLiveIsConfigured = BRIEFPILOT_LIVE_URL !== "PLACEHOLDER_BRIEFPILOT_LIVE_URL";
+
+// Compressed demo video + poster (round 8), generated from the raw source at
+// assets/video/briefpilot-demo-source.webm via the ffmpeg pipeline noted in
+// FeaturedWork.tsx. Never referenced until the "Watch demo" modal is opened.
+export const BRIEFPILOT_DEMO_VIDEO = "/video/briefpilot-demo.mp4";
+export const BRIEFPILOT_DEMO_VIDEO_WEBM = "/video/briefpilot-demo.webm";
+export const BRIEFPILOT_DEMO_POSTER = "/video/briefpilot-demo-poster.jpg";
+
 export const AUTHOR_NAME = "Ariba Anjum";
 
 /**

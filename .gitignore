@@ -35,3 +35,6 @@ src/lib/buildInfo.generated.ts
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# raw video sources: large binaries, never served (compressed output lives in /public/video)
+/assets/video/
