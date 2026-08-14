@@ -786,6 +786,261 @@
       transform: translate(6px, 14px) rotate(8deg);
     }
   }
+
+  /* ---- Featured work: "windows in the clearing" (round 7) ---- *
+   * Same forest world as .hero-forest / .shipped-forest: reuses the
+   * --forest-* tokens and Fraunces/Instrument Sans, no new palette or font
+   * strategy. The "misty" atmosphere is a color-mix() blend of the same
+   * tokens toward --forest-base, not a sixth hardcoded color. */
+  .work-forest {
+    font-family: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+    color: var(--forest-ink);
+    background-color: var(--forest-base);
+  }
+  .work-forest__display {
+    font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+  }
+  .work-forest__eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--forest-green);
+    font-weight: 500;
+  }
+  .work-forest__heading {
+    font-weight: 440;
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    color: var(--forest-ink);
+  }
+
+  /* Grid: auto-fit, not a hardcoded column count. Holds any number of items;
+     a third project is one new data entry, zero layout changes. */
+  .work-forest__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .work-forest__item {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .work-forest__item.is-pending {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  /* Arch window: CSS shape (elliptical top corners, near-flat bottom), not
+     hand-authored SVG, so it scales cleanly at any size. */
+  .work-forest__window {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--forest-brown) 45%, transparent);
+    border-radius: 50% 50% 10px 10px / 34% 34% 10px 10px;
+  }
+  .work-forest__window-atmosphere {
+    position: absolute;
+    inset: 0;
+  }
+  /* Dark, moody green-to-ink base for both variants ("same forest, different
+     weather"): live gets a sky-blue glow band at the top and full saturation,
+     dev stays hazier/lower-contrast via filter, no glow color. */
+  .work-forest__window--live .work-forest__window-atmosphere {
+    background:
+      radial-gradient(ellipse at 50% 8%, rgba(179, 219, 237, 0.85), rgba(179, 219, 237, 0.22) 26%, transparent 46%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--forest-green) 55%, var(--forest-ink)) 0%,
+        color-mix(in srgb, var(--forest-green) 78%, var(--forest-ink)) 55%,
+        var(--forest-ink) 100%
+      );
+  }
+  .work-forest__window--dev .work-forest__window-atmosphere {
+    background:
+      radial-gradient(ellipse at 50% 10%, rgba(230, 231, 232, 0.5), transparent 40%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--forest-green) 30%, var(--forest-base)) 0%,
+        color-mix(in srgb, var(--forest-green) 55%, var(--forest-base)) 55%,
+        color-mix(in srgb, var(--forest-green) 72%, var(--forest-ink)) 100%
+      );
+    filter: saturate(0.6) brightness(1.04);
+  }
+
+  /* Canopy horizon: a soft scalloped line partway down, same silhouette
+     either way, just quieter on "dev". */
+  .work-forest__window-horizon {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 62%;
+    height: 22%;
+    fill: color-mix(in srgb, var(--forest-ink) 55%, var(--forest-green));
+    opacity: 0.5;
+  }
+  .work-forest__window--dev .work-forest__window-horizon {
+    fill: color-mix(in srgb, var(--forest-ink) 35%, var(--forest-base));
+    opacity: 0.45;
+  }
+
+  /* Two trunk silhouettes at the base: the literal "clearing in the forest". */
+  .work-forest__window-trunk {
+    position: absolute;
+    bottom: 0;
+    width: 5%;
+    background: color-mix(in srgb, var(--forest-ink) 70%, var(--forest-green));
+    opacity: 0.8;
+  }
+  .work-forest__window-trunk--left {
+    left: 24%;
+    height: 30%;
+  }
+  .work-forest__window-trunk--right {
+    left: 62%;
+    height: 22%;
+  }
+  .work-forest__window--dev .work-forest__window-trunk {
+    background: color-mix(in srgb, var(--forest-ink) 45%, var(--forest-base));
+    opacity: 0.6;
+  }
+
+  /* Motes: "live" only, slow soft pulse. Reduced-motion collapses the
+     animation duration globally (see the media query below), which stops
+     the pulse without any extra rule here. */
+  .work-forest__mote {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--forest-sky);
+    box-shadow: 0 0 4px 1px rgba(179, 219, 237, 0.8);
+    animation: work-mote-pulse 5s ease-in-out infinite;
+  }
+  @keyframes work-mote-pulse {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 0.85;
+      transform: translateY(-3px);
+    }
+  }
+
+  /* Title/status overlaid on the window itself, on its own scrim (separate
+     from the identical, non-hidden title/status in the card below). */
+  .work-forest__window-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.5rem 1.25rem 1.1rem;
+    background: linear-gradient(to top, rgba(10, 14, 12, 0.55), transparent);
+  }
+  .work-forest__window-overlay-title {
+    font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: #fff;
+  }
+  .work-forest__window-overlay-status {
+    margin-top: 0.2rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .work-forest__title {
+    font-weight: 440;
+    font-size: 1.2rem;
+    color: var(--forest-ink);
+    margin-top: 1.5rem;
+  }
+  /* Status stays plain text, never a pill: the window's atmosphere is the
+     signal, this quiet dot + label just repeats it in words. Dot color
+     mirrors the "live" glow vs. the default green, same logic as Shipped's
+     status line. */
+  .work-forest__status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(38, 48, 46, 0.6);
+    margin-top: 0.3rem;
+  }
+  .work-forest__status::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--forest-green);
+    flex: none;
+  }
+  .work-forest__status--live::before {
+    background: var(--forest-sky);
+    box-shadow: 0 0 0 3px rgba(179, 219, 237, 0.4);
+  }
+  .work-forest__summary,
+  .work-forest__detail {
+    margin-top: 0.9rem;
+    color: rgba(38, 48, 46, 0.82);
+  }
+  .work-forest__detail {
+    margin-top: 0;
+  }
+
+  .work-forest__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+  }
+  .work-forest__chip {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(62, 97, 85, 0.07);
+    border: 1px solid rgba(62, 97, 85, 0.2);
+    color: var(--forest-green);
+    white-space: nowrap;
+  }
+
+  .work-forest__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+    margin-top: 1.1rem;
+  }
+  .work-forest__link {
+    font-size: 0.9rem;
+    color: rgba(38, 48, 46, 0.65);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .work-forest__link:hover {
+    color: var(--forest-ink);
+  }
+  .work-forest__link--strong {
+    font-weight: 600;
+    color: var(--forest-green);
+  }
+  .work-forest a:focus-visible {
+    outline: 3px solid var(--forest-sky);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
 /* Respect reduced-motion everywhere. The 3D hero handles this separately by
