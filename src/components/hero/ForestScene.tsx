@@ -9,8 +9,8 @@ import { useEffect, useRef } from "react";
  * a React-managed canvas. Decorative (aria-hidden, pointer-events: none);
  * pointer parallax is read from the hero section, which keeps its events.
  *
- * Atmospheric-perspective rule: depth fades foliage toward a hazy sky/gray
- * blend, never toward ink. Nothing is darkened for depth.
+ * Atmospheric-perspective rule: depth fades foliage toward a hazy neutral
+ * gray, never toward ink. Nothing is darkened for depth.
  *
  * prefers-reduced-motion: builds and paints a single composed static frame,
  * no animation loop at all.
@@ -25,7 +25,6 @@ export default function ForestScene() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const SKY = "#B3DBED";
     const GREEN = "#3E6155";
     const BROWN = "#716444";
     const BASE = "#E6E7E8";
@@ -47,7 +46,7 @@ export default function ForestScene() {
       const A = hex(h);
       return `rgba(${A[0]},${A[1]},${A[2]},${a})`;
     };
-    const HAZE = mix(BASE, SKY, 0.5);
+    const HAZE = BASE;
     const mutedGreen = (depth: number) => mix(GREEN, HAZE, depth);
     const mutedBark = (depth: number) => mix(BROWN, HAZE, depth);
     const mulberry32 = (a: number) => () => {
@@ -121,7 +120,7 @@ export default function ForestScene() {
       c.fillStyle = color;
       c.fill();
       if (lit) {
-        c.fillStyle = rgba(SKY, 0.1);
+        c.fillStyle = rgba(BASE, 0.1);
         c.beginPath();
         c.moveTo(x + wTop / 2 - Math.max(1, wTop * 0.22), topY);
         c.lineTo(x + wTop / 2, topY);
@@ -144,13 +143,13 @@ export default function ForestScene() {
 
       const g = ofx.createLinearGradient(0, 0, 0, H);
       g.addColorStop(0, mix(BASE, GREEN, 0.06));
-      g.addColorStop(0.55, mix(BASE, SKY, 0.26));
+      g.addColorStop(0.55, BASE);
       g.addColorStop(1, mix(GREEN, BASE, 0.42));
       ofx.fillStyle = g;
       ofx.fillRect(0, 0, W, H);
       const glow = ofx.createRadialGradient(LIGHT.x, LIGHT.y, 0, LIGHT.x, LIGHT.y, Math.max(W, H) * 0.9);
       glow.addColorStop(0, "rgba(248,247,240,0.55)");
-      glow.addColorStop(0.4, rgba(SKY, 0.14));
+      glow.addColorStop(0.4, rgba(BASE, 0.14));
       glow.addColorStop(1, "rgba(230,231,232,0)");
       ofx.fillStyle = glow;
       ofx.fillRect(0, 0, W, H);
@@ -193,7 +192,7 @@ export default function ForestScene() {
         const x = W * 0.35 + r() * W * 0.65;
         const y = H * 0.55 + r() * H * 0.5;
         const rad = W * (0.012 + r() * 0.02);
-        onx.fillStyle = rgba(i % 2 ? SKY : BASE, 0.1 + r() * 0.08);
+        onx.fillStyle = rgba(BASE, 0.1 + r() * 0.08);
         onx.beginPath();
         onx.arc(x, y, rad, 0, Math.PI * 2);
         onx.fill();
@@ -223,8 +222,8 @@ export default function ForestScene() {
         ctx!.rotate(r.ang + sway);
         const g = ctx!.createLinearGradient(0, 0, r.len, 0);
         g.addColorStop(0, rgba(BASE, r.a * breathe));
-        g.addColorStop(0.35, rgba(SKY, r.a * breathe * 0.6));
-        g.addColorStop(1, rgba(SKY, 0));
+        g.addColorStop(0.35, rgba(BASE, r.a * breathe * 0.6));
+        g.addColorStop(1, rgba(BASE, 0));
         ctx!.fillStyle = g;
         ctx!.beginPath();
         ctx!.moveTo(0, -r.w * 0.15);
