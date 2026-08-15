@@ -3,12 +3,14 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Full-bleed ambient canvas for the valley panorama: a pure bottle-green
- * atmosphere gradient, drifting gray leaves, soft god-rays, twinkling bokeh.
- * Shares its math and technique with the Hero's ForestScene (same PRNG,
- * color-mix helpers, rays/leaves/motes routines, reduced-motion static-frame
- * fallback) but draws no foliage masses or trunk shapes at all — this brief
- * explicitly rejects any illustrated landform. Light and color only.
+ * Ambient canvas for a work card: a pure bottle-green atmosphere gradient,
+ * drifting gray leaves, soft god-rays, twinkling bokeh. Shares its math and
+ * technique with the Hero's ForestScene (same PRNG, color-mix helpers,
+ * rays/leaves/motes routines, reduced-motion static-frame fallback) but
+ * draws no foliage masses or trunk shapes at all — no illustrated landform.
+ * Light and color only. Self-sizes to its parent element (round 9: now a
+ * card-sized box, not the full viewport), so particle counts are tuned low
+ * to read as ambient rather than cluttered at that smaller scale.
  * Decorative (aria-hidden, pointer-events: none).
  */
 export default function ValleyAtmosphere() {
@@ -168,17 +170,17 @@ export default function ValleyAtmosphere() {
     function initParticles() {
       const r = mulberry32(41);
       motes = [];
-      for (let i = 0; i < 40; i++)
+      for (let i = 0; i < 14; i++)
         motes.push({
           x: r() * W,
           y: r() * H,
-          r: W * (0.0012 + r() * 0.0022),
+          r: W * (0.0018 + r() * 0.003),
           ph: r() * Math.PI * 2,
           sp: 0.2 + r() * 0.5,
           drift: r() * Math.PI * 2,
         });
       leaves = [];
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 4; i++) {
         leaves.push({
           x: r() * W,
           y: r() * H,

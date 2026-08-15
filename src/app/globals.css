@@ -354,6 +354,31 @@
     opacity: 1;
   }
 
+  /* Desktop rail background: the forest green, so the site's persistent nav
+     carries the same accent used across Hero/Shipped/Featured Work rather
+     than the sitewide beige. Scoped to this one element (bg-bg elsewhere,
+     e.g. Contact/buttons, is untouched) — light foreground colors below are
+     calibrated for this green, not the sitewide tokens. */
+  .site-rail {
+    background: var(--forest-green);
+  }
+  .site-rail__monogram {
+    color: #fff;
+  }
+  .site-rail__divider {
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .site-rail__icon {
+    color: rgba(255, 255, 255, 0.65);
+  }
+  .site-rail__icon:hover {
+    color: #fff;
+  }
+  .site-rail a:focus-visible {
+    outline: 2px solid var(--forest-sky);
+    outline-offset: 2px;
+  }
+
   /* The vertical rail's nav links. Rotated via writing-mode only; the
      underlying <a> keeps normal DOM order and the global focus-visible
      outline (see @layer base) still applies. No ancestor here uses
@@ -362,16 +387,16 @@
     writing-mode: vertical-rl;
     text-orientation: mixed;
     letter-spacing: 0.08em;
-    color: var(--muted);
-    opacity: 0.65;
+    color: rgba(255, 255, 255, 0.65);
+    opacity: 0.85;
     transition: color 150ms ease-out, opacity 150ms ease-out;
   }
   .rail-link:hover {
-    color: var(--text);
+    color: #fff;
     opacity: 1;
   }
   .rail-link--active {
-    color: var(--primary-strong);
+    color: var(--forest-sky);
     opacity: 1;
   }
 
@@ -787,106 +812,74 @@
     }
   }
 
-  /* ---- Featured work: "the valley" (round 8) ---- *
-   * Full-bleed sticky-scroll panorama. Reuses --forest-* tokens and
-   * Fraunces/Instrument Sans, no new palette or font strategy. No landform
-   * shapes anywhere below: light and color only.
-   * No-JS / pre-mount default: plain stacked flow, everything visible, no
-   * pin (see .work-valley__driver base rules vs. the --enhanced variant
-   * ValleyScroll adds once mounted). */
-  .work-valley__driver {
-    position: relative;
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--forest-green) 55%, var(--forest-base)) 0%,
-      var(--forest-green) 55%,
-      color-mix(in srgb, var(--forest-green) 60%, var(--forest-ink)) 100%
-    );
+  /* ---- Featured work: "the valley," boxed (round 9) ---- *
+   * Two elevated cards side by side, each carrying the forest atmosphere as
+   * its own background — not the whole section (that read as too much page
+   * for round 8's full-bleed sticky-scroll version). Section itself sits on
+   * the plain light gray the cards are elevated above. Reuses --forest-*
+   * tokens and Fraunces/Instrument Sans. No landform shapes anywhere: light
+   * and color only. Server-rendered by default (no scroll mechanism left to
+   * gate behind JS), so this is trivially readable with JS off. */
+  .work-valley {
+    background: var(--forest-base);
   }
-  .work-valley__driver--enhanced {
-    height: calc((var(--station-count) + 1) * 100svh);
-  }
-
-  .work-valley__pin {
-    position: relative;
-    padding: 3.5rem 1.25rem;
-    color: #fff;
-    font-family: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
-  }
-  .work-valley__driver--enhanced .work-valley__pin {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100svh;
-    padding: 4rem 1.5rem 3rem;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
   .work-valley__display {
     font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
     font-optical-sizing: auto;
   }
   .work-valley__intro {
-    position: relative;
-    z-index: 2;
     max-width: 640px;
   }
   .work-valley__eyebrow {
     font-size: 0.8rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--forest-green);
     font-weight: 500;
   }
   .work-valley__heading {
     font-weight: 440;
     font-size: clamp(1.9rem, 3.6vw, 2.6rem);
     letter-spacing: -0.01em;
-    color: #fff;
+    color: var(--forest-ink);
     margin-top: 0.4rem;
   }
 
-  /* Wash: a soft blurred color mark for each project's "place" in the
-     atmosphere — light and color only, never a drawn shape. Blue (misty)
-     stays fully built for a future in-development project; brown (lit) is
-     what both current projects use (both have shipped). */
-  .work-valley__wash {
-    position: absolute;
-    inset: -10%;
-    z-index: 0;
-    opacity: 0;
-    filter: blur(60px);
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-  .work-valley__wash--misty {
-    background: radial-gradient(circle at 30% 40%, rgba(179, 219, 237, 0.55), transparent 60%);
-  }
-  .work-valley__wash--lit {
-    background: radial-gradient(circle at 70% 55%, rgba(113, 100, 68, 0.55), transparent 60%);
+  /* Grid: auto-fit, not a hardcoded column count — side by side today,
+     holds a third project later with zero layout changes. */
+  .work-valley__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
   }
 
-  .work-valley__stations {
+  /* The "3D box": soft rounded corners, a layered elevation shadow so it
+     reads as a card sitting above the page, forest atmosphere inside. */
+  .work-valley__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 26px;
+    min-height: 420px;
+    display: flex;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--forest-green) 55%, var(--forest-base)) 0%,
+      var(--forest-green) 55%,
+      color-mix(in srgb, var(--forest-green) 60%, var(--forest-ink)) 100%
+    );
+    box-shadow:
+      0 1px 2px rgba(20, 24, 22, 0.18),
+      0 10px 24px -8px rgba(20, 24, 22, 0.4),
+      0 28px 56px -16px rgba(20, 24, 22, 0.45);
+  }
+  .work-valley__card-content {
     position: relative;
     z-index: 2;
-  }
-  .work-valley__station {
-    max-width: 640px;
-    margin-top: 2.5rem;
-  }
-  .work-valley__driver--enhanced .work-valley__stations {
-    flex: 1;
-    display: grid;
-  }
-  .work-valley__driver--enhanced .work-valley__station {
-    grid-area: 1 / 1;
-    align-self: center;
-    margin-top: 0;
-    opacity: 0;
-    transition: opacity 0.15s linear, transform 0.15s linear;
+    display: flex;
+    flex-direction: column;
+    padding: 2.25rem;
+    color: #fff;
+    font-family: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
   }
 
   .work-valley__marker {
@@ -953,34 +946,6 @@
     outline: 3px solid var(--forest-sky);
     outline-offset: 2px;
     border-radius: 2px;
-  }
-
-  /* Progress rail: small, quiet, decorative — the station text already says
-     where you are. Non-interactive by design, hidden until enhanced (no
-     pin to track progress through, without JS). */
-  .work-valley__rail {
-    display: none;
-  }
-  .work-valley__driver--enhanced .work-valley__rail {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    align-self: flex-end;
-    margin-top: 1rem;
-  }
-  .work-valley__rail-tick {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.35);
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-  .work-valley__rail-tick.is-active {
-    background: #fff;
-    transform: scale(1.6);
   }
 
   /* Video lightbox: native <dialog>, dark-green scrim (not black), manual

@@ -50,12 +50,8 @@ export default function Header() {
     <>
       {/* Desktop rail, >=1024px. overflow is never hidden here, so rotated
           links' focus rings are never clipped. */}
-      <header className="fixed inset-y-0 left-0 z-40 hidden w-[72px] flex-col items-center bg-bg py-6 lg:flex">
-        <Link
-          href="/"
-          aria-label={homeLabel}
-          className="font-display text-lg font-semibold text-text no-underline"
-        >
+      <header className="site-rail fixed inset-y-0 left-0 z-40 hidden w-[72px] flex-col items-center py-6 lg:flex">
+        <Link href="/" aria-label={homeLabel} className="site-rail__monogram font-display text-lg font-semibold no-underline">
           {monogram}
         </Link>
 
@@ -74,7 +70,7 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div aria-hidden="true" className="h-14 w-px bg-line" />
+        <div aria-hidden="true" className="site-rail__divider h-14 w-px" />
 
         <div className="flex flex-col items-center gap-4 pt-6">
           <a
@@ -82,7 +78,7 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={contact.github}
-            className="text-muted transition-colors hover:text-primary"
+            className="site-rail__icon transition-colors"
           >
             <GithubIcon />
           </a>
@@ -91,11 +87,11 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={contact.linkedin}
-            className="text-muted transition-colors hover:text-primary"
+            className="site-rail__icon transition-colors"
           >
             <LinkedinIcon />
           </a>
-          <a href={MAILTO} aria-label={contact.emailMe} className="text-muted transition-colors hover:text-primary">
+          <a href={MAILTO} aria-label={contact.emailMe} className="site-rail__icon transition-colors">
             <MailIcon />
           </a>
         </div>
