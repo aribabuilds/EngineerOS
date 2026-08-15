@@ -27,7 +27,7 @@ export default function Section({
     <section
       ref={ref}
       id={id}
-      className={`reveal ${inView ? "reveal--visible" : ""} border-b border-line ${className}`}
+      className={`reveal ${inView ? "reveal--visible" : ""} ${className}`}
       aria-labelledby={id ? `${id}-heading` : undefined}
     >
       <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-18">

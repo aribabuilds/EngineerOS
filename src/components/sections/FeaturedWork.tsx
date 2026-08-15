@@ -34,7 +34,7 @@ export default function FeaturedWork() {
   const quantumStack = parseStack(f.cards.quantum.detail);
 
   return (
-    <section id="work" className="work-valley border-b border-line" aria-labelledby="work-heading">
+    <section id="work" className="work-valley" aria-labelledby="work-heading">
       <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="work-valley__intro">
           <p className="work-valley__eyebrow">work</p>

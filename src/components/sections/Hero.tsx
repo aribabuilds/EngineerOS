@@ -23,7 +23,7 @@ const MAILTO_CALL = `mailto:${HERO_EMAIL}?subject=Book%20a%2020-min%20call`;
 export default function Hero() {
   return (
     <section
-      className="hero-forest relative min-h-[100svh] overflow-hidden border-b border-line"
+      className="hero-forest relative min-h-[100svh] overflow-hidden"
       aria-labelledby="hero-h1"
     >
       {/* Scene: full-bleed, decorative, non-interactive. Pointer parallax is

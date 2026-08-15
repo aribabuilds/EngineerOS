@@ -91,6 +91,11 @@
   --forest-brown: #716444;
   --forest-base: #e6e7e8;
   --forest-ink: #26302e;
+  /* Lightened brown: the "active/current" accent on dark green surfaces
+     (rail nav, mobile topbar), where the base brown reads too close in
+     luminance to the green background. Sky blue stays a secondary accent
+     only (Shipped's status dots, focus rings) — brown is the primary one. */
+  --forest-brown-light: color-mix(in srgb, var(--forest-brown) 60%, var(--forest-base));
 }
 
 @layer base {
@@ -379,6 +384,37 @@
     outline-offset: 2px;
   }
 
+  /* Mobile top bar (<1024px): same green surface as the desktop rail, same
+     light foreground treatment. ThemeToggle is the only bare <button> in
+     this header, so targeting the element directly (no new class needed)
+     safely reaches it without touching its use elsewhere on the site. */
+  .site-rail__wordmark {
+    color: #fff;
+  }
+  .site-rail__wordmark-accent {
+    color: var(--forest-brown-light);
+  }
+  .site-rail__navlink {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .site-rail__navlink:hover {
+    color: #fff;
+  }
+  .site-rail__cv {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .site-rail__cv:hover {
+    color: var(--forest-brown-light);
+  }
+  .site-rail button {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .site-rail button:hover {
+    border-color: var(--forest-sky);
+    color: #fff;
+  }
+
   /* The vertical rail's nav links. Rotated via writing-mode only; the
      underlying <a> keeps normal DOM order and the global focus-visible
      outline (see @layer base) still applies. No ancestor here uses
@@ -395,8 +431,8 @@
     color: #fff;
     opacity: 1;
   }
-  .rail-link--active {
-    color: var(--forest-sky);
+  .rail-link.rail-link--active {
+    color: var(--forest-brown-light);
     opacity: 1;
   }
 
@@ -562,34 +598,30 @@
     margin-top: 0.3rem;
   }
 
+  /* Flag-only, styled like the hero's other buttons (.hero-forest__btn--ghost):
+     same radius, border, and hover tint, just icon-sized. No pill/segmented-
+     control chrome, no text label — the flags carry the meaning. */
   .hero-forest__lang {
     display: inline-flex;
-    gap: 0.15rem;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(38, 48, 46, 0.12);
-    border-radius: 999px;
-    padding: 0.2rem;
-    backdrop-filter: blur(6px);
+    gap: 0.4rem;
   }
   .hero-forest__lang button {
-    font-family: inherit;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: rgba(38, 48, 46, 0.7);
+    font-size: 1.05rem;
+    line-height: 1;
     background: transparent;
-    border: none;
-    border-radius: 999px;
-    padding: 0.32rem 0.7rem;
+    border: 1px solid rgba(38, 48, 46, 0.12);
+    border-radius: 10px;
+    padding: 0.5rem 0.6rem;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
   .hero-forest__lang button[aria-pressed="true"] {
-    background: #3e6155;
-    color: #fff;
+    background: rgba(62, 97, 85, 0.09);
+    border-color: rgba(62, 97, 85, 0.32);
   }
   .hero-forest__lang button:not([aria-pressed="true"]):hover {
-    background: rgba(179, 219, 237, 0.5);
-    color: #26302e;
+    background: rgba(179, 219, 237, 0.35);
+    border-color: rgba(38, 48, 46, 0.22);
   }
 
   /* Scroll-cue arrow bob. The global reduced-motion rule below stops it. */

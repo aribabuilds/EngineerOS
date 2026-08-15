@@ -110,14 +110,15 @@ export default function Header() {
         <ThemeToggle />
       </div>
 
-      {/* Horizontal top bar, <1024px. */}
-      <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-line bg-bg/85 px-5 backdrop-blur-sm sm:px-8 lg:hidden">
+      {/* Horizontal top bar, <1024px. Same green as the desktop rail, so the
+          persistent nav reads as one consistent surface at every breakpoint. */}
+      <header className="site-rail sticky top-0 z-40 flex h-16 items-center justify-between px-5 backdrop-blur-sm sm:px-8 lg:hidden">
         <Link
           href="/"
-          className="u-mono text-sm font-medium tracking-[0.18em] text-text no-underline"
+          className="site-rail__wordmark u-mono text-sm font-medium tracking-[0.18em] no-underline"
           aria-label={homeLabel}
         >
-          {nav.wordmarkFirst} <span className="text-primary-strong">{nav.wordmarkAccent}</span>
+          {nav.wordmarkFirst} <span className="site-rail__wordmark-accent">{nav.wordmarkAccent}</span>
         </Link>
 
         <nav aria-label="Primary" className="flex items-center gap-1 sm:gap-2">
@@ -126,7 +127,7 @@ export default function Header() {
               <li key={item.id}>
                 <Link
                   href={item.href}
-                  className="rounded-md px-2.5 py-1.5 text-sm text-muted no-underline transition-colors hover:text-text"
+                  className="site-rail__navlink rounded-md px-2.5 py-1.5 text-sm no-underline transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -136,7 +137,7 @@ export default function Header() {
           <a
             href={CV_PATH}
             download
-            className="u-mono rounded-md px-2.5 py-1.5 text-sm text-text no-underline transition-colors hover:text-primary-strong"
+            className="site-rail__cv u-mono rounded-md px-2.5 py-1.5 text-sm no-underline transition-colors"
           >
             {nav.cv} <span aria-hidden="true">↓</span>
           </a>

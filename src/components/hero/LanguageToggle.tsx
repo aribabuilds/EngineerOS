@@ -12,16 +12,17 @@ export default function LanguageToggle({ label }: { label: string }) {
 
   return (
     <div className="hero-forest__lang" role="group" aria-label={label}>
-      <button type="button" aria-pressed={lang === "en"} onClick={() => setLang("en")}>
-        🇬🇧 EN
+      <button type="button" aria-pressed={lang === "en"} aria-label="English" onClick={() => setLang("en")}>
+        <span aria-hidden="true">🇬🇧</span>
       </button>
       <button
         type="button"
         aria-pressed={lang === "de"}
+        aria-label="Deutsch"
         onClick={() => setLang("de")}
         title="German version coming soon"
       >
-        🇩🇪 DE
+        <span aria-hidden="true">🇩🇪</span>
       </button>
     </div>
   );

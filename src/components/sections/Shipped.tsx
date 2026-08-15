@@ -17,7 +17,7 @@ export default function Shipped() {
   return (
     <section
       id="shipped"
-      className="shipped-forest relative overflow-hidden border-b border-line"
+      className="shipped-forest relative overflow-hidden"
       aria-labelledby="shipped-heading"
     >
       <AmbientLeaves />

@@ -26,7 +26,6 @@ export default function ForestScene() {
     if (!ctx) return;
 
     const GREEN = "#3E6155";
-    const BROWN = "#716444";
     const BASE = "#E6E7E8";
     const INK = "#26302E";
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -48,7 +47,6 @@ export default function ForestScene() {
     };
     const HAZE = BASE;
     const mutedGreen = (depth: number) => mix(GREEN, HAZE, depth);
-    const mutedBark = (depth: number) => mix(BROWN, HAZE, depth);
     const mulberry32 = (a: number) => () => {
       a |= 0;
       a = (a + 0x6d2b79f5) | 0;
@@ -100,37 +98,6 @@ export default function ForestScene() {
       }
     }
 
-    function trunk(
-      c: CanvasRenderingContext2D,
-      x: number,
-      topY: number,
-      botY: number,
-      wTop: number,
-      wBot: number,
-      color: string,
-      lit: boolean,
-    ) {
-      const lean = (mulberry32(Math.floor(x))() - 0.5) * wBot * 1.4;
-      c.beginPath();
-      c.moveTo(x - wTop / 2, topY);
-      c.lineTo(x + wTop / 2, topY);
-      c.lineTo(x + wBot / 2 + lean, botY);
-      c.lineTo(x - wBot / 2 + lean, botY);
-      c.closePath();
-      c.fillStyle = color;
-      c.fill();
-      if (lit) {
-        c.fillStyle = rgba(BASE, 0.1);
-        c.beginPath();
-        c.moveTo(x + wTop / 2 - Math.max(1, wTop * 0.22), topY);
-        c.lineTo(x + wTop / 2, topY);
-        c.lineTo(x + wBot / 2 + lean, botY);
-        c.lineTo(x + wBot / 2 + lean - Math.max(1, wBot * 0.22), botY);
-        c.closePath();
-        c.fill();
-      }
-    }
-
     function buildStatic() {
       LIGHT = { x: W * 0.8, y: -H * 0.06 };
 
@@ -160,18 +127,12 @@ export default function ForestScene() {
       foliageMass(ofx, W * 0.9, H * 0.05, H * 0.4, 24, mutedGreen(0.58), 7);
       ofx.restore();
 
-      trunk(ofx, W * 0.44, -H * 0.05, H * 1.05, W * 0.006, W * 0.01, mutedBark(0.5), true);
-      trunk(ofx, W * 0.7, -H * 0.05, H * 1.05, W * 0.007, W * 0.012, mutedBark(0.44), true);
-
       ofx.save();
       ofx.filter = "blur(5px)";
       foliageMass(ofx, W * 0.3, H * 0.02, H * 0.34, 22, mutedGreen(0.4), 11);
       foliageMass(ofx, W * 0.97, H * 0.1, H * 0.36, 22, mutedGreen(0.36), 13);
       foliageMass(ofx, W * 0.62, -H * 0.1, H * 0.3, 18, mutedGreen(0.42), 17);
       ofx.restore();
-
-      trunk(ofx, W * 0.38, -H * 0.08, H * 1.1, W * 0.014, W * 0.03, mutedBark(0.14), true);
-      trunk(ofx, W * 0.85, -H * 0.08, H * 1.1, W * 0.016, W * 0.034, mutedBark(0.18), true);
 
       offNear = document.createElement("canvas");
       offNear.width = W * dpr;
@@ -250,7 +211,7 @@ export default function ForestScene() {
           drift: r() * Math.PI * 2,
         });
       leaves = [];
-      const cols = [mutedGreen(0.05), mutedGreen(0.22), mutedBark(0.05), mutedBark(0.2)];
+      const cols = [mutedGreen(0.05), mutedGreen(0.22), mutedGreen(0.12), mutedGreen(0.32)];
       for (let i = 0; i < 8; i++) {
         leaves.push({
           x: W * 0.25 + r() * W * 0.75,
