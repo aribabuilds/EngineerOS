@@ -5,7 +5,7 @@ import Shipped from "@/components/sections/Shipped";
 import FeaturedWork from "@/components/sections/FeaturedWork";
 import WorkWithAI from "@/components/sections/WorkWithAI";
 import DecisionSection from "@/components/sections/DecisionSection";
-import PathSection from "@/components/sections/PathSection";
+import MyPathSection from "@/components/sections/MyPathSection";
 import Achievements from "@/components/sections/Achievements";
 import Contact from "@/components/sections/Contact";
 import { REPOS, QUANTUM_LIVE, AUTHOR_NAME } from "@/lib/site";
@@ -48,9 +48,9 @@ export default function HomePage() {
         <Hero />
         <Shipped />
         <FeaturedWork />
+        <MyPathSection />
         <WorkWithAI />
         <DecisionSection />
-        <PathSection />
         <Achievements />
         <Contact />
       </main>

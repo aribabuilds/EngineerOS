@@ -128,6 +128,27 @@ export interface Dictionary {
     rows: { year: string; role: string; note: string }[];
     closing: string;
   };
+  /** The staircase section (round 11), fully separate from `path` above —
+   * the About page reads `path` directly, so that key stays untouched. */
+  myPath: {
+    eyebrow: string;
+    hook: string;
+    intro: string;
+    /** Detail-box label for steps 1-4. */
+    labelDefault: string;
+    /** Detail-box label for the final step. */
+    labelFinal: string;
+    steps: {
+      role: string;
+      year: string;
+      side: "left" | "right";
+      detail: string;
+    }[];
+    /** Renders italic, the standard pull-quote treatment. */
+    closing: string;
+    /** Renders upright (not italic) in the sky-blue accent, as the punchline. */
+    closingPunchline: string;
+  };
   contact: {
     heading: string;
     lede: string;

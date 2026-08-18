@@ -1045,6 +1045,303 @@
     align-items: center;
     justify-content: center;
   }
+
+  /* --------------------------------------------------------------- *
+   * My Path (round 11): the career staircase. Same forest world as
+   * Shipped/Featured Work via the shared --forest-* tokens and Fraunces/
+   * Instrument Sans, with its own exact atmosphere hexes painted by
+   * StaircaseAtmosphere.tsx. No illustrated landform: light, color, a
+   * brown staircase and a spine, nothing else drawn.
+   * --------------------------------------------------------------- */
+  .staircase {
+    position: relative;
+    overflow: hidden;
+    background: var(--forest-green);
+  }
+  .staircase__content {
+    position: relative;
+    z-index: 2;
+  }
+  .staircase__display {
+    font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+  }
+  .staircase__eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--forest-sky);
+    font-weight: 500;
+  }
+  .staircase__hook {
+    font-weight: 440;
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin-top: 0.4rem;
+  }
+  .staircase__intro {
+    max-width: 640px;
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  /* The list of steps. Positioned so the spine (an absolutely-placed line)
+     can run down its centre on desktop, its left edge on mobile. */
+  .staircase__list {
+    position: relative;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+  .staircase__spine {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 0%;
+    background: rgba(255, 255, 255, 0.28);
+    transition: height 1100ms ease-out;
+    pointer-events: none;
+  }
+  .staircase__spine--visible {
+    height: 100%;
+  }
+
+  /* One step: a 3-column grid (detail / tread / detail) so the box in use
+     alternates side while the connector gap to the centre column — and
+     therefore the connector line's length — never changes. */
+  .staircase-step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 150px 1fr;
+    column-gap: 2rem;
+    align-items: start;
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .staircase-step.is-pending {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .staircase-step__centre {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .staircase-step__tread {
+    position: relative;
+    width: 92px;
+    height: 24px;
+    border-radius: 5px;
+    background: var(--forest-brown);
+    box-shadow:
+      0 5px 0 0 color-mix(in srgb, var(--forest-brown) 62%, #000),
+      0 10px 16px -4px rgba(20, 24, 22, 0.5);
+  }
+  .staircase-step__tread::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 7px;
+    border-radius: 5px 5px 0 0;
+    background: #8a7a56;
+  }
+  /* The leaf marker: a small diagonal stone-green-gray leaf sitting on the
+     tread, tip up, tilted per spec (~-38deg). */
+  .staircase-step__leaf {
+    position: absolute;
+    left: 50%;
+    top: -14px;
+    width: 15px;
+    height: 21px;
+    transform: translateX(-50%) rotate(-38deg);
+  }
+  .staircase-step__leaf path {
+    fill: #5a7d70;
+  }
+  .staircase-step__leaf line {
+    stroke: #3f5c52;
+    stroke-width: 1;
+    opacity: 0.55;
+  }
+  .staircase-step__roleyear--desktop {
+    margin-top: 0.85rem;
+  }
+  .staircase-step__roleyear--mobile {
+    display: none;
+  }
+  .staircase-step__role {
+    display: block;
+    font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+    font-size: 1.05rem;
+    color: #fff;
+  }
+  /* Step 4's role, until the real CV/LinkedIn title is supplied: reads
+     visibly as unfinished rather than as a real claim, echoing the site's
+     OwnerTodo convention without a full block treatment in this tight
+     inline slot. */
+  .staircase-step__role--todo {
+    color: rgba(255, 255, 255, 0.55);
+    font-style: italic;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    text-underline-offset: 3px;
+  }
+  .staircase-step__year {
+    display: block;
+    font-family: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+    font-size: 0.8rem;
+    color: var(--forest-sky);
+    margin-top: 0.2rem;
+  }
+
+  /* The detail box: warm off-white translucent panel, lifted off the
+     atmosphere behind it via a layered shadow. Justified toward the centre
+     column so the connector gap stays constant regardless of side. */
+  .staircase-step__box {
+    position: relative;
+    grid-row: 1;
+    max-width: 420px;
+    padding: 1.4rem 1.6rem;
+    border-radius: 16px;
+    background: rgba(240, 241, 240, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow:
+      0 2px 5px rgba(20, 26, 22, 0.18),
+      0 22px 44px -14px rgba(20, 26, 22, 0.4);
+    font-family: "Instrument Sans Variable", system-ui, -apple-system, sans-serif;
+    color: var(--forest-ink);
+  }
+  .staircase-step[data-side="left"] .staircase-step__box {
+    grid-column: 1;
+    justify-self: end;
+  }
+  .staircase-step[data-side="right"] .staircase-step__box {
+    grid-column: 3;
+    justify-self: start;
+  }
+  /* Connector: a short line that spans only the column gap, from the box's
+     own edge toward the centre column, capped with a glowing dot right at
+     the box. It can never run under the box's text because it is not part
+     of the box's width, only this fixed-length extension outside it. */
+  .staircase-step__box::before,
+  .staircase-step__box::after {
+    content: "";
+    position: absolute;
+    top: 26px;
+  }
+  .staircase-step__box::before {
+    height: 1px;
+    width: 2rem;
+    background: rgba(255, 255, 255, 0.4);
+  }
+  .staircase-step__box::after {
+    width: 7px;
+    height: 7px;
+    margin-top: -3px;
+    border-radius: 50%;
+    background: var(--forest-sky);
+    box-shadow: 0 0 9px 2px rgba(179, 219, 237, 0.75);
+  }
+  .staircase-step[data-side="left"] .staircase-step__box::before {
+    right: -2rem;
+  }
+  .staircase-step[data-side="left"] .staircase-step__box::after {
+    right: calc(-2rem - 3.5px);
+  }
+  .staircase-step[data-side="right"] .staircase-step__box::before {
+    left: -2rem;
+  }
+  .staircase-step[data-side="right"] .staircase-step__box::after {
+    left: calc(-2rem - 3.5px);
+  }
+
+  .staircase-step__label {
+    font-family: "Geist Mono Variable", ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--forest-green);
+  }
+  .staircase-step__detail {
+    margin-top: 0.5rem;
+    line-height: 1.55;
+  }
+
+  .staircase__closing {
+    max-width: 720px;
+    margin: 5rem auto 0;
+    text-align: center;
+    font-family: "Fraunces Variable", Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+    line-height: 1.5;
+    color: #fff;
+  }
+  .staircase__closing-punchline {
+    display: block;
+    margin-top: 0.6rem;
+    font-style: normal;
+    color: var(--forest-sky);
+  }
+
+  @media (max-width: 760px) {
+    .staircase__list {
+      gap: 2.25rem;
+      padding-left: 2.75rem;
+    }
+    .staircase__spine {
+      left: 0.6rem;
+    }
+    .staircase-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .staircase-step__centre {
+      flex: none;
+      width: 1.2rem;
+    }
+    .staircase-step__tread {
+      width: 44px;
+      height: 14px;
+      margin-left: -0.6rem;
+    }
+    .staircase-step__leaf {
+      width: 11px;
+      height: 16px;
+      top: -10px;
+    }
+    .staircase-step__roleyear--desktop {
+      display: none;
+    }
+    .staircase-step__roleyear--mobile {
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .staircase-step__box {
+      max-width: none;
+      flex: 1;
+    }
+    .staircase-step[data-side="left"] .staircase-step__box,
+    .staircase-step[data-side="right"] .staircase-step__box {
+      grid-column: auto;
+      justify-self: auto;
+    }
+    .staircase-step__box::before,
+    .staircase-step__box::after {
+      display: none;
+    }
+  }
 }
 
 /* Respect reduced-motion everywhere. The 3D hero handles this separately by

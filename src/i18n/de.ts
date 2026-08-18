@@ -20,4 +20,9 @@ export const de: PartialDictionary = {
   // marker line, need German copy. Not read at runtime yet.
   // TODO: featured.cards.multiverse (round 10): new card, needs German copy
   // once Ariba approves the English draft. Not read at runtime yet.
+  // TODO: myPath (round 11 staircase section): eyebrow, hook, intro, both
+  // labels, all 5 steps, closing + closingPunchline all need German copy.
+  // Note: the existing `path` key is separate and already has its own TODO
+  // above; that one is read by the About page, this one isn't read anywhere
+  // yet either.
 };

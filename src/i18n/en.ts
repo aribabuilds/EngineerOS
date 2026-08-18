@@ -250,6 +250,63 @@ export const en: Dictionary = {
       "Every step added the next skill. I went from writing the specifications to building the systems those specifications described.",
   },
 
+  // The staircase section (round 11). Locked copy, used verbatim — no em
+  // dashes were present in the brief, so nothing needed converting this
+  // round. Step 4's role is intentionally a short, visibly-flagged
+  // placeholder: OWNER TODO, Ariba to supply the exact title as it appears
+  // on her CV/LinkedIn. Do not invent or paraphrase it — the on-site title
+  // must match her documented history exactly.
+  myPath: {
+    eyebrow: "My path",
+    hook: "Every step lifted the next",
+    intro:
+      "I did not take the shortest road into engineering. I took the one that kept handing me something to carry forward. Here is what each step gave me.",
+    labelDefault: "What I took from here",
+    labelFinal: "Where it all arrives",
+    steps: [
+      {
+        role: "Freelance developer",
+        year: "2022–2025",
+        side: "left",
+        detail:
+          "Where I learned to ship. I built web and mobile apps for real clients around the world, in Java, JavaScript, Python and Flutter. Real clients mean real deadlines, so I learned early that working software is the only thing that counts.",
+      },
+      {
+        role: "Business analyst",
+        year: "2025",
+        side: "right",
+        detail:
+          "Where I learned to see the product before the code. I stopped jumping straight to building and started with one question: why does this need to exist, and what problem does it solve. Then market analysis, competitors, the angle that stands out, and a user story behind every feature. Build with intent, never by reflex.",
+      },
+      {
+        role: "Project coordinator",
+        year: "2025",
+        side: "left",
+        detail:
+          "Where I learned how things actually get delivered. Over seven months: keeping many moving pieces shipping on deadline without letting anything slip through the gaps, stakeholders informed, the team aligned, the project moving when it would rather stall. The discipline of delivery.",
+      },
+      {
+        // OWNER TODO: exact title as it appears on Ariba's CV/LinkedIn. Not
+        // invented or paraphrased on purpose.
+        role: "TODO: exact CV/LinkedIn title",
+        year: "2026",
+        side: "right",
+        detail:
+          "Curiosity pulled me up a level, to see a whole project from the very top. I could see how every role's quality rolls up into whether the finished thing is excellent or just fine. And it let me use the part of me that works best with people: I read a gap not as a problem but as a place where value is waiting to be added, and I get people delivering in a way they genuinely enjoy.",
+      },
+      {
+        role: "GenAI engineer · vountain",
+        year: "2026",
+        side: "left",
+        detail:
+          "And then it came together. My genuine passion has always been engineering, and here I do it with everything the journey handed me. The real work is quieter than the code: the product thinking, the delivery discipline, and the communication that make what I build actually get adopted and trusted.",
+      },
+    ],
+    closing:
+      "None of it was a detour. Every step handed me something I still carry, and it all shows up in how I build.",
+    closingPunchline: "I went from writing the specifications to building the systems they describe.",
+  },
+
   contact: {
     heading: "Contact",
     lede:
