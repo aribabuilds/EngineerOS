@@ -885,11 +885,14 @@
     margin-top: 0.4rem;
   }
 
-  /* Grid: auto-fit, not a hardcoded column count — side by side today,
-     holds a third project later with zero layout changes. */
+  /* Flex, not grid: wraps to however many fit per row and — critically —
+     centers a lone leftover card on its own row (round 10: 2 up top, 1
+     centered below with three projects) without any nth-child hackery.
+     Still holds any number of cards with zero layout changes. */
   .work-valley__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
   }
 
@@ -900,6 +903,8 @@
     overflow: hidden;
     border-radius: 26px;
     min-height: 420px;
+    flex: 1 1 320px;
+    max-width: 460px;
     display: flex;
     background: linear-gradient(
       180deg,

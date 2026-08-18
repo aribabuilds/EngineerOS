@@ -155,6 +155,19 @@ export const en: Dictionary = {
         detail:
           "The state engine is fully typed and separated from the rendering layer. Every push builds and deploys automatically to the live site.",
       },
+      // Multiverse Machine (round 10): summary/detail/stack are drafted by
+      // Claude from Ariba's SRD, given to Claude verbatim to add — pending
+      // her approval, not final copy. Em dash converted to a comma, same
+      // no-meaning-change treatment as everywhere else on this site.
+      multiverse: {
+        status: "Live",
+        marker: "Live · in the light",
+        title: "Multiverse Machine",
+        summary:
+          "Type a sentence and watch an AI write it word by word, with every word it almost chose branching off as a faded parallel timeline you can click into and follow instead.",
+        detail: "The whole model runs in your browser: no sign-in, no API key, nothing you type ever leaves your device.",
+        stack: ["React", "TypeScript", "Transformers.js", "WebGPU", "D3.js"],
+      },
     },
   },
 

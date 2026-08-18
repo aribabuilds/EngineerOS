@@ -18,4 +18,6 @@ export const de: PartialDictionary = {
   // adoption/statusLine all need German copy. Not read at runtime yet.
   // TODO: featured (round 8 valley redesign): watchDemo, and each card's new
   // marker line, need German copy. Not read at runtime yet.
+  // TODO: featured.cards.multiverse (round 10): new card, needs German copy
+  // once Ariba approves the English draft. Not read at runtime yet.
 };

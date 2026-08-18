@@ -3,6 +3,7 @@ import { getDictionary } from "@/i18n";
 import {
   REPOS,
   QUANTUM_LIVE,
+  MULTIVERSE_LIVE,
   BRIEFPILOT_LIVE_URL,
   briefpilotLiveIsConfigured,
   BRIEFPILOT_DEMO_VIDEO,
@@ -16,18 +17,22 @@ import { parseStack } from "@/components/work/parseStack";
 const f = getDictionary("en").featured;
 
 /**
- * "The valley," boxed (round 9): two elevated cards side by side, each
+ * "The valley," boxed (round 9), now three cards (round 10): elevated boxes
+ * in a flex-wrap grid that centers a lone leftover card on its own row, each
  * carrying the forest atmosphere as its own background rather than the
- * whole section — replaces the earlier full-bleed sticky-scroll panorama,
- * which read as too much for the whole page. Section background is the
- * plain light gray the cards sit on top of. Same content sources as before,
- * same VideoModal wiring, no copy changes.
+ * whole section. Section background is the plain light gray the cards sit
+ * on top of.
  *
  * OWNER TODO: BriefPilot's summary/detail copy is unchanged on purpose —
  * pending Ariba's updated text now that the project has shipped. Do not
  * edit without her explicit new copy. Same for BRIEFPILOT_LIVE_URL in
  * src/lib/site.ts: left as a placeholder, no link renders until she
  * supplies the real URL.
+ *
+ * OWNER TODO: Multiverse Machine's summary/detail/stack were drafted by
+ * Claude from Ariba's SRD and handed over verbatim to add — pending her
+ * approval, not final copy. No repo link was given, so only the live demo
+ * renders for this card.
  */
 export default function FeaturedWork() {
   const briefpilotStack = parseStack(f.cards.briefpilot.detail);
@@ -94,6 +99,19 @@ export default function FeaturedWork() {
                   {f.repo}
                 </a>
               </>
+            }
+          />
+
+          <WorkCard
+            marker={f.cards.multiverse.marker}
+            title={f.cards.multiverse.title}
+            summary={f.cards.multiverse.summary}
+            detail={f.cards.multiverse.detail}
+            stack={f.cards.multiverse.stack}
+            links={
+              <a href={MULTIVERSE_LIVE} target="_blank" rel="noopener noreferrer" className="work-valley__link">
+                {f.openLiveDemo} <span aria-hidden="true">&rarr;</span>
+              </a>
             }
           />
         </div>

@@ -93,6 +93,16 @@ export interface Dictionary {
         summary: string;
         detail: string;
       };
+      multiverse: {
+        status: string;
+        marker: string;
+        title: string;
+        summary: string;
+        detail: string;
+        /** Given as an explicit chip list (not embedded in prose like
+         * BriefPilot's), so it's stored directly rather than derived. */
+        stack: string[];
+      };
     };
   };
   ai: {

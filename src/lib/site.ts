@@ -30,6 +30,10 @@ export const REPOS = {
 
 export const QUANTUM_LIVE = "https://aribabuilds.github.io/Quantum-Playground/";
 
+// Round 10: no repo link given for this one, so only the live demo renders —
+// don't fabricate a github.com/aribabuilds/Multiverse-Machine URL.
+export const MULTIVERSE_LIVE = "https://aribabuilds.github.io/Multiverse-Machine/";
+
 // TODO(owner): BriefPilot has shipped (round 8); replace with the real live
 // URL. Left unconfigured on purpose: no link renders until this is set, same
 // convention as BOOKING_URL above. Do not fabricate a URL.
