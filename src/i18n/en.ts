@@ -77,10 +77,10 @@ export const en: Dictionary = {
   // (no-em-dash rule) with zero meaning change. See growthFrame components
   // for how growthForm ("roots" | "fork") and microFlows are rendered.
   shipped: {
-    eyebrow: "The path so far",
-    heading: "What I've shipped",
+    eyebrow: "Built and adopted",
+    heading: "What teams kept using",
     supportingLine:
-      "Three times something manual or broken needed fixing. Each time I scoped it, built it, and it stayed.",
+      "The things I built that whole teams took on and kept using, long after I shipped them.",
     closingLine: "and it all stayed rooted.",
     items: [
       {
