@@ -385,9 +385,7 @@
   }
 
   /* Mobile top bar (<1024px): same green surface as the desktop rail, same
-     light foreground treatment. ThemeToggle is the only bare <button> in
-     this header, so targeting the element directly (no new class needed)
-     safely reaches it without touching its use elsewhere on the site. */
+     light foreground treatment. */
   .site-rail__wordmark {
     color: #fff;
   }
@@ -398,20 +396,6 @@
     color: rgba(255, 255, 255, 0.7);
   }
   .site-rail__navlink:hover {
-    color: #fff;
-  }
-  .site-rail__cv {
-    color: rgba(255, 255, 255, 0.85);
-  }
-  .site-rail__cv:hover {
-    color: var(--forest-brown-light);
-  }
-  .site-rail button {
-    border-color: rgba(255, 255, 255, 0.3);
-    color: rgba(255, 255, 255, 0.8);
-  }
-  .site-rail button:hover {
-    border-color: var(--forest-sky);
     color: #fff;
   }
 

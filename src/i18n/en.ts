@@ -7,7 +7,7 @@ import type { Dictionary } from "./types";
  */
 export const en: Dictionary = {
   meta: {
-    title: "Ariba Anjum · Junior AI / software engineer",
+    title: "Ariba Anjum",
     description:
       "I ship AI and automation systems that teams actually adopt. Junior AI / software engineer relocating to Germany, open to Werkstudent and junior roles.",
     workTitle: "BriefPilot · Decisions log · Ariba Anjum",

@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
 import { getDictionary } from "@/i18n";
-import { CV_PATH, GITHUB_URL, LINKEDIN_URL, MAILTO } from "@/lib/site";
+import { GITHUB_URL, LINKEDIN_URL, MAILTO } from "@/lib/site";
 
 const nav = getDictionary("en").nav;
 const contact = getDictionary("en").contact;
@@ -97,19 +96,6 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Top-right utility cluster: CV + theme toggle. The rail spec doesn't
-          cover these, so they get the otherwise-empty top-right corner. */}
-      <div className="fixed right-5 top-5 z-40 hidden items-center gap-1 rounded-md bg-bg/85 backdrop-blur-sm lg:flex">
-        <a
-          href={CV_PATH}
-          download
-          className="u-mono rounded-md px-2.5 py-1.5 text-sm text-text no-underline transition-colors hover:text-primary-strong"
-        >
-          {nav.cv} <span aria-hidden="true">↓</span>
-        </a>
-        <ThemeToggle />
-      </div>
-
       {/* Horizontal top bar, <1024px. Same green as the desktop rail, so the
           persistent nav reads as one consistent surface at every breakpoint. */}
       <header className="site-rail sticky top-0 z-40 flex h-16 items-center justify-between px-5 backdrop-blur-sm sm:px-8 lg:hidden">
@@ -134,14 +120,6 @@ export default function Header() {
               </li>
             ))}
           </ul>
-          <a
-            href={CV_PATH}
-            download
-            className="site-rail__cv u-mono rounded-md px-2.5 py-1.5 text-sm no-underline transition-colors"
-          >
-            {nav.cv} <span aria-hidden="true">↓</span>
-          </a>
-          <ThemeToggle />
         </nav>
       </header>
     </>
