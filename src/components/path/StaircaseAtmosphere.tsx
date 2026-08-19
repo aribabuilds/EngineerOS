@@ -65,38 +65,6 @@ export default function StaircaseAtmosphere() {
     let petals: Particle[] = [];
     let motes: { x: number; y: number; r: number; ph: number; sp: number; drift: number }[] = [];
 
-    function drawRays(t: number) {
-      const rays = [
-        { ang: 2.18, len: H * 1.4, w: W * 0.1, a: 0.08, ph: 0.0 },
-        { ang: 2.02, len: H * 1.3, w: W * 0.06, a: 0.1, ph: 1.7 },
-        { ang: 2.32, len: H * 1.4, w: W * 0.14, a: 0.06, ph: 3.1 },
-        { ang: 2.1, len: H * 1.2, w: W * 0.04, a: 0.09, ph: 4.5 },
-      ];
-      ctx!.save();
-      ctx!.globalCompositeOperation = "lighter";
-      for (const r of rays) {
-        const breathe = 0.6 + 0.4 * Math.sin(t * 0.25 + r.ph);
-        const sway = Math.sin(t * 0.12 + r.ph) * 0.03;
-        ctx!.save();
-        ctx!.translate(LIGHT.x, LIGHT.y);
-        ctx!.rotate(r.ang + sway);
-        const g = ctx!.createLinearGradient(0, 0, r.len, 0);
-        g.addColorStop(0, rgba(BASE, r.a * breathe));
-        g.addColorStop(0.35, rgba(SKY, r.a * breathe * 0.6));
-        g.addColorStop(1, rgba(SKY, 0));
-        ctx!.fillStyle = g;
-        ctx!.beginPath();
-        ctx!.moveTo(0, -r.w * 0.15);
-        ctx!.lineTo(r.len, -r.w);
-        ctx!.lineTo(r.len, r.w);
-        ctx!.lineTo(0, r.w * 0.15);
-        ctx!.closePath();
-        ctx!.fill();
-        ctx!.restore();
-      }
-      ctx!.restore();
-    }
-
     function drawMotes(t: number) {
       ctx!.save();
       ctx!.globalCompositeOperation = "lighter";
@@ -227,7 +195,6 @@ export default function StaircaseAtmosphere() {
     function frame(t: number) {
       ctx!.clearRect(0, 0, W, H);
       drawAtmosphere();
-      drawRays(t);
       drawMotes(t);
       drawParticles(t, leaves, BASE, 0.85);
       drawParticles(t, petals, SKY, 0.8);

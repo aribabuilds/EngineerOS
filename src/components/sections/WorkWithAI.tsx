@@ -1,6 +1,7 @@
 "use client";
 
 import Section from "@/components/Section";
+import BlobAccent from "@/components/BlobAccent";
 import { useInView } from "@/lib/useInView";
 import { getDictionary } from "@/i18n";
 
@@ -8,10 +9,16 @@ const ai = getDictionary("en").ai;
 
 export default function WorkWithAI() {
   return (
-    <Section id="ai" eyebrow="how_i_work_with_ai" heading={ai.heading}>
-      <p className="reading mt-5 text-lg text-muted">{ai.intro}</p>
+    <Section id="ai" eyebrow="how_i_work_with_ai" heading={ai.heading} className="relative overflow-hidden">
+      <BlobAccent
+        seed="work-with-ai-accent"
+        color="var(--primary)"
+        size={600}
+        className="-top-32 left-1/2 -translate-x-1/2 opacity-[0.06] blur-3xl"
+      />
+      <p className="reading relative mt-5 text-lg text-muted">{ai.intro}</p>
 
-      <div className="mt-9 grid gap-5 md:grid-cols-3">
+      <div className="relative mt-9 grid gap-5 md:grid-cols-3">
         {ai.columns.map((col, i) => (
           <AiColumn key={col.label} label={col.label} body={col.body} index={i} />
         ))}
