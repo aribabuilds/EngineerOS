@@ -33,9 +33,8 @@ export default function Hero() {
       </div>
       <div className="hero-forest__scrim" aria-hidden="true" />
 
-      {/* Language toggle, top-right. Offset down on desktop so it clears the
-          site Header's fixed top-right utility cluster (CV + theme). */}
-      <div className="absolute right-4 top-4 z-20 lg:top-[4.5rem]">
+      {/* Language toggle, top-right. */}
+      <div className="absolute right-4 top-4 z-20">
         <LanguageToggle label={hero.languageToggleLabel} />
       </div>
 
@@ -69,7 +68,7 @@ export default function Hero() {
           {hero.slabs.map((slab) => (
             <div key={slab.label} className="hero-forest__slab">
               <span className="lab">{slab.label}</span>
-              <span className="val">{slab.value}</span>
+              <span className={`val ${slab.label === "Availability" ? "val--live" : ""}`}>{slab.value}</span>
             </div>
           ))}
         </div>

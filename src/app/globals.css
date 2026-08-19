@@ -439,7 +439,7 @@
     font-size: 0.82rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(38, 48, 46, 0.55);
+    color: var(--forest-brown);
     font-weight: 500;
   }
   .hero-forest__eyebrow b {
@@ -571,7 +571,7 @@
     font-size: 0.68rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(38, 48, 46, 0.55);
+    color: var(--forest-brown);
     font-weight: 600;
   }
   .hero-forest__slab .val {
@@ -580,6 +580,24 @@
     color: #26302e;
     font-weight: 500;
     margin-top: 0.3rem;
+  }
+  /* Availability's value gets the same sky-blue "live" status dot used for
+     promoted/current states elsewhere (Shipped's fork stops, My Path's
+     connector dots) — this is the one quick fact that's a live status, not
+     a static fact like location or languages. */
+  .hero-forest__slab .val--live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .hero-forest__slab .val--live::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--forest-sky);
+    box-shadow: 0 0 0 3px rgba(179, 219, 237, 0.4);
+    flex: none;
   }
 
   /* Flag-only, styled like the hero's other buttons (.hero-forest__btn--ghost):
@@ -599,9 +617,12 @@
     cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease;
   }
+  /* Brown for the active/selected state, the same accent role it plays for
+     the nav rail's current-page link — green and sky are already spoken for
+     (pill / focus rings) elsewhere in the hero. */
   .hero-forest__lang button[aria-pressed="true"] {
-    background: rgba(62, 97, 85, 0.09);
-    border-color: rgba(62, 97, 85, 0.32);
+    background: rgba(113, 100, 68, 0.12);
+    border-color: rgba(113, 100, 68, 0.4);
   }
   .hero-forest__lang button:not([aria-pressed="true"]):hover {
     background: rgba(179, 219, 237, 0.35);
