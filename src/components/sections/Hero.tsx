@@ -1,6 +1,7 @@
 import { getDictionary } from "@/i18n";
 import ForestScene from "@/components/hero/ForestScene";
 import LanguageToggle from "@/components/hero/LanguageToggle";
+import { EMAIL } from "@/lib/site";
 
 const hero = getDictionary("en").hero;
 
@@ -17,12 +18,14 @@ const MAILTO = `mailto:${HERO_EMAIL}`;
 // Google Meet link (that needs the Calendar API with OAuth); Calendar's own
 // compose screen offers a one-click "Add Google Meet video conferencing"
 // button once it opens, so the visitor adds it there before sending.
+// Uses the site-wide EMAIL (ariba.anjum.se@gmail.com), not HERO_EMAIL above —
+// that's the address that actually needs to receive the calendar invite.
 const CALL_EVENT_TITLE = "20-min call with Ariba Anjum";
 const CALL_EVENT_DETAILS = "Booked from Ariba Anjum's portfolio site.";
 const BOOK_A_CALL_URL =
   "https://calendar.google.com/calendar/render?action=TEMPLATE" +
   `&text=${encodeURIComponent(CALL_EVENT_TITLE)}` +
-  `&add=${encodeURIComponent(HERO_EMAIL)}` +
+  `&add=${encodeURIComponent(EMAIL)}` +
   `&details=${encodeURIComponent(CALL_EVENT_DETAILS)}`;
 
 /**

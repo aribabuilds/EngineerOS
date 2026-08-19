@@ -760,7 +760,9 @@
     font-size: 0.68rem;
     line-height: 1.4;
     padding: 0.12rem 0.5rem;
-    border-radius: 999px;
+    /* Same radius as Featured Work's tech chips (.work-valley__chip) —
+       rounded rect, not a full pill. */
+    border-radius: 8px;
     background: rgba(62, 97, 85, 0.07);
     border: 1px solid rgba(62, 97, 85, 0.2);
     color: var(--forest-green);
