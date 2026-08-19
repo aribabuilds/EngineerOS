@@ -717,12 +717,7 @@
   .shipped-forest__card {
     opacity: 1;
     transform: none;
-    box-shadow: 0 0 0 rgba(38, 48, 46, 0);
-    transition: opacity 0.6s ease, transform 300ms ease-out, box-shadow 300ms ease-out;
-  }
-  .shipped-forest__card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 18px 32px -16px rgba(38, 48, 46, 0.28);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .shipped-forest__card.is-pending {
     opacity: 0;
@@ -982,7 +977,10 @@
   .work-valley__chip {
     font-size: 0.72rem;
     padding: 0.15rem 0.55rem;
-    border-radius: 999px;
+    /* The site's standard block radius (rounded-card is 7px), nudged up a
+       touch to sit comfortably inside the card's own 26px corners without
+       reading as a full pill. */
+    border-radius: 8px;
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.28);
     color: #fff;

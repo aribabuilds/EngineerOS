@@ -143,7 +143,8 @@ export const en: Dictionary = {
         summary:
           "Photograph a German official letter and it reads the text back to you. That is the first step toward telling you, in plain language, what it means and what to do.",
         detail:
-          "The OCR pipeline and a photo quality-gate (it asks you to retake an unreadable scan instead of showing garbled text) are shipped. Classification and the plain-English explanation come next. Next.js · FastAPI · Postgres · Docker · CI.",
+          "The OCR pipeline and a photo quality-gate (it asks you to retake an unreadable scan instead of showing garbled text) are shipped. Classification and the plain-English explanation come next.",
+        stack: ["Next.js", "FastAPI", "Postgres", "Docker", "CI"],
       },
       quantum: {
         status: "live",
@@ -154,6 +155,7 @@ export const en: Dictionary = {
           "Quantum states are hard to reason about as vectors of complex numbers. This is a visual, interactive representation that makes gate effects and entanglement observable: build qubits, apply gates, and watch a Bell pair and a teleportation protocol play out in real time.",
         detail:
           "The state engine is fully typed and separated from the rendering layer. Every push builds and deploys automatically to the live site.",
+        stack: ["React", "TypeScript", "Three.js", "React Three Fiber", "GLSL", "Vite"],
       },
       // Multiverse Machine (round 10): summary/detail/stack are drafted by
       // Claude from Ariba's SRD, given to Claude verbatim to add — pending

@@ -10,7 +10,6 @@ import {
 } from "@/lib/site";
 import WorkCard from "@/components/work/WorkCard";
 import VideoModal from "@/components/work/VideoModal";
-import { parseStack } from "@/components/work/parseStack";
 
 const f = getDictionary("en").featured;
 
@@ -35,11 +34,13 @@ const f = getDictionary("en").featured;
  * video) only — no Repo links, no link into the old decisions/case-study
  * page. One clear way to see each thing working, nothing else competing
  * for the click.
+ *
+ * Round 13: every card's tech stack is now a plain explicit list (stored in
+ * i18n, same as Multiverse always had it), not parsed out of the prose —
+ * the stack sentence used to also print, duplicated, at the end of the
+ * paragraph above the chips.
  */
 export default function FeaturedWork() {
-  const briefpilotStack = parseStack(f.cards.briefpilot.detail);
-  const quantumStack = parseStack(f.cards.quantum.detail);
-
   return (
     <section id="work" className="work-valley" aria-labelledby="work-heading">
       <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
@@ -56,7 +57,7 @@ export default function FeaturedWork() {
             title={f.cards.briefpilot.title}
             summary={f.cards.briefpilot.summary}
             detail={f.cards.briefpilot.detail}
-            stack={briefpilotStack}
+            stack={f.cards.briefpilot.stack}
             links={
               <>
                 {briefpilotLiveIsConfigured ? (
@@ -85,7 +86,7 @@ export default function FeaturedWork() {
             title={f.cards.quantum.title}
             summary={f.cards.quantum.summary}
             detail={f.cards.quantum.detail}
-            stack={quantumStack}
+            stack={f.cards.quantum.stack}
             links={
               <a href={QUANTUM_LIVE} target="_blank" rel="noopener noreferrer" className="work-valley__link">
                 {f.openLiveDemo} <span aria-hidden="true">&rarr;</span>

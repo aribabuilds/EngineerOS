@@ -85,6 +85,9 @@ export interface Dictionary {
         title: string;
         summary: string;
         detail: string;
+        /** Explicit chip list; kept out of the prose so it isn't duplicated
+         * between the paragraph and the chip row underneath. */
+        stack: string[];
       };
       quantum: {
         status: string;
@@ -92,6 +95,7 @@ export interface Dictionary {
         title: string;
         summary: string;
         detail: string;
+        stack: string[];
       };
       multiverse: {
         status: string;
@@ -99,8 +103,6 @@ export interface Dictionary {
         title: string;
         summary: string;
         detail: string;
-        /** Given as an explicit chip list (not embedded in prose like
-         * BriefPilot's), so it's stored directly rather than derived. */
         stack: string[];
       };
     };
