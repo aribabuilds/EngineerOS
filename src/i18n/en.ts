@@ -252,10 +252,7 @@ export const en: Dictionary = {
 
   // The staircase section (round 11). Locked copy, used verbatim — no em
   // dashes were present in the brief, so nothing needed converting this
-  // round. Step 4's role is intentionally a short, visibly-flagged
-  // placeholder: OWNER TODO, Ariba to supply the exact title as it appears
-  // on her CV/LinkedIn. Do not invent or paraphrase it — the on-site title
-  // must match her documented history exactly.
+  // round.
   myPath: {
     eyebrow: "My path",
     hook: "Every step lifted the next",
@@ -286,9 +283,7 @@ export const en: Dictionary = {
           "Where I learned how things actually get delivered. Over seven months: keeping many moving pieces shipping on deadline without letting anything slip through the gaps, stakeholders informed, the team aligned, the project moving when it would rather stall. The discipline of delivery.",
       },
       {
-        // OWNER TODO: exact title as it appears on Ariba's CV/LinkedIn. Not
-        // invented or paraphrased on purpose.
-        role: "TODO: exact CV/LinkedIn title",
+        role: "Project manager intern",
         year: "2026",
         side: "right",
         detail:
@@ -305,6 +300,13 @@ export const en: Dictionary = {
     closing:
       "None of it was a detour. Every step handed me something I still carry, and it all shows up in how I build.",
     closingPunchline: "I went from writing the specifications to building the systems they describe.",
+  },
+
+  // Round 12: replaces the old standalone Contact section. The email itself
+  // is appended after this line at render time from the site-wide EMAIL
+  // constant (Outro.tsx), not duplicated here.
+  outro: {
+    line: "That's the story, start to now. Everything else lives in the nav on the left — say hello at",
   },
 
   contact: {

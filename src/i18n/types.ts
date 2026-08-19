@@ -149,6 +149,14 @@ export interface Dictionary {
     /** Renders upright (not italic) in the sky-blue accent, as the punchline. */
     closingPunchline: string;
   };
+  /** The site's closing line (round 12), replacing the standalone Contact
+   * section — the nav rail already carries the GitHub/LinkedIn/email icons.
+   * The email itself renders from the site-wide EMAIL constant, not from
+   * this string, so `line` should read naturally leading into an email
+   * address appended right after it. */
+  outro: {
+    line: string;
+  };
   contact: {
     heading: string;
     lede: string;

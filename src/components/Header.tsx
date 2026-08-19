@@ -11,8 +11,6 @@ const contact = getDictionary("en").contact;
 const NAV_ITEMS = [
   { id: "work", href: "/#work", label: nav.work },
   { id: "path", href: "/#path", label: nav.path },
-  { id: "decision", href: "/#decision", label: nav.decisions },
-  { id: "contact", href: "/#contact", label: nav.contact },
 ] as const;
 
 const monogram = `${nav.wordmarkFirst.charAt(0)}${nav.wordmarkAccent.charAt(0)}`;

@@ -1,7 +1,5 @@
-import Link from "next/link";
 import { getDictionary } from "@/i18n";
 import {
-  REPOS,
   QUANTUM_LIVE,
   MULTIVERSE_LIVE,
   BRIEFPILOT_LIVE_URL,
@@ -31,8 +29,12 @@ const f = getDictionary("en").featured;
  *
  * OWNER TODO: Multiverse Machine's summary/detail/stack were drafted by
  * Claude from Ariba's SRD and handed over verbatim to add — pending her
- * approval, not final copy. No repo link was given, so only the live demo
- * renders for this card.
+ * approval, not final copy.
+ *
+ * Round 12: cards link out to a live demo (or, BriefPilot's case, a demo
+ * video) only — no Repo links, no link into the old decisions/case-study
+ * page. One clear way to see each thing working, nothing else competing
+ * for the click.
  */
 export default function FeaturedWork() {
   const briefpilotStack = parseStack(f.cards.briefpilot.detail);
@@ -57,9 +59,6 @@ export default function FeaturedWork() {
             stack={briefpilotStack}
             links={
               <>
-                <Link href="/work/briefpilot" className="work-valley__link">
-                  {f.readDecisions} <span aria-hidden="true">&rarr;</span>
-                </Link>
                 {briefpilotLiveIsConfigured ? (
                   <a
                     href={BRIEFPILOT_LIVE_URL}
@@ -70,9 +69,6 @@ export default function FeaturedWork() {
                     {f.openLiveDemo}
                   </a>
                 ) : null}
-                <a href={REPOS.briefpilot} target="_blank" rel="noopener noreferrer" className="work-valley__link">
-                  {f.repo}
-                </a>
                 <VideoModal
                   label={f.watchDemo}
                   ariaLabel="Watch BriefPilot demo"
@@ -91,14 +87,9 @@ export default function FeaturedWork() {
             detail={f.cards.quantum.detail}
             stack={quantumStack}
             links={
-              <>
-                <a href={QUANTUM_LIVE} target="_blank" rel="noopener noreferrer" className="work-valley__link">
-                  {f.openLiveDemo} <span aria-hidden="true">&rarr;</span>
-                </a>
-                <a href={REPOS.quantum} target="_blank" rel="noopener noreferrer" className="work-valley__link">
-                  {f.repo}
-                </a>
-              </>
+              <a href={QUANTUM_LIVE} target="_blank" rel="noopener noreferrer" className="work-valley__link">
+                {f.openLiveDemo} <span aria-hidden="true">&rarr;</span>
+              </a>
             }
           />
 

@@ -3,11 +3,8 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
 import Shipped from "@/components/sections/Shipped";
 import FeaturedWork from "@/components/sections/FeaturedWork";
-import WorkWithAI from "@/components/sections/WorkWithAI";
-import DecisionSection from "@/components/sections/DecisionSection";
 import MyPathSection from "@/components/sections/MyPathSection";
-import Achievements from "@/components/sections/Achievements";
-import Contact from "@/components/sections/Contact";
+import Outro from "@/components/sections/Outro";
 import { REPOS, QUANTUM_LIVE, AUTHOR_NAME } from "@/lib/site";
 
 /** SoftwareSourceCode structured data for both featured repos (brief §9). */
@@ -49,10 +46,7 @@ export default function HomePage() {
         <Shipped />
         <FeaturedWork />
         <MyPathSection />
-        <WorkWithAI />
-        <DecisionSection />
-        <Achievements />
-        <Contact />
+        <Outro />
       </main>
       <Footer />
     </>

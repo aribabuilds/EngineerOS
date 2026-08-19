@@ -25,4 +25,6 @@ export const de: PartialDictionary = {
   // Note: the existing `path` key is separate and already has its own TODO
   // above; that one is read by the About page, this one isn't read anywhere
   // yet either.
+  // TODO: outro (round 12 closing line): needs German copy. Not read at
+  // runtime yet.
 };
