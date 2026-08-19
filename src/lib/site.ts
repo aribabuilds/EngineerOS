@@ -10,10 +10,6 @@ export const SITE_URL = "https://aribaanjum.com";
 export const EMAIL = "ariba.anjum.se@gmail.com";
 export const MAILTO = `mailto:${EMAIL}`;
 
-// TODO(owner): real Cal.com / Calendly link, or remove the "Book a call" button.
-export const BOOKING_URL = "PLACEHOLDER_BOOKING_URL";
-export const bookingIsConfigured = BOOKING_URL !== "PLACEHOLDER_BOOKING_URL";
-
 export const LINKEDIN_URL = "https://www.linkedin.com/in/aribaa/";
 export const GITHUB_URL = "https://github.com/aribabuilds";
 

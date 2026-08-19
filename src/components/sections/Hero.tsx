@@ -10,8 +10,20 @@ const hero = getDictionary("en").hero;
 // place so it's a one-line change if the site later unifies on one address.
 const HERO_EMAIL = "hello@aribaanjum.com";
 const MAILTO = `mailto:${HERO_EMAIL}`;
-// TODO(owner): swap for the real Google Meet scheduling URL when available (brief §9).
-const MAILTO_CALL = `mailto:${HERO_EMAIL}?subject=Book%20a%2020-min%20call`;
+
+// "Book a call": Google Calendar's public quick-add URL. Opens a new-event
+// compose screen with Ariba pre-added as a guest — no API key or backend
+// needed. Note: this can pre-fill the guest list but can't force-attach a
+// Google Meet link (that needs the Calendar API with OAuth); Calendar's own
+// compose screen offers a one-click "Add Google Meet video conferencing"
+// button once it opens, so the visitor adds it there before sending.
+const CALL_EVENT_TITLE = "20-min call with Ariba Anjum";
+const CALL_EVENT_DETAILS = "Booked from Ariba Anjum's portfolio site.";
+const BOOK_A_CALL_URL =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  `&text=${encodeURIComponent(CALL_EVENT_TITLE)}` +
+  `&add=${encodeURIComponent(HERO_EMAIL)}` +
+  `&details=${encodeURIComponent(CALL_EVENT_DETAILS)}`;
 
 /**
  * Forest-scene hero (round 5). One continuous canvas scene fills the hero as
@@ -52,23 +64,32 @@ export default function Hero() {
           {hero.subline.map((seg, i) => (seg.strong ? <b key={i}>{seg.text}</b> : <span key={i}>{seg.text}</span>))}
         </p>
 
-        <span className="hero-forest__pill mb-8">{hero.pill}</span>
-
         <div className="mb-8 flex flex-wrap gap-3">
           <a className="hero-forest__btn hero-forest__btn--primary" href={MAILTO}>
             {hero.ctaPrimaryLabel}
           </a>
-          <a className="hero-forest__btn hero-forest__btn--ghost" href={MAILTO_CALL}>
+          <a
+            className="hero-forest__btn hero-forest__btn--ghost"
+            href={BOOK_A_CALL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {hero.ctaSecondaryLabel}
           </a>
         </div>
 
-        {/* Quick facts: always revealed, no interaction (brief §7). */}
-        <div className="mb-8 flex flex-wrap gap-2">
-          {hero.slabs.map((slab) => (
-            <div key={slab.label} className="hero-forest__slab">
-              <span className="lab">{slab.label}</span>
-              <span className={`val ${slab.label === "Availability" ? "val--live" : ""}`}>{slab.value}</span>
+        {/* Quick facts: always revealed, no interaction (brief §7). One
+            unified card of label/value rows (round 15), replacing the old
+            standalone pill + three separate boxes. */}
+        <div className="hero-forest__quickcard mb-8">
+          {hero.quickFacts.rows.map((row) => (
+            <div key={row.label} className="hero-forest__quickrow">
+              <span className="hero-forest__quickrow-label">{row.label}</span>
+              <span
+                className={`hero-forest__quickrow-value ${row.live ? "hero-forest__quickrow-value--live" : ""}`}
+              >
+                {row.value}
+              </span>
             </div>
           ))}
         </div>

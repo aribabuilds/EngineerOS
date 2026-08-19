@@ -510,18 +510,6 @@
     outline-offset: 2px;
   }
 
-  .hero-forest__pill {
-    display: inline-block;
-    font-size: 0.86rem;
-    line-height: 1.3;
-    color: #3e6155;
-    background: rgba(62, 97, 85, 0.09);
-    border: 1px solid rgba(62, 97, 85, 0.32);
-    border-radius: 999px;
-    padding: 0.5rem 0.95rem;
-    font-weight: 500;
-  }
-
   .hero-forest__btn {
     font-size: 0.98rem;
     font-weight: 600;
@@ -555,42 +543,57 @@
     border-color: rgba(38, 48, 46, 0.22);
   }
 
-  .hero-forest__slab {
-    background: rgba(255, 255, 255, 0.55);
-    border: none;
-    border-radius: 14px;
-    padding: 0.65rem 0.9rem;
-    min-width: 120px;
+  /* Quick-facts card (round 15): one unified card of label/value rows,
+     replacing the old standalone pill + three separate boxes. Panel style
+     (radius/background/border/shadow) reused token-for-token from My
+     Path's detail box (.staircase-step__box) — the site's one existing
+     translucent panel of this kind. Row structure (grid columns, label/
+     value split) reused from Shipped's .shipped-forest__row. */
+  .hero-forest__quickcard {
+    max-width: 560px;
+    border-radius: 16px;
+    background: rgba(240, 241, 240, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow:
-      0 1px 2px rgba(38, 48, 46, 0.08),
-      0 6px 16px -6px rgba(38, 48, 46, 0.2),
-      0 14px 28px -12px rgba(38, 48, 46, 0.18);
+      0 2px 5px rgba(20, 26, 22, 0.18),
+      0 22px 44px -14px rgba(20, 26, 22, 0.4);
   }
-  .hero-forest__slab .lab {
-    display: block;
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
+  .hero-forest__quickrow {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 0.75rem;
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid rgba(38, 48, 46, 0.12);
+  }
+  @media (min-width: 640px) {
+    .hero-forest__quickrow {
+      grid-template-columns: 6.5rem 1fr;
+    }
+  }
+  .hero-forest__quickrow:last-child {
+    border-bottom: none;
+  }
+  .hero-forest__quickrow-label {
+    font-size: 0.72rem;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--forest-brown);
     font-weight: 600;
+    padding-top: 0.15rem;
   }
-  .hero-forest__slab .val {
-    display: block;
-    font-size: 0.92rem;
+  .hero-forest__quickrow-value {
     color: #26302e;
-    font-weight: 500;
-    margin-top: 0.3rem;
   }
   /* Availability's value gets the same sky-blue "live" status dot used for
      promoted/current states elsewhere (Shipped's fork stops, My Path's
      connector dots) — this is the one quick fact that's a live status, not
      a static fact like location or languages. */
-  .hero-forest__slab .val--live {
+  .hero-forest__quickrow-value--live {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
   }
-  .hero-forest__slab .val--live::before {
+  .hero-forest__quickrow-value--live::before {
     content: "";
     width: 6px;
     height: 6px;
@@ -1300,7 +1303,17 @@
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--forest-green);
+    color: var(--forest-brown);
+  }
+  /* On mobile, role + year move inside the (light) detail box instead of
+     sitting over the dark canvas, so they need dark-on-light colors here —
+     the desktop version above stays white/sky, unchanged, for the dark
+     centre column. */
+  .staircase-step__roleyear--mobile .staircase-step__role {
+    color: var(--forest-ink);
+  }
+  .staircase-step__roleyear--mobile .staircase-step__year {
+    color: rgba(38, 48, 46, 0.55);
   }
   .staircase-step__detail {
     margin-top: 0.5rem;
@@ -1372,6 +1385,23 @@
     .staircase-step__box::after {
       display: none;
     }
+  }
+
+  /* Closing line (round 14): same forest green as the left nav rail, so the
+     site's last note reads as part of the same persistent surface. */
+  .outro-forest {
+    background: var(--forest-green);
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .outro-forest__link {
+    color: var(--forest-sky);
+  }
+  .outro-forest__link:hover {
+    color: #fff;
+  }
+  .outro-forest a:focus-visible {
+    outline: 3px solid var(--forest-sky);
+    outline-offset: 2px;
   }
 }
 

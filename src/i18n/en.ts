@@ -50,18 +50,24 @@ export const en: Dictionary = {
         text: " I proposed and led an LLM document pipeline handling 100+ onboarding docs a week; automations I built at Grayhat and Webmedia were adopted company-wide.",
       },
     ],
-    pill: "Open to Werkstudent and AI/automation roles · Remote → On-site",
     ctaPrimaryLabel: "Email me",
     ctaSecondaryLabel: "Book a 20-min call",
-    slabs: [
-      // TODO(owner): confirm exact availability wording (brief §9).
-      { label: "Availability", value: "Open now · interviewing" },
-      { label: "Location", value: "Germany" },
-      {
-        label: "Languages",
-        value: "English (fluent) · German (conversational) · Arabic (fluent) · Turkish (conversational)",
-      },
-    ],
+    // Round 15: the old standalone pill ("Open to Werkstudent and
+    // AI/automation roles · Remote → On-site") is merged into the
+    // Availability row below — its "Remote → On-site" half lives on here,
+    // its "Open to Werkstudent and AI/automation roles" half is dropped
+    // (the eyebrow role + rest of the page already carry that).
+    quickFacts: {
+      rows: [
+        // TODO(owner): confirm exact availability wording (brief §9).
+        { label: "Availability", value: "Open now · interviewing · Remote → On-site", live: true },
+        { label: "Location", value: "Germany" },
+        {
+          label: "Languages",
+          value: "English (fluent) · German (conversational) · Arabic (fluent) · Turkish (conversational)",
+        },
+      ],
+    },
     // Rendered as "Inside this" + a separately-bobbing arrow in the hero.
     scrollCue: "Inside this",
     languageToggleLabel: "Language",
@@ -308,7 +314,7 @@ export const en: Dictionary = {
   // is appended after this line at render time from the site-wide EMAIL
   // constant (Outro.tsx), not duplicated here.
   outro: {
-    line: "That's the story, start to now. Everything else lives in the nav on the left — say hello at",
+    line: "That's the story, up to now. The next part I'd rather build with you. Say hello at",
   },
 
   contact: {
