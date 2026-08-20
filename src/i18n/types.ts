@@ -75,6 +75,9 @@ export interface Dictionary {
     }[];
   };
   featured: {
+    /** Small field-style eyebrow above the heading. Was a hardcoded literal
+     * ("work") until round 16; now a real key so DE can translate it. */
+    eyebrow: string;
     heading: string;
     readDecisions: string;
     repo: string;

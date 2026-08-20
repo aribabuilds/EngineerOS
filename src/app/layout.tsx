@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { themeBootScript } from "@/lib/theme";
+import { LocaleProvider } from "@/lib/LocaleContext";
 import { getDictionary } from "@/i18n";
 import {
   SITE_URL,
@@ -75,10 +76,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <a href="#main" className="skip-link">
-          {dict.nav.skipToContent}
-        </a>
-        {children}
+        <LocaleProvider>
+          <a href="#main" className="skip-link">
+            {dict.nav.skipToContent}
+          </a>
+          {children}
+        </LocaleProvider>
       </body>
     </html>
   );

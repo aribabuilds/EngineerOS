@@ -1,9 +1,10 @@
+"use client";
+
 import { getDictionary } from "@/i18n";
 import ForestScene from "@/components/hero/ForestScene";
 import LanguageToggle from "@/components/hero/LanguageToggle";
+import { useLocale } from "@/lib/LocaleContext";
 import { EMAIL } from "@/lib/site";
-
-const hero = getDictionary("en").hero;
 
 // Brief-locked hero contact address. NOTE: this differs from the site-wide
 // EMAIL (ariba.anjum.se@gmail.com) used by the Header and Contact section.
@@ -36,6 +37,9 @@ const BOOK_A_CALL_URL =
  * Scope is the hero only, nothing else on the site changes.
  */
 export default function Hero() {
+  const { locale } = useLocale();
+  const hero = getDictionary(locale).hero;
+
   return (
     <section
       className="hero-forest relative min-h-[100svh] overflow-hidden"

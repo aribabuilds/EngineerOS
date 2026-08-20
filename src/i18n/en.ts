@@ -131,6 +131,7 @@ export const en: Dictionary = {
   },
 
   featured: {
+    eyebrow: "work",
     heading: "Featured work",
     readDecisions: "Read the decisions",
     repo: "Repo",

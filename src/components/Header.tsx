@@ -3,18 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { getDictionary } from "@/i18n";
+import { useLocale } from "@/lib/LocaleContext";
 import { GITHUB_URL, LINKEDIN_URL, MAILTO } from "@/lib/site";
 
-const nav = getDictionary("en").nav;
-const contact = getDictionary("en").contact;
-
-const NAV_ITEMS = [
-  { id: "work", href: "/#work", label: nav.work },
-  { id: "path", href: "/#path", label: nav.path },
-] as const;
-
-const monogram = `${nav.wordmarkFirst.charAt(0)}${nav.wordmarkAccent.charAt(0)}`;
-const homeLabel = `${nav.wordmarkFirst} ${nav.wordmarkAccent}: home`;
+// The ids are anchor targets, not content — they don't change with locale,
+// so the IntersectionObserver logic below can stay keyed to this constant
+// list regardless of which language's labels are currently showing.
+const NAV_ITEM_IDS = ["work", "path"] as const;
 
 /**
  * Site-wide header. A fixed vertical rail on desktop (>=1024px): monogram,
@@ -24,10 +19,21 @@ const homeLabel = `${nav.wordmarkFirst} ${nav.wordmarkAccent}: home`;
  * (display: none removes an element from the tab order and a11y tree).
  */
 export default function Header() {
+  const { locale } = useLocale();
+  const dict = getDictionary(locale);
+  const nav = dict.nav;
+  const contact = dict.contact;
+  const NAV_ITEMS = [
+    { id: "work", href: "/#work", label: nav.work },
+    { id: "path", href: "/#path", label: nav.path },
+  ] as const;
+  const monogram = `${nav.wordmarkFirst.charAt(0)}${nav.wordmarkAccent.charAt(0)}`;
+  const homeLabel = `${nav.wordmarkFirst} ${nav.wordmarkAccent}: home`;
+
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    const targets = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(
+    const targets = NAV_ITEM_IDS.map((id) => document.getElementById(id)).filter(
       (el): el is HTMLElement => el !== null,
     );
     if (targets.length === 0) return;

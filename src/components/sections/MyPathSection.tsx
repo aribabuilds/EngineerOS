@@ -2,10 +2,9 @@
 
 import { getDictionary } from "@/i18n";
 import { useInView } from "@/lib/useInView";
+import { useLocale } from "@/lib/LocaleContext";
 import StaircaseAtmosphere from "@/components/path/StaircaseAtmosphere";
 import StaircaseStep from "@/components/path/StaircaseStep";
-
-const myPath = getDictionary("en").myPath;
 
 /**
  * "My Path" (round 11): a descending staircase, one step per role, replacing
@@ -14,8 +13,11 @@ const myPath = getDictionary("en").myPath;
  * atmosphere via StaircaseAtmosphere. Keeps id="path" so Header.tsx's nav
  * link and anchor keep working unchanged. Uses the `myPath` i18n key, kept
  * fully separate from `path` (still read directly by the About page).
+ * Round 16: reads locale from context (EN/DE toggle).
  */
 export default function MyPathSection() {
+  const { locale } = useLocale();
+  const myPath = getDictionary(locale).myPath;
   const { ref: listRef, inView: spineVisible } = useInView<HTMLOListElement>(0.1);
 
   return (

@@ -1,27 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useLocale } from "@/lib/LocaleContext";
 
 /**
- * Visual-only EN/DE toggle. German copy is a fast-follow (round-5 brief), so
- * this only tracks the pressed state for now; it does not swap any text.
- * When German lands, this is where the real locale switch gets wired in.
+ * EN/DE toggle (round 16: now real — de.ts has full homepage copy).
+ * Reads/writes the site-wide locale via LocaleContext.
  */
 export default function LanguageToggle({ label }: { label: string }) {
-  const [lang, setLang] = useState<"en" | "de">("en");
+  const { locale, setLocale } = useLocale();
 
   return (
     <div className="hero-forest__lang" role="group" aria-label={label}>
-      <button type="button" aria-pressed={lang === "en"} aria-label="English" onClick={() => setLang("en")}>
+      <button type="button" aria-pressed={locale === "en"} aria-label="English" onClick={() => setLocale("en")}>
         <span aria-hidden="true">🇬🇧</span>
       </button>
-      <button
-        type="button"
-        aria-pressed={lang === "de"}
-        aria-label="Deutsch"
-        onClick={() => setLang("de")}
-        title="German version coming soon"
-      >
+      <button type="button" aria-pressed={locale === "de"} aria-label="Deutsch" onClick={() => setLocale("de")}>
         <span aria-hidden="true">🇩🇪</span>
       </button>
     </div>

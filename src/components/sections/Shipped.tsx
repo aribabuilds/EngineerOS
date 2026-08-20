@@ -1,19 +1,25 @@
+"use client";
+
 import { getDictionary } from "@/i18n";
 import GrowthFrame from "@/components/shipped/GrowthFrame";
 import StopCard from "@/components/shipped/StopCard";
 import AmbientLeaves from "@/components/shipped/AmbientLeaves";
-
-const shipped = getDictionary("en").shipped;
+import { useLocale } from "@/lib/LocaleContext";
 
 /**
  * Forest-path redesign (round 6): the path continuing deeper from the Hero.
  * Three project "stops," each a fine-line growth animation beside a
  * Problem/Decision/Outcome/Adoption card. Bespoke section shell (not the
  * generic Section.tsx), since this continues the Hero's forest world rather
- * than the site's default theme. Server component; only GrowthFrame and
- * StopCard are client, for the scroll-triggered draw/reveal.
+ * than the site's default theme. Client component (round 16: reads the
+ * locale from context so the EN/DE toggle can switch its copy); only
+ * GrowthFrame and StopCard were already client, for the scroll-triggered
+ * draw/reveal.
  */
 export default function Shipped() {
+  const { locale } = useLocale();
+  const shipped = getDictionary(locale).shipped;
+
   return (
     <section
       id="shipped"

@@ -1,3 +1,5 @@
+"use client";
+
 import { getDictionary } from "@/i18n";
 import {
   QUANTUM_LIVE,
@@ -10,8 +12,7 @@ import {
 } from "@/lib/site";
 import WorkCard from "@/components/work/WorkCard";
 import VideoModal from "@/components/work/VideoModal";
-
-const f = getDictionary("en").featured;
+import { useLocale } from "@/lib/LocaleContext";
 
 /**
  * "The valley," boxed (round 9), now three cards (round 10): elevated boxes
@@ -39,13 +40,18 @@ const f = getDictionary("en").featured;
  * i18n, same as Multiverse always had it), not parsed out of the prose —
  * the stack sentence used to also print, duplicated, at the end of the
  * paragraph above the chips.
+ *
+ * Round 16: client component, reads locale from context (EN/DE toggle).
  */
 export default function FeaturedWork() {
+  const { locale } = useLocale();
+  const f = getDictionary(locale).featured;
+
   return (
     <section id="work" className="work-valley" aria-labelledby="work-heading">
       <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="work-valley__intro">
-          <p className="work-valley__eyebrow">work</p>
+          <p className="work-valley__eyebrow">{f.eyebrow}</p>
           <h2 id="work-heading" className="work-valley__display work-valley__heading">
             {f.heading}
           </h2>
