@@ -53,8 +53,10 @@ export default function Hero() {
         <LanguageToggle label={hero.languageToggleLabel} />
       </div>
 
-      {/* Text, left-aligned, vertically centered on desktop, top on mobile. */}
-      <div className="relative z-10 flex min-h-[100svh] max-w-[640px] flex-col justify-start px-6 py-16 sm:px-12 lg:justify-center lg:py-12">
+      {/* Text, horizontally centered like every other section's content
+          column (round 18 — was flush-left before), vertically centered on
+          desktop, top on mobile. */}
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[640px] flex-col justify-start px-6 py-16 sm:px-12 lg:justify-center lg:py-12">
         <p className="hero-forest__eyebrow mb-6">
           <b>{hero.eyebrowName}</b> &nbsp;·&nbsp; {hero.eyebrowRole}
         </p>

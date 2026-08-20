@@ -475,18 +475,25 @@
 
   /* Legibility scrim: page-base color bleeding into the scene, soft fade,
      never a hard-edged box. Horizontal on desktop, vertical on mobile. */
+  /* Round 18: the text column moved from flush-left to horizontally
+     centered (mx-auto in Hero.tsx), so the legibility scrim needed to
+     recenter with it — a directional left-to-right gradient tuned for
+     flush-left text would leave the now-centered column's right half
+     under-covered. Same principle as before (soft haze, not a hard-edged
+     box), just an ellipse centered on the text instead of a left-to-right
+     sweep. */
   .hero-forest__scrim {
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(
-      100deg,
+    background: radial-gradient(
+      ellipse 55% 68% at 50% 50%,
       #e6e7e8 0%,
-      rgba(230, 231, 232, 0.88) 26%,
-      rgba(230, 231, 232, 0.55) 44%,
-      rgba(230, 231, 232, 0.16) 62%,
-      rgba(230, 231, 232, 0) 78%
+      rgba(230, 231, 232, 0.88) 42%,
+      rgba(230, 231, 232, 0.5) 64%,
+      rgba(230, 231, 232, 0.16) 82%,
+      rgba(230, 231, 232, 0) 96%
     );
   }
   @media (max-width: 860px) {
