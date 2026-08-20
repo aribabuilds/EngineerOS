@@ -4,14 +4,12 @@ import { getDictionary } from "@/i18n";
 import ForestScene from "@/components/hero/ForestScene";
 import LanguageToggle from "@/components/hero/LanguageToggle";
 import { useLocale } from "@/lib/LocaleContext";
-import { EMAIL } from "@/lib/site";
+import { EMAIL, MAILTO } from "@/lib/site";
 
-// Brief-locked hero contact address. NOTE: this differs from the site-wide
-// EMAIL (ariba.anjum.se@gmail.com) used by the Header and Contact section.
-// The round-5 brief locks hello@aribaanjum.com for the hero CTAs; kept in one
-// place so it's a one-line change if the site later unifies on one address.
-const HERO_EMAIL = "hello@aribaanjum.com";
-const MAILTO = `mailto:${HERO_EMAIL}`;
+// Round 17: both hero CTAs now use the one real address (ariba.anjum.se@
+// gmail.com, the site-wide EMAIL/MAILTO from lib/site.ts) — the separate
+// "brief-locked" hello@aribaanjum.com address this used to point to is
+// retired.
 
 // "Book a call": Google Calendar's public quick-add URL. Opens a new-event
 // compose screen with Ariba pre-added as a guest — no API key or backend
@@ -19,8 +17,6 @@ const MAILTO = `mailto:${HERO_EMAIL}`;
 // Google Meet link (that needs the Calendar API with OAuth); Calendar's own
 // compose screen offers a one-click "Add Google Meet video conferencing"
 // button once it opens, so the visitor adds it there before sending.
-// Uses the site-wide EMAIL (ariba.anjum.se@gmail.com), not HERO_EMAIL above —
-// that's the address that actually needs to receive the calendar invite.
 const CALL_EVENT_TITLE = "20-min call with Ariba Anjum";
 const CALL_EVENT_DETAILS = "Booked from Ariba Anjum's portfolio site.";
 const BOOK_A_CALL_URL =
