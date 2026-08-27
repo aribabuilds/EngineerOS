@@ -38,7 +38,11 @@ export const de: PartialDictionary = {
     ctaSecondaryLabel: "20-Minuten-Gespräch buchen",
     quickFacts: {
       rows: [
-        { label: "Verfügbarkeit", value: "Aktuell verfügbar · im Bewerbungsprozess · Remote → vor Ort", live: true },
+        {
+          label: "Verfügbarkeit",
+          value: "Aktuell verfügbar · im Bewerbungsprozess · vor Ort, hybrid oder remote, ich bin für alles offen",
+          live: true,
+        },
         { label: "Standort", value: "Deutschland" },
         {
           label: "Sprachen",

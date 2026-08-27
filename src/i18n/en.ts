@@ -60,7 +60,7 @@ export const en: Dictionary = {
     quickFacts: {
       rows: [
         // TODO(owner): confirm exact availability wording (brief §9).
-        { label: "Availability", value: "Open now · interviewing · Remote → On-site", live: true },
+        { label: "Availability", value: "Open now · interviewing · On-site, hybrid or remote, I'm open to all", live: true },
         { label: "Location", value: "Germany" },
         {
           label: "Languages",
