@@ -7,9 +7,9 @@ import type { Dictionary } from "./types";
  */
 export const en: Dictionary = {
   meta: {
-    title: "Ariba Anjum",
+    title: "Ariba Anjum · Technical Business Analyst, AI & Process Automation",
     description:
-      "I ship AI and automation systems that teams actually adopt. Junior AI / software engineer relocating to Germany, open to Werkstudent and junior roles.",
+      "I find the work people do by hand and turn it into AI automation teams actually adopt. Technical Business Analyst with a Software Engineering background, based in Siegen.",
     workTitle: "BriefPilot · Decisions log · Ariba Anjum",
     workDescription:
       "BriefPilot: reading German official letters aloud, local-first. The decisions behind an in-development OCR pipeline.",
@@ -31,40 +31,31 @@ export const en: Dictionary = {
     themeToDark: "Switch to dark theme",
   },
 
-  // Forest-scene hero (round 5), from ariba-hero-final.html. Locked copy used
-  // as written, with two project-standard adjustments: the sub-line's em dash
-  // is converted to a comma (no-em-dash rule), and the copy marked below as a
-  // stand-in is flagged TODO(owner) per brief §9.
+  // Forest-scene hero (round 5), from ariba-hero-final.html. Copy rebranded
+  // to Technical Business Analyst, AI & Process Automation (owner-supplied,
+  // used verbatim).
   hero: {
     eyebrowName: "Ariba Anjum",
-    eyebrowRole: "AI and Automation Engineer",
-    h1: "I ship AI and automation that teams actually adopt",
-    // TODO(owner): stand-in sub-line. Swap for the final H7 string before
-    // launch (brief §9: "do not ship this wording as final").
+    eyebrowRole: "Technical Business Analyst, AI & Process Automation",
+    h1: "I find the work people do by hand, and turn it into AI automation they actually adopt.",
+    // Three paragraphs, each its own <p>. Below the mobile breakpoint only
+    // the first shows until "Read more" is tapped (see Hero.tsx).
     subline: [
-      {
-        text: "Software engineer in AI & automation with a project-management edge, I scope the problem, talk to the stakeholders, and drive it to adoption. At ",
-      },
-      { text: "vountain", strong: true },
-      {
-        text: " I proposed and led an LLM document pipeline handling 100+ onboarding docs a week; automations I built at Grayhat and Webmedia were adopted company-wide.",
-      },
+      "At a German FinTech, customers were spending 15 to 30 minutes typing asset data from official documents into a form. I noticed, pitched a better way and built it: an AI document workflow where they upload a photo and simply confirm. When the AI isn't sure, a person checks. It's handling 100+ documents a week.",
+      "It wasn't the first time. At Grayhat, a project manager was pulling status updates together by hand, so I built an AI pipeline that writes them. At Webmedia, client requests were getting lost in Slack, so I turned each one into a tracked ticket with an AI summary. Both were adopted by their teams, and one went company-wide.",
+      "I'm a Technical Business Analyst with a Software Engineering background, so I don't just describe the problem. I build the fix and stay until people use it.",
     ],
+    readMore: "Read more",
+    showLess: "Show less",
     ctaPrimaryLabel: "Email me",
     ctaSecondaryLabel: "Book a 20-min call",
-    // Round 15: the old standalone pill ("Open to Werkstudent and
-    // AI/automation roles · Remote → On-site") is merged into the
-    // Availability row below — its "Remote → On-site" half lives on here,
-    // its "Open to Werkstudent and AI/automation roles" half is dropped
-    // (the eyebrow role + rest of the page already carry that).
     quickFacts: {
       rows: [
-        // TODO(owner): confirm exact availability wording (brief §9).
-        { label: "Availability", value: "Open now · interviewing · On-site, hybrid or remote, I'm open to all", live: true },
-        { label: "Location", value: "Germany" },
+        { label: "Availability", value: "Open now · On-site, hybrid or remote", live: true },
+        { label: "Location", value: "Siegen, Germany" },
         {
           label: "Languages",
-          value: "English (fluent) · German (conversational) · Arabic (fluent) · Turkish (conversational)",
+          value: "English (C1, IELTS 7.5) · Urdu (native) · Turkish (B2) · Arabic (B2) · German (A2, working toward B2)",
         },
       ],
     },

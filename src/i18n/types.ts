@@ -28,16 +28,17 @@ export interface Dictionary {
     eyebrowName: string;
     eyebrowRole: string;
     h1: string;
-    /** Sub-line as segments; `strong` gives weight (not color) to concrete
-     * nouns. TODO(owner): this copy is a stand-in, swap for the final H7
-     * string before launch (brief §9). */
-    subline: { text: string; strong?: boolean }[];
+    /** Subhead paragraphs, each rendered as its own <p>. Only the first is
+     * shown by default below the mobile breakpoint. */
+    subline: string[];
+    /** Mobile-only subhead toggle labels. */
+    readMore: string;
+    showLess: string;
     ctaPrimaryLabel: string;
     ctaSecondaryLabel: string;
     /** Always-revealed quick facts (no interaction), one unified card of
-     * label/value rows (round 15 — replaces the old standalone pill +
-     * three separate boxes). The availability value is a stand-in;
-     * TODO(owner) confirm exact wording (brief §9). `live` marks the one
+     * label/value rows (round 15, replaces the old standalone pill +
+     * three separate boxes). `live` marks the one
      * row that gets the sky-blue "active" status dot. */
     quickFacts: {
       rows: { label: string; value: string; live?: boolean }[];
