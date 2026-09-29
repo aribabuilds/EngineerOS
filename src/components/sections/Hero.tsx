@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { getDictionary } from "@/i18n";
 import ForestScene from "@/components/hero/ForestScene";
 import LanguageToggle from "@/components/hero/LanguageToggle";
@@ -7,12 +8,12 @@ import { useLocale } from "@/lib/LocaleContext";
 import { EMAIL, MAILTO } from "@/lib/site";
 
 // Round 17: both hero CTAs now use the one real address (ariba.anjum.se@
-// gmail.com, the site-wide EMAIL/MAILTO from lib/site.ts) — the separate
+// gmail.com, the site-wide EMAIL/MAILTO from lib/site.ts); the separate
 // "brief-locked" hello@aribaanjum.com address this used to point to is
 // retired.
 
 // "Book a call": Google Calendar's public quick-add URL. Opens a new-event
-// compose screen with Ariba pre-added as a guest — no API key or backend
+// compose screen with Ariba pre-added as a guest, no API key or backend
 // needed. Note: this can pre-fill the guest list but can't force-attach a
 // Google Meet link (that needs the Calendar API with OAuth); Calendar's own
 // compose screen offers a one-click "Add Google Meet video conferencing"
@@ -35,6 +36,10 @@ const BOOK_A_CALL_URL =
 export default function Hero() {
   const { locale } = useLocale();
   const hero = getDictionary(locale).hero;
+  // Mobile-only subhead toggle: paragraphs 2+ stay in the HTML and are only
+  // hidden by CSS below the 640px breakpoint while collapsed.
+  const [sublineOpen, setSublineOpen] = useState(false);
+  const [firstPara, ...morePara] = hero.subline;
 
   return (
     <section
@@ -54,7 +59,7 @@ export default function Hero() {
       </div>
 
       {/* Text, horizontally centered like every other section's content
-          column (round 18 — was flush-left before), vertically centered on
+          column (round 18, was flush-left before), vertically centered on
           desktop, top on mobile. */}
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[640px] flex-col justify-start px-6 py-16 sm:px-12 lg:justify-center lg:py-12">
         <p className="hero-forest__eyebrow mb-6">
@@ -65,9 +70,27 @@ export default function Hero() {
           {hero.h1}
         </h1>
 
-        <p className="hero-forest__subline mb-6">
-          {hero.subline.map((seg, i) => (seg.strong ? <b key={i}>{seg.text}</b> : <span key={i}>{seg.text}</span>))}
-        </p>
+        <div className="hero-forest__subline mb-6">
+          <p>{firstPara}</p>
+          <div
+            id="hero-subline-more"
+            className="hero-forest__subline-more"
+            data-expanded={sublineOpen ? "true" : "false"}
+          >
+            {morePara.map((text, i) => (
+              <p key={i}>{text}</p>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="hero-forest__more"
+            aria-expanded={sublineOpen}
+            aria-controls="hero-subline-more"
+            onClick={() => setSublineOpen((open) => !open)}
+          >
+            {sublineOpen ? hero.showLess : hero.readMore}
+          </button>
+        </div>
 
         <div className="mb-8 flex flex-wrap gap-3">
           <a className="hero-forest__btn hero-forest__btn--primary" href={MAILTO}>

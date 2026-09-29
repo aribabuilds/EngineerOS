@@ -23,30 +23,28 @@ export const de: PartialDictionary = {
 
   hero: {
     eyebrowName: "Ariba Anjum",
-    eyebrowRole: "KI- und Automatisierungsingenieurin",
-    h1: "Ich entwickle KI- und Automatisierungslösungen, die Teams wirklich einsetzen",
+    eyebrowRole: "Technical Business Analystin, KI & Prozessautomatisierung",
+    h1: "Ich finde die Arbeit, die Menschen von Hand erledigen, und mache daraus KI-Automatisierung, die wirklich genutzt wird.",
     subline: [
-      {
-        text: "Als Softwareentwicklerin für KI und Automatisierung mit Projektmanagement-Hintergrund grenze ich das Problem ein, spreche mit den Stakeholdern und sorge dafür, dass die Lösung tatsächlich eingesetzt wird. Bei ",
-      },
-      { text: "vountain", strong: true },
-      {
-        text: " habe ich eine LLM-Dokumentenpipeline vorgeschlagen und geleitet, die über 100 Onboarding-Dokumente pro Woche verarbeitet. Automatisierungen, die ich bei Grayhat und Webmedia gebaut habe, wurden unternehmensweit eingeführt.",
-      },
+      "Bei einem deutschen FinTech brauchten Kunden 15 bis 30 Minuten, um Daten aus offiziellen Dokumenten von Hand in ein Formular zu tippen. Ich habe das bemerkt, einen besseren Weg vorgeschlagen und ihn gebaut: einen KI-Dokumenten-Workflow, bei dem sie ein Foto hochladen und nur noch bestätigen. Wenn die KI unsicher ist, prüft ein Mensch. Der Workflow verarbeitet über 100 Dokumente pro Woche.",
+      "Es war nicht das erste Mal. Bei Grayhat hat ein Projektmanager Statusupdates von Hand zusammengetragen, also habe ich eine KI-Pipeline gebaut, die sie schreibt. Bei Webmedia gingen Kundenanfragen in Slack verloren, also habe ich aus jeder Anfrage ein nachverfolgtes Ticket mit KI-Zusammenfassung gemacht. Beide wurden von ihren Teams übernommen, eine davon im ganzen Unternehmen.",
+      "Ich bin Technical Business Analystin mit einem Hintergrund in Software Engineering. Ich beschreibe das Problem also nicht nur. Ich baue die Lösung und bleibe dran, bis sie genutzt wird.",
     ],
+    readMore: "Mehr lesen",
+    showLess: "Weniger",
     ctaPrimaryLabel: "E-Mail schreiben",
     ctaSecondaryLabel: "20-Minuten-Gespräch buchen",
     quickFacts: {
       rows: [
         {
           label: "Verfügbarkeit",
-          value: "Aktuell verfügbar · im Bewerbungsprozess · vor Ort, hybrid oder remote, ich bin für alles offen",
+          value: "Ab sofort verfügbar · Vor Ort, hybrid oder remote",
           live: true,
         },
-        { label: "Standort", value: "Deutschland" },
+        { label: "Standort", value: "Siegen, Deutschland" },
         {
           label: "Sprachen",
-          value: "Englisch (fließend) · Deutsch (Konversationsniveau) · Arabisch (fließend) · Türkisch (Konversationsniveau)",
+          value: "Englisch (C1, IELTS 7.5) · Urdu (Muttersprache) · Türkisch (B2) · Arabisch (B2) · Deutsch (A2, Ziel B2)",
         },
       ],
     },
